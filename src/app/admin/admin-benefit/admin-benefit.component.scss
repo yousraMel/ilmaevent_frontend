@@ -1,0 +1,134 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 2000;
+
+}
+@import "../../../sass/main.scss";
+
+// ----------------------------------------------
+// Reboot Style
+// ----------------------------------------------
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: $primary;
+  }
+  
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  :focus {
+    outline: 0;
+    box-shadow: none !important;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .calendar-events {
+    cursor: move;
+  }
+  
+  .object-fit-cover {
+    object-fit: cover;
+  }
+  
+
+.admin__request {
+    position: relative;
+    //top : 30px;
+    //height : 150px;
+    padding: 3rem;
+    &-tools {
+      margin-bottom : 4rem !important;
+    }
+    &-tools-list {
+      display: flex;
+      justify-content: space-between
+    }
+  
+  }
+  .tools__search {
+    width: 400px;
+    box-shadow: 2px 1px 1px $color-primary-light;
+  }
+  
+  .btn-export {
+    background-color: $color-primary-dark;
+    color: $color-white;
+    border-radius : 7px;
+  }
+
+  .customtooltip {
+    position: relative;
+    // display: inline-block;
+    cursor: pointer;
+}
+
+.customtooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: $color-primary-light;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 30%; /* Position the tooltip above the text */
+    left: 30%;
+    margin-left: -60px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.customtooltip:hover .customtooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 2000;
+
+}
+
+.form-box {
+  position: fixed;
+  top: 20vh;
+  left: 30vw;
+  width: 45vw;
+  padding: 3rem;
+  z-index: 4000;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.form_box__btn {
+  padding : 2rem 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+

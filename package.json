@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ilmaevent": "node dist/ilmaevent/server/server.mjs"
+    "serve:ssr:ilmaevent": "node dist/ilmaevent/server/server.mjs",
+    "compile:sass": "sass src/sass/main.scss src/styles/style.css"
   },
   "private": true,
   "dependencies": {
@@ -21,8 +22,11 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.8",
+    "bootstrap": "^5.3.2",
     "express": "^4.18.2",
+    "font-awesome": "^4.7.0",
     "rxjs": "~7.8.0",
+    "sass": "^1.69.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

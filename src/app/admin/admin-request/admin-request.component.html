@@ -1,0 +1,75 @@
+<div class="row admin__request-tools">
+  <ul class="admin__request-tools-list">
+    <li>
+      <input type="text" class="form__input tools__search" placeholder="Recherche" id="search">
+    </li>
+    <li>
+      <button class="btn btn-sm btn-export">Exporter</button>
+    </li>
+  </ul>
+</div>
+<div class="row admin__request-table">
+  <h3>Demandes d'Organisation</h3>
+  <table class="table mt-5">
+    <thead>
+      <tr>   
+        <th>Détails</th>
+        <th>Info de Contact</th>
+        <th>Préstations Demandées</th>
+        <th>Code</th>
+        <th>Libellé</th>
+        <th>Description</th>
+        <th>Type Evénement</th>
+        <th>Gratuit (Oui/Non)</th>
+        <th>Nb de Participants</th>
+        <th>Institution</th>
+        <th>Responsable du Comité</th>
+     
+      </tr>
+    </thead>
+    <tbody class="list">
+      <tr class="list--list-item"  *ngFor="let request of requests; let i = index">
+        <td class="customtooltip">        
+          <i class="far fa-clock"></i>
+          <span class="customtooltiptext">
+            Date Création :  {{request.creationDate}} <br />
+            Date Modification :  {{request.lastModifDate}}
+        </span></td>
+        <td class="customtooltip"> 
+          <i class="fas fa-info-circle "></i>
+        <span class="customtooltiptext">
+          Addresse : {{request.address}} <br />
+          Téléphone : {{request.phone}} <br />
+          Email : {{request.email}} <br />
+          Site Web : {{request.webSite}} <br />
+          Réseaux Sociaux : <br />
+          <span *ngFor="let link of request.socialNetworks; let k = index"> 
+            {{link}} <br />
+          </span>
+        </span>
+      </td>
+        <td class="customtooltip">        
+          <i class="fas fa-tasks"></i>
+          <span class="customtooltiptext">
+            <span *ngIf="request.benefits && request.benefits.length > 0; else noBenefits">
+              <span *ngFor="let benefit of request.benefits; let j = index">
+                {{ benefit?.label || 'Pas de prestations demandées' }} <br />
+              </span>
+            </span>
+            <ng-template #noBenefits>
+              Pas de prestations demandées
+            </ng-template>
+        </span></td>
+        <td class="">{{request.code}}</td>
+        <td class="">{{request.label}}</td>
+        <td class="">{{request.description}}</td>
+        <td class="">{{request.type?.label}}</td>
+        <td>{{ request.isFree ? 'Oui' : 'Non' }}</td>
+        <td class="">{{request.participantsNb}}</td>
+        <td class="">{{request.institution}}</td>
+        <td class="">{{request.committeeLeader}}</td>
+       
+      </tr>
+    </tbody>
+  </table>
+</div>

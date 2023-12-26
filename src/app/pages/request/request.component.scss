@@ -1,0 +1,116 @@
+@import "../../../sass/main.scss";
+
+.form__switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 28px;
+}
+
+.form__switch-input {
+    display: none;
+}
+
+.form__switch-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+}
+
+.form__switch-switch {
+    position: absolute;
+    top: 1px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s;
+}
+
+.form__switch-input:checked + .form__switch-label .form__switch-switch {
+    left: 30px;
+    background-color: $color-primary-dark;
+}
+
+.form__checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__checkbox {
+    display: none; /* Hide the default checkbox */
+}
+.form__checkbox-label {
+    padding-left: 0;
+}
+
+.form__checkbox-label::before {
+    content: "";
+    display: inline-block;
+    width: 15px; /* Adjust as needed */
+    height: 15px; /* Adjust as needed */
+    margin-right: 5px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Adjust as needed */
+    border-radius: 3px; /* Adjust as needed */
+    background-color: #fff; /* Adjust as needed */
+}
+
+.form__checkbox:checked + .form__checkbox-label::before {
+    background-color: $color-primary-dark; /* Adjust as needed */
+    border-color: $color-primary-dark; /* Adjust as needed */
+}
+
+/* Additional styling for visual feedback when hovering over the label */
+.form__checkbox-label:hover::before {
+    border-color: $color-primary-light; /* Adjust as needed */
+}
+
+.btn--add {
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: #fff;
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+}
+
+.btn--add span {
+    color: #6a7cc1;
+    font-size: 1.5rem;
+    font-weight: 800;
+    float: left;
+    margin-left: 5px;
+}
+
+.btn--delete {
+    margin-left: 80%;
+    margin-top: -50%;
+    color: $color-secondary;
+    font-weight: 800;
+    background-color: transparent;
+}
+
+.btn--delete:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-submit {
+    width : 90% !important;
+
+    &:hover {
+        color : $color-white;
+    }
+}

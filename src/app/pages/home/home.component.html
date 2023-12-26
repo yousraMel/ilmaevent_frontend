@@ -1,0 +1,81 @@
+<app-navigation></app-navigation>
+<header class="header">
+  <div class="u-center-text">
+    <h1 class="heading-primary">
+      <span class="heading-primary--main">ILMA EVENT</span>
+      <span class="heading-primary--sub">Organiser votre événement avec IlmaSuccess</span>
+    </h1>
+
+    <a href="/form" class="btn btn--secondary">Organiser</a>
+  </div>
+</header>
+
+<main>
+  <section class="section-about">
+    <div class="section-about__title u-margin-bottom-medium">
+      <h2 class="heading-secondary">
+        Découvrez les nouvelles prestations de ILMA SUCCESS
+      </h2>
+
+    </div>
+    <div class="row">
+      <div class="col-1-of-2">
+        <p class="paragraph">
+          Organiser un évènement, c’est la principale tâche de notre centre ILMA SUCCESS affilié de la
+          Société JU2 COM.
+          Il peut s’agir d’une prestation complète (de A à Z) ou partielle. Les évènements professionnels
+          :
+          formation, conférence, congrès, convention d’entreprise, salon, séminaire, soirée d’entreprise,
+          team building, voyages d’affaires… Quoi qu’il en soit, ILMA SUCCESS dispose d’un personnel
+          compétent
+          et ayant des talents différents pour répondre aux besoins des clients. En général,
+          elle regroupe une équipe commerciale, une équipe marketing, une équipe de communication,
+          un chef de projet évènementiel, un chargé de relations publics…
+        </p>
+
+      </div>
+      <div class="col-1-of-2">
+        <p class="paragraph">
+          Les tâches De ILMA SUCCESS sont très diversifiées. Mais voici son mode de fonctionnement :
+        </p>
+        <ul class="list">
+          <li>
+            Élaboration d’un cahier de charge qui détermine les objectifs de la prestation et les
+            besoins avant, pendant et après l’évènement.
+          </li>
+          <li>
+            Mis en place des outils évènementiels.
+          </li>
+          <li>
+            Création des supports marketing.
+          </li>
+          <li>
+            Réalisation des tâches : recherche d’une salle de réception, des prestataires
+            (traiteur, animateurs, imprimeurs, etc.).
+          </li>
+          <li>
+            Suivi et feedback.
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+  <section class="section-features">
+    <div class="row">
+      <div class="col-1-of-3" *ngFor="let benefit of benefits; let i=index;">
+        <div class="feature-box">
+          <i class="feature-box__icon icon-basic-world"></i>
+          <h3 class="heading-tertiary u-margin-bottom-small">{{benefit.label}}</h3>
+          <p class="feature-box__text customtooltip">
+            {{benefit.description | truncate: 128}}
+            <span class="customtooltiptext">{{benefit.description}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<app-footer></app-footer>

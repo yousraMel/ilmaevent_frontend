@@ -1,0 +1,26 @@
+<div class="popup-container" *ngIf="true">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closeAddBenefitPopup()">&times;</span>
+      <h2>Add New Benefit</h2>
+    
+      <!-- Benefit Form -->
+        <form [formGroup]="benefitForm" class="form">
+        <label for="code">Code:</label>
+        <input type="text" id="code" formControlName="code" required>
+    
+        <label for="label">Libellé:</label>
+        <input type="text" id="label" formControlName="label" required>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description"></textarea>
+    
+        <label for="rank">Ordre:</label>
+        <input type="text" id="rank" formControlName="rank">
+    
+        <label for="active">Actif:</label>
+        <input type="checkbox" id="active" formControlName="active">
+        <button type="submit" class="btn btn--primary btn-submit" (click)="onSubmit()">Ajouter</button>
+      </form>
+    </div>
+  </div>
+  

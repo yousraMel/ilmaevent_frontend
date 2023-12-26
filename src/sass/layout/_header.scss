@@ -1,0 +1,41 @@
+.header {
+    height: 45vh;
+    background: $color-primary;
+    background-size: cover;
+    background-position: top;
+    margin: 3rem auto;
+    padding: 3rem auto;
+    /*@supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    }*/
+
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+        only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+        only screen and (min-width: 125em) {
+        background-image: linear-gradient(
+                to right bottom,
+                rgba($color-primary-light, 0.8),
+                rgba($color-primary-dark, 0.8)
+            )
+    }
+
+    &__page {
+        height: 10vh;
+    }
+
+    &__page__title {
+        /*margin: 1% 18%;*/
+        max-width: 114rem;
+        margin: 0 auto;
+    }
+
+    &__page__title h1 {
+        margin: 1% auto;
+    }
+
+    @include respond(phone) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
+}

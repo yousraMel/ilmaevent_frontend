@@ -1,0 +1,30 @@
+@import "../../../sass/main.scss";
+
+/* Add some basic styling for the tooltip */
+.customtooltip {
+    position: relative;
+    // display: inline-block;
+    cursor: pointer;
+}
+
+.customtooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: $color-primary-light;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 30%; /* Position the tooltip above the text */
+    left: 30%;
+    margin-left: -60px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.customtooltip:hover .customtooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
