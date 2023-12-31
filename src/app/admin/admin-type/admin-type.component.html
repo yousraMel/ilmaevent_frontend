@@ -4,7 +4,7 @@
       <input type="text" class="form__input tools__search" placeholder="Recherche" id="search">
     </li>
     <li>
-      <button class="btn btn-sm btn-export" (click)="openAddBenefitPopup()">Ajouter</button>
+      <button class="btn btn-sm btn-export" (click)="openAddTypePopup()">Ajouter</button>
     </li>
   </ul>
 </div>
@@ -23,27 +23,26 @@
       </tr>
     </thead>
     <tbody class="list">
-      <tr class="list--list-item" *ngFor="let benefit of benefits; let i = index">
+      <tr class="list--list-item" *ngFor="let type of types; let i = index">
         <td class="customtooltip">
           <i class="far fa-clock"></i>
           <span class="customtooltiptext">
-            Date Création : {{benefit.creationDate}} <br />
-            Date Modification : {{benefit.lastModifDate}}
+            Date Création : {{type.creationDate}} <br />
+            Date Modification : {{type.lastModifDate}}
           </span>
         </td>
-        <td class="">{{benefit.code}}</td>
-        <td class="">{{benefit.label}}</td>
-        <td class="">{{benefit.description}}</td>
-        <td class="">{{benefit.rank}}</td>
-        <td class="">{{benefit.active? 'Oui' : 'Non'}}</td>
+        <td class="">{{type.code}}</td>
+        <td class="">{{type.label}}</td>
+        <td class="">{{type.description}}</td>
+        <td class="">{{type.rank}}</td>
+        <td class="">{{type.active? 'Oui' : 'Non'}}</td>
 
         <td class="">
-          <a type="button" (click)="onEditBenefit(benefit.id)" class="mr-3"><i class="fa fa-pencil"
+          <a type="button" (click)="onEditType(type.id)" class="mr-3"><i class="fa fa-pencil"
               aria-hidden="true"></i></a>
         </td>
         <td class="">
-          <a type="button" (click)="onCallDeleteBenefit(benefit.id,i)"><i class="fa fa-trash"
-              aria-hidden="true"></i></a>
+          <a type="button" (click)="onCallDeleteType(type.id,i)"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
 
       </tr>
@@ -53,16 +52,16 @@
 
 
 <!------------------------------------------------ ADD NEW BENEFIT POPUP ------------------------------------------------------>
-<app-add-benefit *ngIf="isAddBenefitPopupOpen" (close)="closeAddBenefitPopup()" (submit)="onBenefitFormSubmit($event)"
-  [benefitId]="benefitId">
-</app-add-benefit>
+<app-add-type *ngIf="isAddTypePopupOpen" (close)="closeAddTypePopup()" (submit)="onTypeFormSubmit($event)"
+  [typeId]="typeId">
+</app-add-type>
 <!------------------------------------------------ END ADD NEW BENEFIT POPUP ------------------------------------------------------>
 <!------------------------------------------------ ALERT CALL ------------------------------------------------------>
 <div class="backdrop" *ngIf="isAlertCalled"></div>
 <div class=" form-box " *ngIf="isAlertCalled">
   <h4>Voulez-vous vraiment supprimer cette préstation ?</h4>
   <div class="form_box__btn">
-    <button (click)="onDeleteBenefit()" class="btn btn--warning">Oui </button>
+    <button (click)="onDeleteType()" class="btn btn--warning">Oui </button>
     <button class="btn btn--secondary" (click)="onCloseAlert()">Annuler </button>
   </div>
 </div>

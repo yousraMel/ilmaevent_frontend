@@ -68,24 +68,24 @@ export class AllService {
 
   /* -------------------------- apiEventType -------------------------- */
 
-  getAllEventTypes(): Observable<any> {
+  getAllTypes(): Observable<any> {
     return this.http.get(hostEventType + '/getAll', httpOptions);
   }
 
-  addEventType(item: any) {
+  addType(item: any) {
     console.log('item : ' + item)
     return this.http.post(hostEventType + '/save', item);
   }
 
-  getEventType(id: any) {
+  getType(id: any) {
     return this.http.get(hostEventType + '/get/' + id);
   }
 
-  updateEventType(item: any) {
+  updateType(item: any) {
     return this.http.put(hostEventType + '/update', item);
   }
 
-  deleteEventType(id: any) {
+  deleteType(id: any) {
     return this.http.delete(hostEventType + '/delete/' + id);
   }
 

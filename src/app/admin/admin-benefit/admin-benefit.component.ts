@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AllService } from '../../../services/all.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-admin-benefit',
@@ -16,7 +16,8 @@ export class AdminBenefitComponent implements OnInit {
   isAlertCalled = false;
 
   constructor(
-    private allservice: AllService,
+    private allService: AllService,
+    private sharedService: SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -28,35 +29,33 @@ export class AdminBenefitComponent implements OnInit {
   }
 
   closeAddBenefitPopup() {
-    this.isAddBenefitPopupOpen = false;
+    setTimeout(() => {
+      this.reloadBenefits();
+      this.isAddBenefitPopupOpen = false;
+    }, 1000);
   }
 
   reloadBenefits() {
-    this.allservice.getAllBenefits().subscribe((data: any[]) => {
+    this.allService.getAllBenefits().subscribe((data: any[]) => {
       this.benefits = data;
     });
-    
   }
+
+
   onBenefitFormSubmit(benefit: any) {
-      this.benefit = benefit;
-      console.log('New Benefit:', this.benefit);
-      this.allservice.addBenefit(this.benefit).subscribe(
-        data => {
-          console.log('Response:', data);
-          this.benefit = data;
-          this.benefitId = this.benefit.id;
-        },
-        error => {
-          console.error('Error:', error);
-        }
-      );
-      setTimeout(() =>{ 
-        this.reloadBenefits();
-        this.isAddBenefitPopupOpen = false;
-        }, 1000);
-   
-     
-    // }
+    this.benefit = benefit;
+    console.log('New Benefit:', this.benefit);
+    this.allService.addBenefit(this.benefit).subscribe(
+      data => {
+        console.log('Response:', data);
+        this.benefit = data;
+        this.benefitId = this.benefit.id;
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+    this.closeAddBenefitPopup();
   }
 
   // CALL POPUP TO DELETE AN ARTICLE 
@@ -71,8 +70,8 @@ export class AdminBenefitComponent implements OnInit {
   }
 
   onDeleteBenefit() {
-    this.allservice.deleteBenefit(this.benefitId).subscribe(response => {
-      this.benefits.splice(this.index , 1);
+    this.allService.deleteBenefit(this.benefitId).subscribe(response => {
+      this.benefits.splice(this.index, 1);
     });
     this.isAlertCalled = false;
   }
@@ -80,5 +79,6 @@ export class AdminBenefitComponent implements OnInit {
   onEditBenefit(benefitId: number) {
     this.benefitId = benefitId;
     this.isAddBenefitPopupOpen = true;
+    this.sharedService.editMode = true;
   }
 }

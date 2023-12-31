@@ -21,11 +21,11 @@
              <span class="hide-menu">Accueil</span>
            </li>
            <li class="sidebar-item">
-             <a class="sidebar-link"  aria-expanded="false" (click)="toggleComponent('adminRequest')">
+             <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminRequest')">
                <span>
                  <i class="ti ti-layout-dashboard"></i>
                </span>
-               <span class="hide-menu" >Tableau de Board</span>
+               <span class="hide-menu">Tableau de Board</span>
              </a>
            </li>
            <li class="nav-small-cap">
@@ -33,15 +33,15 @@
              <span class="hide-menu">Administration</span>
            </li>
            <li class="sidebar-item">
-             <a class="sidebar-link"  aria-expanded="false" (click)="toggleComponent('adminBenefit')">
+             <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminBenefit')">
                <span>
                  <i class="ti ti-article"></i>
                </span>
-               <span class="hide-menu"  >Préstations</span>
+               <span class="hide-menu">Préstations</span>
              </a>
            </li>
            <li class="sidebar-item">
-             <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+             <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminType')">
                <span>
                  <i class="ti ti-alert-circle"></i>
                </span>
@@ -135,13 +135,16 @@
         <app-admin-benefit></app-admin-benefit>
       </section> -->
 
-      <!-- Conditionally render components based on the activeComponent value -->
-      <section *ngIf="activeComponent === 'adminRequest'" class="admin__request">
-        <app-admin-request></app-admin-request>
-      </section>
-      <section *ngIf="activeComponent === 'adminBenefit'" class="admin__benefit">
-        <app-admin-benefit></app-admin-benefit>
-      </section>
+       <!-- Conditionally render components based on the activeComponent value -->
+       <section *ngIf="activeComponent === 'adminRequest'" class="admin__request">
+         <app-admin-request></app-admin-request>
+       </section>
+       <section *ngIf="activeComponent === 'adminBenefit'" class="admin__benefit">
+         <app-admin-benefit></app-admin-benefit>
+       </section>
+       <section *ngIf="activeComponent === 'adminType'" class="admin__type">
+         <app-admin-type></app-admin-type>
+       </section>
      </div>
    </div>
  </div>
