@@ -1,7 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <canvas *ngIf="isBrowser" baseChart [data]="requestByIsFreeData" [type]="'doughnut'"
+      [options]="requestByIsFreeChartOptions" class="admin_graphic">
+    </canvas>
+    </div>
+    <div class="col">
+      <canvas *ngIf="isBrowser" baseChart [data]="requestByTypeData" [type]="'bar'" [options]="requestByTypeChartOptions"
+    class="admin_graphic">
+  </canvas>
+    </div>
+  </div>
+</div>
+
 <div class="row admin__request-tools">
 
-  <!-- Sorting -->
-  <!-- <div>
+
+  
+
+<!-- Sorting -->
+<!-- <div>
     <label>Sort By:</label>
     <select [(ngModel)]="sortBy" (change)="sort($event)">
       <option value="label">Label</option>

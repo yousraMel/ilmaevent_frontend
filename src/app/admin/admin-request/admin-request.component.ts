@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { ChartData, ChartOptions } from 'chart.js';
 import { AllService } from '../../../services/all.service';
 import { ExcelExportService } from '../../services/excel-export.service';
 
@@ -9,6 +11,7 @@ import { ExcelExportService } from '../../services/excel-export.service';
 })
 
 export class AdminRequestComponent implements OnInit {
+  public isBrowser: boolean = false;
   requests: any[] = [];
   filteredRequests: any[] = [];
   sortBy: string = 'label'; // Default sort column
@@ -22,19 +25,117 @@ export class AdminRequestComponent implements OnInit {
   participantsNbFilter = '';
   institutionFilter = '';
   committeeLeaderFilter = '';
+  isFreeRequests: any[] = [];
+  notFreeRequests: any[] = [];
+
+  requestByIsFreeData: ChartData<'doughnut'> = {
+    labels: ['Gratuit', 'Payant'],
+    datasets: [
+      {
+        label: 'Demandes', data: [0, 0],
+        backgroundColor: ['#6A7CC1', '#db2c2e'], // Customize the colors here
+      },
+    ],
+  };
+
+  requestByIsFreeChartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Demandes par Gratuité',
+      },
+    },
+  };
+
+  // Chart data for requests by type
+  requestByTypeData: ChartData<'doughnut'> = {
+    labels: [], // Dynamic labels for types will be populated
+    datasets: [
+      {
+        label: 'Demandes',
+        data: [], // Dynamic data for each type will be populated
+        backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],// Choose a color for the bars
+      },
+    ],
+  };
+
+  // requestByTypeChartOptions: ChartOptions = {
+  //   responsive: true,
+  //   plugins: {
+  //     title: {
+  //       display: true,
+  //       text: 'Distribution des Demandes par Type',
+  //     },
+  //   },
+  // };
+
+  requestByTypeChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Distribution des Demandes par Type',
+      },
+    },
+  };
 
   constructor(
     private allservice: AllService,
-    private excelExportService: ExcelExportService
-  ) { }
-
+    private excelExportService: ExcelExportService,
+    @Inject(PLATFORM_ID) platformId: Object, private renderer2: Renderer2
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.allservice.getAllRequests().subscribe((data: any[]) => {
       this.requests = data;
+
+      // Calculate the number of requests for each category
+      this.isFreeRequests = this.requests.filter(request => request.isFree);
+      this.notFreeRequests = this.requests.filter(request => !request.isFree);
+
+      // Initialize requestByIsFreeData here
+      this.requestByIsFreeData = {
+        labels: ['Gratuit', 'Payant'],
+        datasets: [
+          {
+            label: 'Demandes', data: [this.isFreeRequests.length, this.notFreeRequests.length],
+            backgroundColor: ['#6A7CC1', '#db2c2e'], // Customize the colors here
+          },
+        ],
+      };
+
+      // Get unique types from the list
+      const uniqueTypes = Array.from(new Set(this.requests.map(request => request.type?.label?.toLowerCase().trim() || 'Non Renseigné')));
+
+      // Populate labels and data for the chart
+      this.requestByTypeData.labels = uniqueTypes;
+      this.requestByTypeData.datasets[0].data = uniqueTypes.map(type =>
+        this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length
+      );
+
+      // Log counts for each type
+      uniqueTypes.forEach(type => {
+        console.log(`Type: ${type}, Count: ${this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length}`);
+      });
     });
-    this.filteredRequests = this.requests.slice(); // Initialize filtered requests
+
+
+
+    // Initialize filteredRequests
+    this.filteredRequests = this.requests.slice();
   }
+
 
   // Sorting function
   sort(event: any) {
@@ -123,4 +224,6 @@ export class AdminRequestComponent implements OnInit {
     // Export the data
     this.excelExportService.exportToExcel(exportData, 'exported_requests', 'requests');
   }
+
+
 }

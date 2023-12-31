@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { NgChartsModule } from 'ng2-charts';
 
 import { TruncatePipe } from '../pipes/truncate.pipe';
 import { AllService } from '../services/all.service';
@@ -47,7 +48,8 @@ import { SharedService } from './services/shared.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgChartsModule,
   ],
   providers: [
     provideClientHydration(),
