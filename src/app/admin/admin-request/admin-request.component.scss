@@ -56,14 +56,22 @@
   
   }
   .tools__search {
-    width: 400px;
     box-shadow: 2px 1px 1px $color-primary-light;
+    font-size : inherit;
+    padding: 0rem ;
+    font-weight: 700;
+  }
+
+  .tools__search::placeholder {
+    color: $color-primary-dark; /* Replace with the color you want */
   }
   
   .btn-export {
     background-color: $color-primary-dark;
     color: $color-white;
     border-radius : 7px;
+    padding: 1rem;
+    font-size: 1.2rem;
   }
 
   .customtooltip {
@@ -92,4 +100,9 @@
 .customtooltip:hover .customtooltiptext {
     visibility: visible;
     opacity: 1;
+}
+
+.table__tools {
+  display: flex;
+  justify-content: space-between;
 }

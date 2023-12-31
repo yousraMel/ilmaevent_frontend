@@ -20,6 +20,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RequestComponent } from './pages/request/request.component';
+import { ExcelExportService } from './services/excel-export.service';
+import { SharedService } from './services/shared.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { RequestComponent } from './pages/request/request.component';
   ],
   providers: [
     provideClientHydration(),
-    AllService
+    AllService,
+    SharedService,
+    ExcelExportService
   ],
   bootstrap: [AppComponent]
 })
