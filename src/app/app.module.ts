@@ -21,8 +21,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RequestComponent } from './pages/request/request.component';
+import { AuthService } from './services/auth.service';
 import { ExcelExportService } from './services/excel-export.service';
 import { SharedService } from './services/shared.service';
+import { LoginComponent } from './auth/login/login.component';
+import { RegistrationComponent } from './auth/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { SharedService } from './services/shared.service';
     AdminBenefitComponent,
     AddBenefitComponent,
     AdminTypeComponent,
-    AddTypeComponent
+    AddTypeComponent,
+    LoginComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ import { SharedService } from './services/shared.service';
     provideClientHydration(),
     AllService,
     SharedService,
-    ExcelExportService
+    ExcelExportService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

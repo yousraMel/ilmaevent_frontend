@@ -76,6 +76,12 @@
                <span class="hide-menu">Documentation</span>
              </a>
            </li>
+           <li routerLinkActive="active" class="sidebar-item">
+             <a class="sidebar-link" (click)="logout()" *ngIf="isLoggedIn === true">
+               <i class="fa fa-sign-out"></i>
+               <em>Déconnexion</em>
+             </a>
+           </li>
          </ul>
        </nav>
        <!-- End Sidebar navigation -->

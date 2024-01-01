@@ -44,7 +44,6 @@ export class AdminBenefitComponent implements OnInit {
 
   onBenefitFormSubmit(benefit: any) {
     this.benefit = benefit;
-    console.log('New Benefit:', this.benefit);
     this.allService.addBenefit(this.benefit).subscribe(
       data => {
         console.log('Response:', data);

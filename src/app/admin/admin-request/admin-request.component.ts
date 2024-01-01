@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { AllService } from '../../../services/all.service';
 import { ExcelExportService } from '../../services/excel-export.service';
@@ -28,6 +28,15 @@ export class AdminRequestComponent implements OnInit {
   isFreeRequests: any[] = [];
   notFreeRequests: any[] = [];
 
+  constructor(
+    private allservice: AllService,
+    private excelExportService: ExcelExportService,
+    @Inject(PLATFORM_ID) platformId: Object, private renderer2: Renderer2,
+    private cdr: ChangeDetectorRef // Add this line
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
   requestByIsFreeData: ChartData<'doughnut'> = {
     labels: ['Gratuit', 'Payant'],
     datasets: [
@@ -54,21 +63,11 @@ export class AdminRequestComponent implements OnInit {
     datasets: [
       {
         label: 'Demandes',
-        data: [], // Dynamic data for each type will be populated
+        data: [0], // Dynamic data for each type will be populated
         backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],// Choose a color for the bars
       },
     ],
   };
-
-  // requestByTypeChartOptions: ChartOptions = {
-  //   responsive: true,
-  //   plugins: {
-  //     title: {
-  //       display: true,
-  //       text: 'Distribution des Demandes par Type',
-  //     },
-  //   },
-  // };
 
   requestByTypeChartOptions: ChartOptions = {
     responsive: true,
@@ -88,18 +87,12 @@ export class AdminRequestComponent implements OnInit {
     },
   };
 
-  constructor(
-    private allservice: AllService,
-    private excelExportService: ExcelExportService,
-    @Inject(PLATFORM_ID) platformId: Object, private renderer2: Renderer2
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
 
   ngOnInit(): void {
     this.allservice.getAllRequests().subscribe((data: any[]) => {
       this.requests = data;
-
+      // Initialize filteredRequests
+      this.filteredRequests = this.requests.slice();
       // Calculate the number of requests for each category
       this.isFreeRequests = this.requests.filter(request => request.isFree);
       this.notFreeRequests = this.requests.filter(request => !request.isFree);
@@ -114,26 +107,35 @@ export class AdminRequestComponent implements OnInit {
           },
         ],
       };
-
       // Get unique types from the list
       const uniqueTypes = Array.from(new Set(this.requests.map(request => request.type?.label?.toLowerCase().trim() || 'Non Renseigné')));
+      // Initialize requestByTypeData here
+      this.requestByTypeData = {
+        labels: uniqueTypes,
+        datasets: [
+          {
+            label: 'Demandes',
+            data: uniqueTypes.map(type =>
+              this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length
+            ),
+            backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],
+          },
+        ],
+      };
+
+      // Get unique types from the list
+      // const uniqueTypes = Array.from(new Set(this.requests.map(request => request.type?.label?.toLowerCase().trim() || 'Non Renseigné')));
 
       // Populate labels and data for the chart
-      this.requestByTypeData.labels = uniqueTypes;
-      this.requestByTypeData.datasets[0].data = uniqueTypes.map(type =>
-        this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length
-      );
+      // this.requestByTypeData.labels = uniqueTypes;
+      // this.requestByTypeData.datasets[0].data = uniqueTypes.map(type =>
+      //   this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length
+      // );
 
-      // Log counts for each type
-      uniqueTypes.forEach(type => {
-        console.log(`Type: ${type}, Count: ${this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length}`);
-      });
+      this.cdr.detectChanges();
     });
 
 
-
-    // Initialize filteredRequests
-    this.filteredRequests = this.requests.slice();
   }
 
 

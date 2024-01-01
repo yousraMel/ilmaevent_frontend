@@ -44,7 +44,6 @@ export class AdminTypeComponent implements OnInit {
 
   onTypeFormSubmit(type: any) {
     this.type = type;
-    console.log('New Type:', this.type);
     this.allService.addType(this.type).subscribe(
       data => {
         console.log('Response:', data);
