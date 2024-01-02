@@ -65,10 +65,9 @@
         color: $color-white;
     }
     &--secondary {
-        background-color : $color-tertiary-light;
+        background-color: $color-tertiary-light;
         color: $color-white;
     }
-
 
     &::after {
         content: "";
@@ -112,4 +111,70 @@
         box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
         transform: translateY(0);
     }
+}
+
+.btn--add {
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: #fff;
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+}
+
+.btn--add span {
+    color: #6a7cc1;
+    font-size: 1.5rem;
+    font-weight: 800;
+    float: left;
+    margin-left: 5px;
+}
+
+.btn--delete {
+    margin-left: 80%;
+    margin-top: -50%;
+    color: $color-secondary;
+    font-weight: 800;
+    background-color: transparent;
+}
+
+.btn--delete:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-submit {
+    width: 90% !important;
+
+    &:hover {
+        color: $color-white;
+    }
+}
+
+// .btn-export {
+//     background-color: $color-primary-dark;
+//     color: $color-white;
+//     border-radius : 7px;
+//   }
+
+.btn-export {
+    background-color: $color-primary-dark;
+    color: $color-white;
+    border-radius: 7px;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    float: right;
+    background-color: $color-secondary;
+    color: white;
+    border: none;
+    padding: 0rem 0.5rem;
+    font-size: 1.5rem;
 }

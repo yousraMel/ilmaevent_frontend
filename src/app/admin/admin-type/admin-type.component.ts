@@ -5,7 +5,7 @@ import { SharedService } from '../../services/shared.service';
 @Component({
   selector: 'app-admin-type',
   templateUrl: './admin-type.component.html',
-  styleUrl: './admin-type.component.scss'
+  styleUrl: '../../../sass/main.scss'
 })
 export class AdminTypeComponent implements OnInit {
   types: any[] = [];

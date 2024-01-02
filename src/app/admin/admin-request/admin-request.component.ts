@@ -7,7 +7,7 @@ import { ExcelExportService } from '../../services/excel-export.service';
 @Component({
   selector: 'app-admin-request',
   templateUrl: './admin-request.component.html',
-  styleUrl: './admin-request.component.scss'
+  styleUrl: '../../../sass/main.scss'
 })
 
 export class AdminRequestComponent implements OnInit {

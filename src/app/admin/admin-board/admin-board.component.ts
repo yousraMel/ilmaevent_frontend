@@ -5,7 +5,7 @@ import { TokenStorageService } from '../../services/token-storage.service';
 @Component({
   selector: 'app-admin-board',
   templateUrl: './admin-board.component.html',
-  styleUrls: ['./admin-board.component.scss']
+  styleUrl: '../../../sass/main.scss'
 })
 export class AdminBoardComponent implements OnInit {
 

@@ -1,6 +1,6 @@
-<header class="header">
-  <div class="header__logo-box">
-    <img src="../../assets/img/logo1.png" alt="Logo" class="header__logo">
+<header class="login_header">
+  <div class="login_header__logo-box">
+    <img src="../../assets/img/logo1.png" alt="Logo" class="login_header__logo">
     <h5 class="sub-title sub-title--sm  mt-3">Horizons de l'intégration scolaire et l'insertion sociale</h5>
   </div>
 </header>
@@ -9,7 +9,7 @@
     <div class="col-md-6">
       <form *ngIf="!isLoggedIn" name="form" #f="ngForm" (ngSubmit)=" f.form.valid && onSubmit()">
         <div class="card-login">
-          <div class="row card-login__header  heading">
+          <div class="row card-login__header  login_heading">
             <div class="col-md-12">
               <h4>Connexion </h4>
             </div>
@@ -37,7 +37,7 @@
           </div>
           <div class="row mt-5 card-login__footer">
             <div class="offset-md-1 col-md-5 ">
-              <a href="" class="help">Mot de passe oublié ?</a>
+              <a href="" class="login_help">Mot de passe oublié ?</a>
             </div>
             <div class="offset-md-2 col-md-4">
               <button class="btn-text--form" type="submit" [disabled]="!f.valid">

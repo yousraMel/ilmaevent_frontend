@@ -38,3 +38,41 @@ html {
     background-color: $color-primary;
     color: $color-white;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: $color-primary;
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  :focus {
+    outline: 0;
+    box-shadow: none !important;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .calendar-events {
+    cursor: move;
+  }
+  
+  .object-fit-cover {
+    object-fit: cover;
+  }
+  

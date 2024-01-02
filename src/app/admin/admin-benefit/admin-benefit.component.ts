@@ -5,7 +5,7 @@ import { SharedService } from '../../services/shared.service';
 @Component({
   selector: 'app-admin-benefit',
   templateUrl: './admin-benefit.component.html',
-  styleUrls: ['./admin-benefit.component.scss']
+  styleUrl: '../../../sass/main.scss'
 })
 export class AdminBenefitComponent implements OnInit {
   benefits: any[] = [];

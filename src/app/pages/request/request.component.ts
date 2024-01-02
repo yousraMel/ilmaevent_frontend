@@ -6,7 +6,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
-  styleUrl: './request.component.scss'
+  styleUrl: '../../../sass/main.scss'
 })
 export class RequestComponent implements OnInit {
 

@@ -5,7 +5,7 @@ import { SharedService } from '../../../services/shared.service';
 @Component({
   selector: 'app-add-type',
   templateUrl: './add-type.component.html',
-  styleUrl: './add-type.component.scss'
+  styleUrl: '../../../../sass/main.scss'
 })
 export class AddTypeComponent implements OnInit {
   @Output() close = new EventEmitter<void>();

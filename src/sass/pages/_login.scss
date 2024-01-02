@@ -1,6 +1,4 @@
-@import "../../../sass/main.scss";
-
-.header {
+.login_header {
     height: 35vh;
     background-color: $color-white;
     position: relative;
@@ -33,7 +31,7 @@
     }
 }
 
-.heading {
+.login_heading {
     background-image: linear-gradient(to right bottom, rgba($color-tertiary, 1), rgba($color-tertiary-light, 1));
     font-size: 1.6rem;
     padding: 1rem;
@@ -41,7 +39,7 @@
     margin-bottom: 2rem;
 }
 
-.help {
+.login_help {
     text-decoration: none;
     font-size: 1rem;
     background-color: transparent;

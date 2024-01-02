@@ -5,7 +5,7 @@ import { TruncatePipe } from '../../../pipes/truncate.pipe';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: '../../../sass/main.scss'
 })
 export class HomeComponent implements OnInit {
 

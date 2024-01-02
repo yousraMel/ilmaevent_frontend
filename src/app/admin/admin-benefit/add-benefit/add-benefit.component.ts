@@ -7,7 +7,7 @@ import { SharedService } from '../../../services/shared.service';
 @Component({
   selector: 'app-add-benefit',
   templateUrl: './add-benefit.component.html',
-  styleUrls: ['./add-benefit.component.scss']
+  styleUrl: '../../../../sass/main.scss'
 })
 export class AddBenefitComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
