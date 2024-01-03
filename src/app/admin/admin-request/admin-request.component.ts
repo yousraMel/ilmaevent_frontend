@@ -13,6 +13,7 @@ import { ExcelExportService } from '../../services/excel-export.service';
 export class AdminRequestComponent implements OnInit {
   public isBrowser: boolean = false;
   requests: any[] = [];
+  requestsCount: number = 0;
   filteredRequests: any[] = [];
   sortBy: string = 'label'; // Default sort column
   sortOrder: string = 'asc'; // Default sort order
@@ -27,9 +28,13 @@ export class AdminRequestComponent implements OnInit {
   committeeLeaderFilter = '';
   isFreeRequests: any[] = [];
   notFreeRequests: any[] = [];
-      // Sorting properties
-      sortColumn: string | null = null;
-      sortDirection: 'asc' | 'desc' = 'asc';
+  // Sorting properties
+  sortColumn: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
+  currentPage: number = 1;
+  itemsPerPage: number = 10; // Adjust this value based on your preference
+  totalItems: number = 0;
+  totalPages: number = 0; // Add this line
 
   constructor(
     private allservice: AllService,
@@ -146,8 +151,11 @@ export class AdminRequestComponent implements OnInit {
   ngOnInit(): void {
     this.allservice.getAllRequests().subscribe((data: any[]) => {
       this.requests = data;
-      // Initialize filteredRequests
       this.filteredRequests = this.requests.slice();
+      this.requestsCount = this.filteredRequests.length;
+      this.totalItems = this.filteredRequests.length;
+      // Initialize filteredRequests
+      
       // Calculate the number of requests for each category
       this.isFreeRequests = this.requests.filter(request => request.isFree);
       this.notFreeRequests = this.requests.filter(request => !request.isFree);
@@ -213,6 +221,8 @@ export class AdminRequestComponent implements OnInit {
             .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
             .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0));
      });
+           // ... existing logic ...
+      this.applyPagination();
       this.cdr.detectChanges();
     });
 
@@ -240,6 +250,12 @@ export class AdminRequestComponent implements OnInit {
       // Default to no filtering for other types
       return true;
     });
+     // Update totalItems based on the filteredRequests
+      this.totalItems = this.filteredRequests.length;
+
+      this.requestsCount = this.filteredRequests.length;
+      // Apply pagination
+      this.applyPagination();
   }
 
   sort(column: string) {
@@ -265,6 +281,8 @@ export class AdminRequestComponent implements OnInit {
 
       return 0; // Default to no sorting for other types
     });
+     // Apply pagination
+   this.applyPagination();
   }
 
   getSortIcon(column: string) {
@@ -324,5 +342,24 @@ export class AdminRequestComponent implements OnInit {
     this.excelExportService.exportToExcel(exportData, 'exported_requests', 'requests');
   }
 
+  applyPagination() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    console.log('startIndex: ' + startIndex);
+    console.log('endIndex: ' + endIndex);
+    console.log('this.filteredRequests before slicing: ', this.filteredRequests);
+    this.filteredRequests = this.requests.slice(startIndex, endIndex);
+    console.log('this.filteredRequests after slicing: ', this.filteredRequests);
+    // Calculate total pages
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+    console.log('Total Pages: ', this.totalPages);
+  }
+  
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.applyPagination();
+    }
+  }
 
 }

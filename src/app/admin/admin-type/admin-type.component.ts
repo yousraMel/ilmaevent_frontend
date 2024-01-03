@@ -9,6 +9,7 @@ import { SharedService } from '../../services/shared.service';
 })
 export class AdminTypeComponent implements OnInit {
   types: any[] = [];
+  typesCount: number = 0;
   filteredTypes: any[] = [];
   isAddTypePopupOpen: boolean = false;
   type: any;
@@ -48,6 +49,7 @@ export class AdminTypeComponent implements OnInit {
     this.allService.getAllTypes().subscribe((data: any[]) => {
       this.types = data;
       this.filteredTypes = this.types.slice();
+      this.typesCount = this.filteredTypes.length;
     });
   }
 
@@ -113,6 +115,7 @@ export class AdminTypeComponent implements OnInit {
       // Default to no filtering for other types
       return true;
     });
+    this.typesCount = this.filteredTypes.length;
   }
 
   sort(column: string) {

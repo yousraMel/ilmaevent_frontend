@@ -27,7 +27,7 @@
 </div>
 <div class="row admin__request-table">
   <div class="table__tools">
-    <h3>Demandes d'Organisation</h3>
+    <h3>Demandes d'Organisation ({{requestsCount}})</h3>
     <button class="btn btn-sm btn-export" (click)="exportToExcel()">Exporter</button>
   </div>
 
@@ -118,4 +118,9 @@
       </tr>
     </tbody>
   </table>
+  <div class="pagination">
+    <button class ="btn pagination__btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span class ="pagination__text">{{ currentPage }} / {{ totalPages }}</span>
+    <button class ="btn pagination__btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
 </div>

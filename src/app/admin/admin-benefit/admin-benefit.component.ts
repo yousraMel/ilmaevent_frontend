@@ -9,6 +9,7 @@ import { SharedService } from '../../services/shared.service';
 })
 export class AdminBenefitComponent implements OnInit {
   benefits: any[] = [];
+  benefitsCount : number = 0;
   filteredBenefits: any[] = [];
   isAddBenefitPopupOpen: boolean = false;
   benefit: any;
@@ -49,6 +50,7 @@ export class AdminBenefitComponent implements OnInit {
     this.allService.getAllBenefits().subscribe((data: any[]) => {
       this.benefits = data;
       this.filteredBenefits = this.benefits.slice();
+      this.benefitsCount = this.filteredBenefits.length;
     });
   }
 
@@ -114,6 +116,7 @@ export class AdminBenefitComponent implements OnInit {
       // Default to no filtering for other types
       return true;
     });
+    this.benefitsCount = this.filteredBenefits.length;
   }
 
   sort(column: string) {
