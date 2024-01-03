@@ -1,29 +1,41 @@
 <div class="row admin__request-tools">
   <ul class="admin__request-tools-list">
     <li>
-      <input type="text" class="form__input tools__search" placeholder="Recherche" id="search">
-    </li>
-    <li>
-      <button class="btn btn-sm btn-export" (click)="openAddTypePopup()">Ajouter</button>
+      <button class="btn btn-sm btn-export" (click)="openAddTypePopup()"><i class="fa fa-add"></i>Ajouter</button>
     </li>
   </ul>
 </div>
 <div class="row admin__request-table">
-  <h3>Préstations</h3>
+  <h3>Préstations ({{typesCount}})</h3>
   <table class="table mt-5">
     <thead>
       <tr>
         <th>Détails</th>
-        <th>Code</th>
-        <th>Libellé</th>
-        <th>Description</th>
-        <th>Ordre</th>
-        <th>Actif</th>
+        <th > 
+          <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
+            class="form__input tools__search" placeholder="Code"> <i class="fa" [ngClass]="getSortIcon('code')" (click)="sort('code')"></i>
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
+            class="form__input tools__search" placeholder="Libellé"> <i class="fa" [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="descriptionFilter" (input)="filter('description', descriptionFilter)"
+            class="form__input tools__search" placeholder="Description"> <i class="fa" [ngClass]="getSortIcon('description')" (click)="sort('description')"></i>
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="rankFilter" (input)="filter('rank', rankFilter)"
+            class="form__input tools__search" placeholder="Ordre"><i class="fa" [ngClass]="getSortIcon('rank')" (click)="sort('rank')"></i>
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="activeFilter" (input)="filter('active', activeFilter)"
+            class="form__input tools__search" placeholder="Actif">
+        </th>
 
       </tr>
     </thead>
     <tbody class="list">
-      <tr class="list--list-item" *ngFor="let type of types; let i = index">
+      <tr class="list--list-item" *ngFor="let type of filteredTypes; let i = index">
         <td class="customtooltip">
           <i class="far fa-clock"></i>
           <span class="customtooltiptext">
