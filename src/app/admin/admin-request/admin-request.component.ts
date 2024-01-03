@@ -27,6 +27,9 @@ export class AdminRequestComponent implements OnInit {
   committeeLeaderFilter = '';
   isFreeRequests: any[] = [];
   notFreeRequests: any[] = [];
+      // Sorting properties
+      sortColumn: string | null = null;
+      sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor(
     private allservice: AllService,
@@ -215,26 +218,9 @@ export class AdminRequestComponent implements OnInit {
 
   }
 
-  // Sorting function
-  sort(event: any) {
-    const selectedValue = event.target.value;
-    if (selectedValue === this.sortBy) {
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortBy = selectedValue;
-      this.sortOrder = 'asc';
-    }
-
-    this.filteredRequests = this.requests.slice().sort((a, b) => {
-      const aValue = a[this.sortBy];
-      const bValue = b[this.sortBy];
-      return this.sortOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-    });
-  }
-
   filter(column: string, value: string) {
     this.filteredRequests = this.requests.filter(request => {
-      const columnValue = request[column];
+      const columnValue = column === 'type' ? request.type?.label : request[column];
       if (value === '') {
         return true; // No filtering if the value is empty
       }
@@ -247,12 +233,47 @@ export class AdminRequestComponent implements OnInit {
         return columnValue === +value; // Convert value to number for strict equality
       } else if (typeof columnValue === 'boolean') {
         // Boolean comparison
-        return columnValue === (value.toLowerCase() === 'true');
+        const booleanValue = value.toLowerCase() === 'oui';
+        return columnValue === booleanValue;
       }
 
       // Default to no filtering for other types
       return true;
     });
+  }
+
+  sort(column: string) {
+    if (this.sortColumn === column) {
+      // Toggle sort direction if it's the same column
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Set new sort column and default direction
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    // Perform the actual sorting
+    this.filteredRequests.sort((a, b) => {
+      const valueA = a[column];
+      const valueB = b[column];
+
+      if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return this.sortDirection === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+      } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+        return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
+      }
+
+      return 0; // Default to no sorting for other types
+    });
+  }
+
+  getSortIcon(column: string) {
+    // Return appropriate FontAwesome class based on sort direction and column
+    return {
+      'fa-sort': !this.sortColumn || this.sortColumn !== column,
+      'fa-sort-asc': this.sortColumn === column && this.sortDirection === 'asc',
+      'fa-sort-desc': this.sortColumn === column && this.sortDirection === 'desc',
+    };
   }
 
   exportToExcel() {

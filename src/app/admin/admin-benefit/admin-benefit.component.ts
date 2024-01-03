@@ -20,6 +20,9 @@ export class AdminBenefitComponent implements OnInit {
   descriptionFilter: string = '';
   activeFilter: string = '';
   rankFilter = '';
+      // Sorting properties
+      sortColumn: string | null = null;
+      sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor(
     private allService: AllService,
@@ -28,7 +31,7 @@ export class AdminBenefitComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadBenefits();
-    this.filteredBenefits = this.benefits.slice();
+    // this.filteredBenefits = this.benefits.slice();
   }
 
   openAddBenefitPopup() {
@@ -45,6 +48,7 @@ export class AdminBenefitComponent implements OnInit {
   reloadBenefits() {
     this.allService.getAllBenefits().subscribe((data: any[]) => {
       this.benefits = data;
+      this.filteredBenefits = this.benefits.slice();
     });
   }
 
@@ -89,8 +93,8 @@ export class AdminBenefitComponent implements OnInit {
   }
 
   filter(column: string, value: string) {
-    this.filteredBenefits = this.benefits.filter(request => {
-      const columnValue = request[column];
+    this.filteredBenefits = this.benefits.filter(benefit => {
+      const columnValue = benefit[column];
       if (value === '') {
         return true; // No filtering if the value is empty
       }
@@ -103,11 +107,46 @@ export class AdminBenefitComponent implements OnInit {
         return columnValue === +value; // Convert value to number for strict equality
       } else if (typeof columnValue === 'boolean') {
         // Boolean comparison
-        return columnValue === (value.toLowerCase() === 'true');
+        const booleanValue = value.toLowerCase() === 'oui';
+        return columnValue === booleanValue;
       }
 
       // Default to no filtering for other types
       return true;
     });
+  }
+
+  sort(column: string) {
+    if (this.sortColumn === column) {
+      // Toggle sort direction if it's the same column
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Set new sort column and default direction
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    // Perform the actual sorting
+    this.filteredBenefits.sort((a, b) => {
+      const valueA = a[column];
+      const valueB = b[column];
+
+      if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return this.sortDirection === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+      } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+        return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
+      }
+
+      return 0; // Default to no sorting for other types
+    });
+  }
+
+  getSortIcon(column: string) {
+    // Return appropriate FontAwesome class based on sort direction and column
+    return {
+      'fa-sort': !this.sortColumn || this.sortColumn !== column,
+      'fa-sort-asc': this.sortColumn === column && this.sortDirection === 'asc',
+      'fa-sort-desc': this.sortColumn === column && this.sortDirection === 'desc',
+    };
   }
 }

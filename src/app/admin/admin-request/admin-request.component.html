@@ -37,21 +37,21 @@
         <th>Détails</th>
         <th>Info de Contact</th>
         <th>Préstations Demandées</th>
-        <th>
+        <th > 
           <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
-            class="form__input tools__search" placeholder="Code">
+            class="form__input tools__search" placeholder="Code"> <i class="fa" [ngClass]="getSortIcon('code')" (click)="sort('code')"></i>
         </th>
-        <th (click)="sort('label')">
+        <th>
           <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
-            class="form__input tools__search" placeholder="Libellé">
+            class="form__input tools__search" placeholder="Libellé"> <i class="fa" [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
         </th>
-        <th (click)="sort('description')">
+        <th>
           <input type="text" [(ngModel)]="descriptionFilter" (input)="filter('description', descriptionFilter)"
-            class="form__input tools__search" placeholder="Description">
+            class="form__input tools__search" placeholder="Description"> <i class="fa" [ngClass]="getSortIcon('description')" (click)="sort('description')"></i>
         </th>
         <th>
           <input type="text" [(ngModel)]="typeFilter" (input)="filter('type', typeFilter)"
-            class="form__input tools__search" placeholder="Type Evénement">
+            class="form__input tools__search" placeholder="Type Evénement"><i class="fa" [ngClass]="getSortIcon('type')" (click)="sort('type')"></i>
         </th>
         <th>
           <input type="text" [(ngModel)]="isFreeFilter" (input)="filter('isFree', isFreeFilter)"
@@ -59,16 +59,16 @@
         </th>
         <th>
           <input type="text" [(ngModel)]="participantsNbFilter" (input)="filter('participantsNb', participantsNbFilter)"
-            class="form__input tools__search" placeholder="Participants">
+            class="form__input tools__search" placeholder="Participants"><i class="fa" [ngClass]="getSortIcon('participantsNb')" (click)="sort('participantsNb')"></i>
         </th>
         <th>
           <input type="text" [(ngModel)]="institutionFilter" (input)="filter('institution', institutionFilter)"
-            class="form__input tools__search" placeholder="Institution">
+            class="form__input tools__search" placeholder="Institution"><i class="fa" [ngClass]="getSortIcon('institution')" (click)="sort('institution')"></i>
         </th>
         <th>
           <input type="text" [(ngModel)]="committeeLeaderFilter"
             (input)="filter('committeeLeader', committeeLeaderFilter)" class="form__input tools__search"
-            placeholder="Responsable">
+            placeholder="Responsable"><i class="fa" [ngClass]="getSortIcon('committeeLeader')" (click)="sort('committeeLeader')"></i>
         </th>
 
       </tr>
