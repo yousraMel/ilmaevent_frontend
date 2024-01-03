@@ -1,0 +1,21 @@
+.header_contact {
+    height: 10vh;
+    padding: 5rem;
+    background-image: linear-gradient(to right bottom, $color-primary, $color-primary-light);
+
+    @media (max-width:767.98px) {
+        height: 5vh;
+    }
+}
+
+.section-contact {
+    background-color: $color-white;
+    height: 58vh;
+    padding-top: 7rem;
+    padding-bottom: 6rem;
+
+    & h2,
+    & h3 {
+        color: $color-secondary-dark;
+    }
+}

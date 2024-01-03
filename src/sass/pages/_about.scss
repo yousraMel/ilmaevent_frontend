@@ -1,0 +1,74 @@
+
+.header_about {
+    // margin-top: 25rem;
+    background-image: linear-gradient(to right bottom, rgba($color-primary, 1), rgba($color-primary-light, 1));
+
+    &__about {
+        // margin: 6.5rem 0;
+    }
+
+    & p,
+    & h4 {
+        color: $color-white;
+    }
+
+    &__row {
+        padding: 5rem 5rem;
+    }
+
+    &__shape {
+        float: right;
+        transform: translate(-2rem, -5rem);
+        width: 35rem;
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+
+        & img {
+            width: 100%;
+        }
+    }
+}
+
+hr {
+    width: 100%;
+    border: 1.5px solid $color-tertiary;
+
+}
+
+.section-missions {
+    background-color: $color-white;
+    // padding-top: 7rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+
+    & .feature {
+        // margin-top: 5rem;
+    }
+
+    &__heading {
+        justify-content: space-around;
+    display: flex;
+    margin: 5rem;
+    }
+}
+
+.section-members {
+    margin: 5rem 0;
+    background-image: linear-gradient(to right bottom,
+            rgba($color-tertiary-light, 1) 0%,
+            rgba($color-tertiary, 1) 30%,
+            rgba($color-tertiary, 1) 70%,
+            rgba($color-tertiary-light, 1) 100%);
+
+    &__picture {
+        margin-right: 3rem;
+        margin-top: 3.5rem;
+    }
+
+    &__name {
+        font-weight: 400;
+        font-size: 1.4rem;
+        display: block;
+        margin-bottom: 3rem;
+    }
+}
