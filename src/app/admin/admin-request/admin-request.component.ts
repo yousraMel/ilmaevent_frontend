@@ -37,6 +37,7 @@ export class AdminRequestComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
+  // Chart data for requests by free/not free
   requestByIsFreeData: ChartData<'doughnut'> = {
     labels: ['Gratuit', 'Payant'],
     datasets: [
@@ -57,14 +58,36 @@ export class AdminRequestComponent implements OnInit {
     },
   };
 
+    // Chart data for requests by institution
+    requestByInstitutionData: ChartData<'doughnut'> = {
+      labels: [], // Dynamic labels for types will be populated
+      datasets: [
+        {
+          label: '',
+          data: [0], // Dynamic data for each type will be populated
+          backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],// Choose a color for the bars
+        },
+      ],
+    };
+
+    requestByInstitutionChartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Distribution des Demandes par Institution',
+      },
+    },
+  };
+
   // Chart data for requests by type
   requestByTypeData: ChartData<'doughnut'> = {
     labels: [], // Dynamic labels for types will be populated
     datasets: [
       {
-        label: 'Demandes',
+        label: 'Nombre de Demandes',
         data: [0], // Dynamic data for each type will be populated
-        backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],// Choose a color for the bars
+        backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],// Choose a color for the bars
       },
     ],
   };
@@ -83,6 +106,35 @@ export class AdminRequestComponent implements OnInit {
       title: {
         display: true,
         text: 'Distribution des Demandes par Type',
+      },
+    },
+  };
+  // Chart data for participants by type
+  participantsByTypeData: ChartData<'bar'> = {
+    labels: [], // Dynamic labels for types will be populated
+    datasets: [
+      {
+        label: 'Nombre de Participants',
+        data: [0], // Dynamic data for each type will be populated
+        backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],// Choose a color for the bars
+      },
+    ],
+  };
+
+  participantsByTypeChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Nombre de participants par Type',
       },
     },
   };
@@ -107,37 +159,61 @@ export class AdminRequestComponent implements OnInit {
           },
         ],
       };
-      // Get unique types from the list
-      const uniqueTypes = Array.from(new Set(this.requests.map(request => request.type?.label?.toLowerCase().trim() || 'Non Renseigné')));
-      // Initialize requestByTypeData here
-      this.requestByTypeData = {
-        labels: uniqueTypes,
+       // Get unique institution from the list
+       const uniqueInstitution = Array.from(new Set(this.requests.map(request => request.institution?.trim() || 'Non Renseigné')));
+       // Initialize requestByInstitutionData here
+       this.requestByInstitutionData = {
+        labels: uniqueInstitution,
         datasets: [
           {
-            label: 'Demandes',
-            data: uniqueTypes.map(type =>
-              this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length
+            label: 'Nombre de Demandes',
+            data: uniqueInstitution.map(institution =>
+              this.requests.filter(request => (request.institution?.trim() || 'Non Renseigné') === institution).length
             ),
-            backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],
+            backgroundColor: ['#6A7CC1', '#861718' , '#245371', '#97a3d4' , '#db2c2e', '#3f8fc2' , '#3d4f94', '#5e1011' , '#193a4f'],
           },
         ],
       };
 
       // Get unique types from the list
-      // const uniqueTypes = Array.from(new Set(this.requests.map(request => request.type?.label?.toLowerCase().trim() || 'Non Renseigné')));
-
-      // Populate labels and data for the chart
-      // this.requestByTypeData.labels = uniqueTypes;
-      // this.requestByTypeData.datasets[0].data = uniqueTypes.map(type =>
-      //   this.requests.filter(request => (request.type?.label?.toLowerCase().trim() || 'Non Renseigné') === type).length
-      // );
-
+      const uniqueTypes = Array.from(new Set(this.requests.map(request => request.type?.label?.trim() || 'Non Renseigné')));
+      // Initialize requestByTypeData here
+      this.requestByTypeData = {
+        labels: uniqueTypes,
+        datasets: [
+          {
+            label: 'Nombre de Demandes',
+            data: uniqueTypes.map(type =>
+              this.requests.filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type).length
+            ),
+            backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],
+          },
+        ],
+      };
+       // Initialize participantsByTypeData here
+        this.participantsByTypeData = {
+          labels: uniqueTypes,
+          datasets: [
+            {
+              label: 'Nombre de Participants',
+              data: uniqueTypes.map(type =>
+                this.requests
+                  .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
+                  .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0)
+              ),
+              backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],
+            },
+          ],
+        };
+        uniqueTypes.forEach(type => {
+          console.log(  this.requests
+            .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
+            .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0));
+     });
       this.cdr.detectChanges();
     });
 
-
   }
-
 
   // Sorting function
   sort(event: any) {

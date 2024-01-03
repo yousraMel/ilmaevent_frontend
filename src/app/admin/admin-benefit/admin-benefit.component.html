@@ -1,10 +1,7 @@
 <div class="row admin__request-tools">
   <ul class="admin__request-tools-list">
     <li>
-      <input type="text" class="form__input tools__search" placeholder="Recherche" id="search">
-    </li>
-    <li>
-      <button class="btn btn-sm btn-export" (click)="openAddBenefitPopup()">Ajouter</button>
+      <button class="btn btn-sm btn-export" (click)="openAddBenefitPopup()"><i class="fa fa-add"></i> Ajouter</button>
     </li>
   </ul>
 </div>
@@ -14,11 +11,26 @@
     <thead>
       <tr>
         <th>Détails</th>
-        <th>Code</th>
-        <th>Libellé</th>
-        <th>Description</th>
-        <th>Ordre</th>
-        <th>Actif</th>
+        <th>
+          <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
+            class="form__input tools__search" placeholder="Code">
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
+            class="form__input tools__search" placeholder="Libellé">
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="descriptionFilter" (input)="filter('description', descriptionFilter)"
+            class="form__input tools__search" placeholder="Description">
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="rankFilter" (input)="filter('rank', rankFilter)"
+            class="form__input tools__search" placeholder="Ordre">
+        </th>
+        <th>
+          <input type="text" [(ngModel)]="activeFilter" (input)="filter('active', activeFilter)"
+            class="form__input tools__search" placeholder="Actif">
+        </th>
 
       </tr>
     </thead>
