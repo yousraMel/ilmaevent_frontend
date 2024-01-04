@@ -19,15 +19,22 @@
 // #999
 // #333
 
+// $color-primary: #3fa796;
+$color-primary-light-90: #e7f1f9;
+$color-primary-light-75: #c2dcf0;
+$color-primary-light-50: #85bae0;
+$color-primary-light-25: #4897d1;
+$color-primary: #2970a3;
+$color-primary-dark-25: #2970a3;
+$color-primary-dark-50: #2970a3;
+$color-primary-dark-75: #2970a3;
 
-
-$color-primary: #6a7cc1;
 $color-primary-light: #97a3d4;
 $color-primary-dark: #3d4f94;
 
 $color-primary-vibrant: hsl(235, 60%, 50%);
 
-$color-secondary: #861718;
+$color-secondary: #a10035;
 $color-secondary-light: #db2c2e;
 $color-secondary-dark: #5e1011;
 
@@ -41,19 +48,23 @@ $color-tertiary-vibrant: hsl(205, 60%, 40%);
 
 $color-grey-light-1: #f7f7f7;
 $color-grey-light-2: #eee;
-
+$color-grey-light-3: #fdfdfd;
 $color-grey-dark: #777;
 $color-grey-dark-2: #999;
 $color-grey-dark-3: #333;
+// $color-grey-dark-5: #fafbf5;
+$color-grey-dark-4: #e0e4e7;
+// $color-grey-dark-5: #f7f7f7;
+
+$color-grey-dark-5: #fcfcfc;
 
 $color-white: #fff;
+
 $color-black: #000;
 
 // FONT
+$font-size-xsmall: 1.2rem;
+$font-size-small: 1.4rem;
 $default-font-size: 1.6rem;
-
-// GRID
-$grid-width: 114rem;
-$gutter-vertical: 8rem;
-$gutter-vertical-small: 6rem;
-$gutter-horizontal: 6rem;
+$font-size-large: 1.8rem;
+$font-size-xlarge: 2rem;

@@ -1,12 +1,6 @@
-// @import "../../node_modules/bootstrap/scss/bootstrap";
-
-@import "abstracts/functions";
-@import "abstracts/mixins";
 @import "abstracts/variables";
-
 @import "base/base";
 @import "base/typography";
-@import "base/utilities";
 
 @import "components/button";
 @import "components/card";
@@ -18,14 +12,11 @@
 
 @import "layout/footer";
 @import "layout/header";
-@import "layout/grid";
 @import "layout/navigation";
+@import "layout/section";
 
 @import "pages/home";
-@import "pages/form";
 @import "pages/login";
 @import "pages/admin";
 @import "pages/contact";
 @import "pages/about";
-
-

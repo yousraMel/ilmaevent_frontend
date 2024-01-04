@@ -1,10 +1,8 @@
 .book__form {
-    width: 85%  !important;
+    width: 85% !important;
 }
 
-
 .form {
-
     &__group:not(:last-child) {
         margin-bottom: 2rem;
     }
@@ -23,19 +21,16 @@
         width: 90%;
         display: block;
         transition: all 0.3s;
-
-        @include respond(tab-port) {
-            width: 100%;
-        }
+        border-bottom: 3px solid $color-primary;
 
         &:focus {
             outline: none;
             box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
-            border-bottom: 3px solid $color-primary;
+            border-bottom: 3px solid $color-secondary-dark;
         }
 
         &:focus:invalid {
-            border-bottom: 3px solid $color-secondary-dark;
+            border-bottom: 3px solid $color-secondary-light;
         }
 
         &::-webkit-input-placeholder {
@@ -140,7 +135,7 @@
 
 .form__switch-input:checked + .form__switch-label .form__switch-switch {
     left: 30px;
-    background-color: $color-primary-dark;
+    background-color: $color-primary;
 }
 
 .form__checkbox-group {
@@ -167,13 +162,13 @@
 }
 
 .form__checkbox:checked + .form__checkbox-label::before {
-    background-color: $color-primary-dark; /* Adjust as needed */
-    border-color: $color-primary-dark; /* Adjust as needed */
+    background-color: $color-primary; /* Adjust as needed */
+    border-color: $color-primary; /* Adjust as needed */
 }
 
 /* Additional styling for visual feedback when hovering over the label */
 .form__checkbox-label:hover::before {
-    border-color: $color-primary-light; /* Adjust as needed */
+    border-color: $color-secondary-dark; /* Adjust as needed */
 }
 
 .form-box {
@@ -185,10 +180,10 @@
     z-index: 4000;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  }
-  
-  .form_box__btn {
-    padding : 2rem 0;
+}
+
+.form_box__btn {
+    padding: 2rem 0;
     display: flex;
     justify-content: space-around;
-  }
+}

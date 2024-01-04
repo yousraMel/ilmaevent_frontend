@@ -1,12 +1,18 @@
 .navbar {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 20px;
-    background: $color-white;
+    padding: 10px;
+    // background: $color-primary-light-90;
+    background: $color-grey-dark-5;
+    height: 9.6rem;
+    // border-bottom: 1px solid $color-grey-dark;
+    z-index: 1;
 
     &__logo {
-        max-width: 100px;
+        width: 75px;
     }
 
     &__menu {
@@ -21,8 +27,8 @@
     }
 
     &__link {
-        font-weight: 600;
-        font-size: larger;
+        // font-weight: 600;
+        font-size: $font-size-small;
         text-decoration: none;
         border-bottom: 2px solid transparent; // Set a transparent border initially
         padding: 20px 15px;
@@ -32,24 +38,6 @@
 
     &__link:hover,
     &__item:hover > a {
-        border-bottom: 2px solid $color-primary-dark;
-    }
-}
-
-/* Optional: Add some styles for responsiveness */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .navbar {
-        &__nav {
-            margin-top: 10px;
-        }
-        &__menu {
-            flex-direction: column;
-            text-align: center;
-        }
+        border-bottom: 2px solid $color-secondary-dark;
     }
 }
