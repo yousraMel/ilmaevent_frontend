@@ -6,13 +6,15 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+const API_URL = 'http://localhost:8082/api/';
+// const API_URL = 'http://ilma-event-api-env.eba-968cdqgy.eu-north-1.elasticbeanstalk.com/api/';
 
-const hostBenefit = 'http://localhost:8082/api/benefit';
-const hostContent = 'http://localhost:8082/api/content';
-const hostEventType = 'http://localhost:8082/api/eventType';
-const hostEvent = 'http://localhost:8082/api/event';
-const hostMedia = 'http://localhost:8082/api/media';
-const hostRequest = 'http://localhost:8082/api/request';
+const hostBenefit = API_URL + 'benefit';
+const hostContent = API_URL + 'content';
+const hostEventType = API_URL + 'eventType';
+const hostEvent = API_URL + 'event';
+const hostMedia = API_URL + 'media';
+const hostRequest = API_URL + 'request';
 
 @Injectable({
   providedIn: 'root'

@@ -97,6 +97,30 @@
     &__radio-input:checked ~ &__radio-label &__radio-button::after {
         opacity: 1;
     }
+
+    &__input--coltable {
+        padding: 0;
+        width: 75%;
+        display: inline;
+        border: none;
+        margin-right: 1rem;
+        background-color: transparent;
+
+        &::placeholder {
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        &:focus {
+            outline: none;
+            border: none;
+            box-shadow: none;
+        }
+
+        &:focus::placeholder {
+            color: $color-grey-dark-4;
+        }
+    }
 }
 
 .form__switch {
@@ -175,15 +199,25 @@
     position: fixed;
     top: 20vh;
     left: 30vw;
-    width: 45vw;
-    padding: 3rem;
+    width: 30vw;
+    // padding: 3rem;
     z-index: 4000;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 7px;
+}
+
+.form_box__title {
+    padding: 1.5rem 2rem;
+    background-color: $color-grey-dark-5;
+    font-weight: 500;
 }
 
 .form_box__btn {
-    padding: 2rem 0;
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-around;
+    .btn {
+        width: 80px;
+    }
 }

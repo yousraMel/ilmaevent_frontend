@@ -1,9 +1,13 @@
 .card {
     padding: 2rem 3rem 2.5rem;
-    height: 35rem;
+    height: 40rem;
     margin-bottom: 3rem;
 
     &__icon {
         font-size: 3rem;
+    }
+
+    &--graph {
+        width: 52rem;
     }
 }

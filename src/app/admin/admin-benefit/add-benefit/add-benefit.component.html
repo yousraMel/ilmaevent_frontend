@@ -1,41 +1,43 @@
 <div class="popup-container" *ngIf="true">
-  <div class="popup-content">
-    <button class="close-btn" (click)="closeAddBenefitPopup()"> &times;</button>
-    <form [formGroup]="benefitForm" class="form">
-      <div class="u-margin-bottom-medium">
-        <h4 class="heading-tertiary">
-          Ajouter une Nouvelle Préstation.
-        </h4>
-      </div>
-      <div class="form__group">
-        <label for="label" class="form__label">Libellé :</label>
-        <input type="text" class="form__input" placeholder="Libellé" id="label" formControlName="label" required>
-      </div>
+    <div class="popup-content">
+        <button class="close-btn" (click)="closeAddBenefitPopup()"> &times;</button>
+        <form [formGroup]="benefitForm" class="form">
+            <div class="u-margin-bottom-medium">
+                <h4 class="heading-tertiary">
+                    Ajouter une Nouvelle Préstation.
+                </h4>
+            </div>
+            <div class="form__group">
+                <label for="label" class="form__label">Libellé :</label>
+                <input type="text" class="form__input" placeholder="Libellé" id="label" formControlName="label"
+                    required>
+            </div>
 
-      <div class="form__group">
-        <label for="description" class="form__label">Description :</label>
-        <input type="area" class="form__input form__textarea" placeholder="Description" id="description"
-          formControlName="description" required />
-      </div>
+            <div class="form__group">
+                <label for="description" class="form__label">Description :</label>
+                <input type="tetxtarea" class="form__input " placeholder="Description" id="description"
+                    formControlName="description" required />
+            </div>
 
-      <div class="form__group">
-        <label for="participantsNb" class="form__label">Ordre :</label>
-        <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank" required>
-      </div>
+            <div class="form__group">
+                <label for="participantsNb" class="form__label">Ordre :</label>
+                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank" required>
+            </div>
 
-      <div class="form__group">
-        <label for="active" class="form__label">Actif ?</label>
-        <div class="form__switch">
-          <input type="checkbox" class="form__input form__switch-input" id="active" formControlName="active" />
-          <label class="form__switch-label" for="active">
-            <span class="form__switch-switch"></span>
-          </label>
-        </div>
-      </div>
+            <div class="form__group">
+                <label for="active" class="form__label">Actif ?</label>
+                <div class="form__switch">
+                    <input type="checkbox" class="form__input form__switch-input" id="active"
+                        formControlName="active" />
+                    <label class="form__switch-label" for="active">
+                        <span class="form__switch-switch"></span>
+                    </label>
+                </div>
+            </div>
 
-      <div class="row form__group">
-        <button type="submit" class="btn btn--primary btn-submit" (click)="onSubmit()">Sauvegarder</button>
-      </div>
-    </form>
-  </div>
+            <div class="row form__group row d-flex justify-content-center">
+                <button type="submit" class="btn btn--primary btn-submit" (click)="onSubmit()">Sauvegarder</button>
+            </div>
+        </form>
+    </div>
 </div>

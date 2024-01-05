@@ -1,0 +1,74 @@
+// ----------------------------------------------
+// Table Style
+// ----------------------------------------------
+
+.data-table {
+    margin: 20px 0;
+    border: 1px solid $color-grey-dark;
+    h3 {
+        margin-bottom: 0;
+    }
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // margin-bottom: 10px;
+    background-color: $color-grey-dark-5;
+    border: 1px solid $color-grey-dark;
+    padding: 1.5rem;
+}
+
+.table-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.table-counter {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.table-actions {
+    display: flex;
+}
+
+.table_pagination {
+    display: flex;
+    justify-content: center;
+
+    .page-link {
+        color: $color-white;
+        background-color: $color-primary;
+        font-size: $font-size-small;
+        &:hover {
+            color: $color-white;
+            background-color: $color-primary;
+        }
+    }
+}
+
+.table_column {
+    width: 100px;
+    border: 1px solid $color-grey-dark;
+    &--small {
+        width: 50px;
+    }
+
+    &--large {
+        width: 200px;
+    }
+}
+
+thead,
+th {
+    background-color: $color-grey-dark-5;
+    font-size: 1.2rem;
+}
+
+td,
+th {
+    text-align: center;
+    vertical-align: middle;
+}
