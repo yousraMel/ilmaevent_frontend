@@ -1,7 +1,6 @@
-
 .header_about {
     // margin-top: 25rem;
-    background-image: linear-gradient(to right bottom, rgba($color-primary, 1), rgba($color-primary-light, 1));
+    // background-image: linear-gradient(to right bottom, rgba($color-primary, 1), rgba($color-primary-light, 1));
 
     &__about {
         // margin: 6.5rem 0;
@@ -9,7 +8,7 @@
 
     & p,
     & h4 {
-        color: $color-white;
+        // color: $color-white;
     }
 
     &__row {
@@ -32,7 +31,6 @@
 hr {
     width: 100%;
     border: 1.5px solid $color-tertiary;
-
 }
 
 .section-missions {
@@ -47,28 +45,12 @@ hr {
 
     &__heading {
         justify-content: space-around;
-    display: flex;
-    margin: 5rem;
+        display: flex;
+        margin: 5rem;
     }
 }
 
 .section-members {
-    margin: 5rem 0;
-    background-image: linear-gradient(to right bottom,
-            rgba($color-tertiary-light, 1) 0%,
-            rgba($color-tertiary, 1) 30%,
-            rgba($color-tertiary, 1) 70%,
-            rgba($color-tertiary-light, 1) 100%);
-
-    &__picture {
-        margin-right: 3rem;
-        margin-top: 3.5rem;
-    }
-
-    &__name {
-        font-weight: 400;
-        font-size: 1.4rem;
-        display: block;
-        margin-bottom: 3rem;
-    }
+    // margin: 5rem 0;
+    background-color: $color-tertiary-light;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AllService } from '../../../services/all.service';
+import { AllService } from '../../services/all.service';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
 @Component({

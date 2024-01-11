@@ -3,11 +3,25 @@
     height: 40rem;
     margin-bottom: 3rem;
 
+    &--transparent {
+        background-color: transparent;
+        height: 20rem;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & img {
+            height: 100px;
+            width: 200px;
+        }
+    }
+
     &__icon {
         font-size: 3rem;
     }
 
     &--graph {
         width: 52rem;
+        height: 24rem;
     }
 }

@@ -21,9 +21,10 @@ export class AdminTypeComponent implements OnInit {
   descriptionFilter: string = '';
   activeFilter: string = '';
   rankFilter = '';
-    // Sorting properties
-    sortColumn: string | null = null;
-    sortDirection: 'asc' | 'desc' = 'asc';
+  // Sorting properties
+  sortColumn: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
+  errorMessage: string = '';
 
   constructor(
     private allService: AllService,
@@ -40,9 +41,10 @@ export class AdminTypeComponent implements OnInit {
 
   closeAddTypePopup() {
     setTimeout(() => {
+      this.sharedService.editMode = false
       this.reloadTypes();
       this.isAddTypePopupOpen = false;
-    }, 1000);
+    }, 700);
   }
 
   reloadTypes() {
@@ -77,14 +79,26 @@ export class AdminTypeComponent implements OnInit {
   }
 
   onCloseAlert() {
-    this.isAlertCalled = false;
+    setTimeout(() => {
+      this.reloadTypes();
+      this.isAlertCalled = false;
+    }, 700);
+
   }
 
   onDeleteType() {
     this.allService.deleteType(this.typeId).subscribe(response => {
       this.types.splice(this.index, 1);
-    });
-    this.isAlertCalled = false;
+      setTimeout(() => {
+        this.reloadTypes();
+        this.isAlertCalled = false;
+      }, 700);
+    },
+      (error) => {
+        console.error(error);
+        this.errorMessage = error;
+      });
+
   }
 
   onEditType(typeId: number) {

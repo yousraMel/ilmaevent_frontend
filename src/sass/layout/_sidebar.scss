@@ -3,14 +3,17 @@
 // ----------------------------------------------
 
 .left-sidebar {
-  width: 270px;
+  width: 240px;
   height: 100vh;
-  background-color: $color-white;
+  background-color: $color-grey-dark-5;
   position: absolute;
   transition: 0.2s ease-in;
   // height: 100%;
   z-index: 11;
-  border-right: 1px solid rgb(229, 234, 239);
+  // border-right: 1px solid rgb(229, 234, 239);
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .brand-logo {

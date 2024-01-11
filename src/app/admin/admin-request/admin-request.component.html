@@ -28,246 +28,164 @@
         </div>
     </div>
 </div>
-<div class="data-table">
-    <div class="table-header">
-        <div class="table-title">
-            <h3 class="heading-tertiary">
-                Demandes d'Organisation
-                <span class="table_counter">({{requestsCount}})</span>
-            </h3>
-        </div>
-        <div class="table-actions">
-            <button class="btn btn-sm btn-export" (click)="exportToExcel()">
-                <i class="fa-solid fa-file-export"></i>
-                Exporter
-            </button>
-        </div>
-    </div>
-    <div class="table-body ">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="table_column table_column--small">Détails</th>
-                    <th class="table_column table_column--small">Contact</th>
-                    <th class="table_column table_column--small">Préstations</th>
-                    <!-- <th>
-                        <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
-                            class="form__input tools__search" placeholder="Code"> <i class="fa"
-                            [ngClass]="getSortIcon('code')" (click)="sort('code')"></i>
-                    </th> -->
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
-                            class="form__input form__input--coltable" placeholder="Libellé"> <i class="fa"
-                            [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
-                    </th>
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="descriptionFilter"
-                            (input)="filter('description', descriptionFilter)" class="form__input form__input--coltable"
-                            placeholder="Description"> <i class="fa" [ngClass]="getSortIcon('description')"
-                            (click)="sort('description')"></i>
-                    </th>
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="typeFilter" (input)="filter('type', typeFilter)"
-                            class="form__input form__input--coltable" placeholder="Type"><i class="fa"
-                            [ngClass]="getSortIcon('type')" (click)="sort('type')"></i>
-                    </th>
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="isFreeFilter" (input)="filter('isFree', isFreeFilter)"
-                            class="form__input form__input--coltable" placeholder="Gratuit">
-                    </th>
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="participantsNbFilter"
-                            (input)="filter('participantsNb', participantsNbFilter)"
-                            class="form__input form__input--coltable" placeholder="Participants"><i class="fa"
-                            [ngClass]="getSortIcon('participantsNb')" (click)="sort('participantsNb')"></i>
-                    </th>
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="institutionFilter"
-                            (input)="filter('institution', institutionFilter)" class="form__input form__input--coltable"
-                            placeholder="Institution"><i class="fa" [ngClass]="getSortIcon('institution')"
-                            (click)="sort('institution')"></i>
-                    </th>
-                    <th class="table_column">
-                        <input type="text" [(ngModel)]="committeeLeaderFilter"
-                            (input)="filter('committeeLeader', committeeLeaderFilter)"
-                            class="form__input form__input--coltable" placeholder="Responsable"><i class="fa"
-                            [ngClass]="getSortIcon('committeeLeader')" (click)="sort('committeeLeader')"></i>
-                    </th>
+<div class="row">
+    <div class="col-12">
+        <div class="data-table">
+            <div class="table-header">
+                <div class="table-title">
+                    <h3 class="heading-tertiary">
+                        Demandes d'Organisation
+                        <span class="table_counter">({{requestsCount}})</span>
+                    </h3>
+                </div>
+                <div class="table-actions">
+                    <div class="filter-status">
+                        <label>Status:</label>
+                        <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter('status')">
+                        Tous
+                        <input type="radio" [(ngModel)]="filterValue" [value]="'Nouveau'"
+                            (change)="applyFilter('status')"> Nouveau
+                        <input type="radio" [(ngModel)]="filterValue" [value]="'En cours'"
+                            (change)="applyFilter('status')"> En cours
+                        <input type="radio" [(ngModel)]="filterValue" [value]="'Traité'"
+                            (change)="applyFilter('status')"> Traité
+                        <input type="radio" [(ngModel)]="filterValue" [value]="'Annulé'"
+                            (change)="applyFilter('status')"> Annulé
+                    </div>
+                    <button class="btn btn-sm btn-export" (click)="exportToExcel()">
+                        <i class="fa-solid fa-file-export"></i>
+                        Exporter
+                    </button>
+                </div>
+            </div>
+            <div class="table-body ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="table_column table_column--small">Détails</th>
+                            <th class="table_column" (click)="sort('status')">
+                                Statut
+                                <i class="fa" [ngClass]="getSortIcon('status')"></i>
+                            </th>
+                            <th class="table_column table_column--small">Contact</th>
+                            <th class="table_column table_column--small">Préstations</th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
+                                    class="form__input form__input--coltable" placeholder="Libellé"> <i class="fa"
+                                    [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
+                            </th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="descriptionFilter"
+                                    (input)="filter('description', descriptionFilter)"
+                                    class="form__input form__input--coltable" placeholder="Description"> <i class="fa"
+                                    [ngClass]="getSortIcon('description')" (click)="sort('description')"></i>
+                            </th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="typeFilter" (input)="filter('type', typeFilter)"
+                                    class="form__input form__input--coltable" placeholder="Type"><i class="fa"
+                                    [ngClass]="getSortIcon('type')" (click)="sort('type')"></i>
+                            </th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="isFreeFilter" (input)="filter('isFree', isFreeFilter)"
+                                    class="form__input form__input--coltable" placeholder="Gratuit">
+                            </th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="participantsNbFilter"
+                                    (input)="filter('participantsNb', participantsNbFilter)"
+                                    class="form__input form__input--coltable" placeholder="Participants"><i class="fa"
+                                    [ngClass]="getSortIcon('participantsNb')" (click)="sort('participantsNb')"></i>
+                            </th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="institutionFilter"
+                                    (input)="filter('institution', institutionFilter)"
+                                    class="form__input form__input--coltable" placeholder="Institution"><i class="fa"
+                                    [ngClass]="getSortIcon('institution')" (click)="sort('institution')"></i>
+                            </th>
+                            <th class="table_column">
+                                <input type="text" [(ngModel)]="committeeLeaderFilter"
+                                    (input)="filter('committeeLeader', committeeLeaderFilter)"
+                                    class="form__input form__input--coltable" placeholder="Responsable"><i class="fa"
+                                    [ngClass]="getSortIcon('committeeLeader')" (click)="sort('committeeLeader')"></i>
+                            </th>
 
-                </tr>
-            </thead>
-            <tbody class="list">
-                <tr class="list--list-item" *ngFor="let request of filteredRequests; let i = index">
-                    <td class="customtooltip">
-                        <i class="far fa-clock"></i>
-                        <span class="customtooltiptext">
-                            Date Création : {{request.creationDate}} <br />
-                            Date Modification : {{request.lastModifDate}}
-                        </span></td>
-                    <td class="customtooltip">
-                        <i class="fas fa-info-circle "></i>
-                        <span class="customtooltiptext">
-                            Addresse : {{request.address}} <br />
-                            Téléphone : {{request.phone}} <br />
-                            Email : {{request.email}} <br />
-                            Site Web : {{request.webSite}} <br />
-                            Réseaux Sociaux : <br />
-                            <span *ngFor="let link of request.socialNetworks; let k = index">
-                                {{link}} <br />
-                            </span>
-                        </span>
-                    </td>
-                    <td class="customtooltip">
-                        <i class="fas fa-tasks"></i>
-                        <span class="customtooltiptext">
-                            <span *ngIf="request.benefits && request.benefits.length > 0; else noBenefits">
-                                <span *ngFor="let benefit of request.benefits; let j = index">
-                                    {{ benefit?.label || 'Pas de prestations demandées' }} <br />
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        <tr class="list--list-item" *ngFor="let request of filteredRequests; let i = index">
+                            <td class="customtooltip">
+                                <i class="far fa-clock"></i>
+                                <span class="customtooltiptext">
+                                    Date Création : {{request.creationDate}} <br />
+                                    Date Modification : {{request.lastModifDate}}
+                                </span></td>
+                            <td class="">
+                                <!-- <select class="form__input form__select form__input--coltable" id="status"
+                                    [(ngModel)]="{{request.status}}" (change)="updateStatus(request.id)">-->
+                                <select class="form__input form__select form__select--coltable form__input--coltable"
+                                    id="status" [(ngModel)]="selectedStatusMap[request.id]"
+                                    (change)="updateStatus(request.id)"
+                                    [ngStyle]="{ 'background-color': getStatusLabelColor(selectedStatusMap[request.id]) }">
+                                    <option>Nouveau</option>
+                                    <option>En cours</option>
+                                    <option>Traité</option>
+                                    <option>Annulé</option>
+                                </select>
+                            </td>
+
+
+                            <td class="customtooltip">
+                                <i class="fas fa-info-circle "></i>
+                                <span class="customtooltiptext">
+                                    Addresse : {{request.address}} <br />
+                                    Téléphone : {{request.phone}} <br />
+                                    Email : {{request.email}} <br />
+                                    Site Web : {{request.webSite}} <br />
+                                    Réseaux Sociaux : <br />
+                                    <span *ngFor="let link of request.socialNetworks; let k = index">
+                                        {{link}} <br />
+                                    </span>
                                 </span>
-                            </span>
-                            <ng-template #noBenefits>
-                                Pas de prestations demandées
-                            </ng-template>
-                        </span></td>
-                    <!-- <td class="">{{request.code}}</td> -->
-                    <td class="">{{request.label}}</td>
-                    <td class="">{{request.description}}</td>
-                    <td class="">{{request.type?.label}}</td>
-                    <td>{{ request.isFree ? 'Oui' : 'Non' }}</td>
-                    <td class="">{{request.participantsNb}}</td>
-                    <td class="">{{request.institution}}</td>
-                    <td class="">{{request.committeeLeader}}</td>
+                            </td>
+                            <td class="customtooltip">
+                                <i class="fas fa-tasks"></i>
+                                <span class="customtooltiptext">
+                                    <span *ngIf="request.benefits && request.benefits.length > 0; else noBenefits">
+                                        <span *ngFor="let benefit of request.benefits; let j = index">
+                                            {{ benefit?.label || 'Pas de prestations demandées' }} <br />
+                                        </span>
+                                    </span>
+                                    <ng-template #noBenefits>
+                                        Pas de prestations demandées
+                                    </ng-template>
+                                </span></td>
+                            <td class="">{{request.label}}</td>
+                            <td class="">{{request.description}}</td>
+                            <td class="">{{request.type?.label}}</td>
+                            <td>{{ request.isFree ? 'Oui' : 'Non' }}</td>
+                            <td class="">{{request.participantsNb}}</td>
+                            <td class="">{{request.institution}}</td>
+                            <td class="">{{request.committeeLeader}}</td>
 
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="table_pagination">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="page-item">
-                    <button class="page-link" (click)="goToPage(currentPage - 1)"
-                        [disabled]="currentPage === 1">Précédent</button>
-                </li>
-                <li class="page-item"><span class="page-link">{{ currentPage }} / {{ totalPages }}</span></li>
-                <li class="page-item">
-                    <button class="page-link" (click)="goToPage(currentPage + 1)"
-                        [disabled]="currentPage === totalPages">Suivant</button>
-                </li>
-            </ul>
-        </nav>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table_pagination">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <button class="page-link" (click)="goToPage(currentPage - 1)"
+                                [disabled]="currentPage === 1">Précédent</button>
+                        </li>
+                        <li class="page-item"><span class="page-link">{{ currentPage }} /
+                                {{ totalPages }}</span></li>
+                        <li class="page-item">
+                            <button class="page-link" (click)="goToPage(currentPage + 1)"
+                                [disabled]="currentPage === totalPages">Suivant</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 </div>
-
-
-<!-- <div class="row admin__request-table">
-    <div class="table__tools">
-        <h3>Demandes d'Organisation ({{requestsCount}})</h3>
-        <button class="btn btn-sm btn-export" (click)="exportToExcel()">Exporter</button>
-    </div>
-
-    <table class="table mt-5">
-        <thead>
-            <tr>
-                <th class="table_column">Détails</th>
-                <th>Info de Contact</th>
-                <th>Préstations Demandées</th>
-                <th>
-                    <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
-                        class="form__input form__input--coltable" placeholder="Code"> <i class="fa"
-                        [ngClass]="getSortIcon('code')" (click)="sort('code')"></i>
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
-                        class="form__input tools__search" placeholder="Libellé"> <i class="fa"
-                        [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="descriptionFilter"
-                        (input)="filter('description', descriptionFilter)" class="form__input tools__search"
-                        placeholder="Description"> <i class="fa" [ngClass]="getSortIcon('description')"
-                        (click)="sort('description')"></i>
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="typeFilter" (input)="filter('type', typeFilter)"
-                        class="form__input tools__search" placeholder="Type Evénement"><i class="fa"
-                        [ngClass]="getSortIcon('type')" (click)="sort('type')"></i>
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="isFreeFilter" (input)="filter('isFree', isFreeFilter)"
-                        class="form__input tools__search" placeholder="Gratuit">
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="participantsNbFilter"
-                        (input)="filter('participantsNb', participantsNbFilter)" class="form__input tools__search"
-                        placeholder="Participants"><i class="fa" [ngClass]="getSortIcon('participantsNb')"
-                        (click)="sort('participantsNb')"></i>
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="institutionFilter"
-                        (input)="filter('institution', institutionFilter)" class="form__input tools__search"
-                        placeholder="Institution"><i class="fa" [ngClass]="getSortIcon('institution')"
-                        (click)="sort('institution')"></i>
-                </th>
-                <th>
-                    <input type="text" [(ngModel)]="committeeLeaderFilter"
-                        (input)="filter('committeeLeader', committeeLeaderFilter)" class="form__input tools__search"
-                        placeholder="Responsable"><i class="fa" [ngClass]="getSortIcon('committeeLeader')"
-                        (click)="sort('committeeLeader')"></i>
-                </th>
-
-            </tr>
-        </thead>
-        <tbody class="list">
-            <tr class="list--list-item" *ngFor="let request of filteredRequests; let i = index">
-                <td class="customtooltip">
-                    <i class="far fa-clock"></i>
-                    <span class="customtooltiptext">
-                        Date Création : {{request.creationDate}} <br />
-                        Date Modification : {{request.lastModifDate}}
-                    </span></td>
-                <td class="customtooltip">
-                    <i class="fas fa-info-circle "></i>
-                    <span class="customtooltiptext">
-                        Addresse : {{request.address}} <br />
-                        Téléphone : {{request.phone}} <br />
-                        Email : {{request.email}} <br />
-                        Site Web : {{request.webSite}} <br />
-                        Réseaux Sociaux : <br />
-                        <span *ngFor="let link of request.socialNetworks; let k = index">
-                            {{link}} <br />
-                        </span>
-                    </span>
-                </td>
-                <td class="customtooltip">
-                    <i class="fas fa-tasks"></i>
-                    <span class="customtooltiptext">
-                        <span *ngIf="request.benefits && request.benefits.length > 0; else noBenefits">
-                            <span *ngFor="let benefit of request.benefits; let j = index">
-                                {{ benefit?.label || 'Pas de prestations demandées' }} <br />
-                            </span>
-                        </span>
-                        <ng-template #noBenefits>
-                            Pas de prestations demandées
-                        </ng-template>
-                    </span></td>
-                <td class="">{{request.code}}</td>
-                <td class="">{{request.label}}</td>
-                <td class="">{{request.description}}</td>
-                <td class="">{{request.type?.label}}</td>
-                <td>{{ request.isFree ? 'Oui' : 'Non' }}</td>
-                <td class="">{{request.participantsNb}}</td>
-                <td class="">{{request.institution}}</td>
-                <td class="">{{request.committeeLeader}}</td>
-
-            </tr>
-        </tbody>
-    </table>
-    <div class="pagination">
-        <button class="btn pagination__btn" (click)="goToPage(currentPage - 1)"
-            [disabled]="currentPage === 1">Previous</button>
-        <span class="pagination__text">{{ currentPage }} / {{ totalPages }}</span>
-        <button class="btn pagination__btn" (click)="goToPage(currentPage + 1)"
-            [disabled]="currentPage === totalPages">Next</button>
-    </div>
-</div> -->

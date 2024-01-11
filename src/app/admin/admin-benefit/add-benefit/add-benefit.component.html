@@ -3,9 +3,12 @@
         <button class="close-btn" (click)="closeAddBenefitPopup()"> &times;</button>
         <form [formGroup]="benefitForm" class="form">
             <div class="u-margin-bottom-medium">
-                <h4 class="heading-tertiary">
+                <h3 class="heading-tertiary" *ngIf="!editMode">
                     Ajouter une Nouvelle Préstation.
-                </h4>
+                </h3>
+                <h3 class="heading-tertiary" *ngIf="editMode">
+                    Modifier la Préstation.
+                </h3>
             </div>
             <div class="form__group">
                 <label for="label" class="form__label">Libellé :</label>
@@ -33,6 +36,10 @@
                         <span class="form__switch-switch"></span>
                     </label>
                 </div>
+            </div>
+            <div class="form__group">
+                <label for="icone" class="form__label">Icone :</label>
+                <input type="text" class="form__input" placeholder="Icone" id="icone" formControlName="icone" required>
             </div>
 
             <div class="row form__group row d-flex justify-content-center">

@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -42,7 +42,13 @@ export class AllService {
   }
 
   deleteBenefit(id: any) {
-    return this.http.delete(hostBenefit + '/delete/' + id);
+    // return this.http.delete(hostBenefit + '/delete/' + id);
+    return this.http.delete(hostBenefit + '/delete/' + id).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = "Attention ! Cette prestation est actuellement utilisée par une ou plusieurs demandes et ne peut pas être supprimée.";
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 
   /* -------------------------- apiRequest -------------------------- */
@@ -88,7 +94,13 @@ export class AllService {
   }
 
   deleteType(id: any) {
-    return this.http.delete(hostEventType + '/delete/' + id);
+    // return this.http.delete(hostEventType + '/delete/' + id);
+    return this.http.delete(hostEventType + '/delete/' + id).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = "Attention ! Ce type est actuellement utilisé par une ou plusieurs demandes et ne peut pas être supprimé.";
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 
 }

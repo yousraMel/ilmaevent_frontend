@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
-import { AllService } from '../../../services/all.service';
+import { AllService } from '../../services/all.service';
 import { ExcelExportService } from '../../services/excel-export.service';
 
 @Component({
@@ -13,6 +13,8 @@ import { ExcelExportService } from '../../services/excel-export.service';
 export class AdminRequestComponent implements OnInit {
   public isBrowser: boolean = false;
   requests: any[] = [];
+  requestId: any;
+  request: any;
   requestsCount: number = 0;
   filteredRequests: any[] = [];
   sortBy: string = 'label'; // Default sort column
@@ -35,6 +37,10 @@ export class AdminRequestComponent implements OnInit {
   itemsPerPage: number = 10; // Adjust this value based on your preference
   totalItems: number = 0;
   totalPages: number = 0; // Add this line
+  // selectedStatus: string = 'Nouveau';
+
+  // Map to store the selected status for each request
+  selectedStatusMap: { [key: number]: string } = {};
 
   constructor(
     private allservice: AllService,
@@ -66,19 +72,19 @@ export class AdminRequestComponent implements OnInit {
     },
   };
 
-    // Chart data for requests by institution
-    requestByInstitutionData: ChartData<'doughnut'> = {
-      labels: [], // Dynamic labels for types will be populated
-      datasets: [
-        {
-          label: '',
-          data: [0], // Dynamic data for each type will be populated
-          backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],// Choose a color for the bars
-        },
-      ],
-    };
+  // Chart data for requests by institution
+  requestByInstitutionData: ChartData<'doughnut'> = {
+    labels: [], // Dynamic labels for types will be populated
+    datasets: [
+      {
+        label: '',
+        data: [0], // Dynamic data for each type will be populated
+        backgroundColor: ['#245371', '#3f8fc2', '#193a4f'],// Choose a color for the bars
+      },
+    ],
+  };
 
-    requestByInstitutionChartOptions: ChartOptions = {
+  requestByInstitutionChartOptions: ChartOptions = {
     responsive: true,
     plugins: {
       title: {
@@ -95,7 +101,7 @@ export class AdminRequestComponent implements OnInit {
       {
         label: 'Nombre de Demandes',
         data: [0], // Dynamic data for each type will be populated
-        backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],// Choose a color for the bars
+        backgroundColor: ['#808080', '#245371', '#3f8fc2', '#4b7ca7', '#193a4f'],// Choose a color for the bars
       },
     ],
   };
@@ -124,7 +130,7 @@ export class AdminRequestComponent implements OnInit {
       {
         label: 'Nombre de Participants',
         data: [0], // Dynamic data for each type will be populated
-        backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],// Choose a color for the bars
+        backgroundColor: ['#808080', '#245371', '#3f8fc2', '#4b7ca7', '#193a4f'],// Choose a color for the bars
       },
     ],
   };
@@ -153,9 +159,12 @@ export class AdminRequestComponent implements OnInit {
       this.requests = data;
       this.filteredRequests = this.requests.slice();
       this.requestsCount = this.filteredRequests.length;
+      this.requests = data.sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime());
+      this.filteredRequests = this.requests.sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime()).slice();
+
       this.totalItems = this.filteredRequests.length;
       // Initialize filteredRequests
-      
+
       // Calculate the number of requests for each category
       this.isFreeRequests = this.requests.filter(request => request.isFree);
       this.notFreeRequests = this.requests.filter(request => !request.isFree);
@@ -170,10 +179,10 @@ export class AdminRequestComponent implements OnInit {
           },
         ],
       };
-       // Get unique institution from the list
-       const uniqueInstitution = Array.from(new Set(this.requests.map(request => request.institution?.trim() || 'Non Renseigné')));
-       // Initialize requestByInstitutionData here
-       this.requestByInstitutionData = {
+      // Get unique institution from the list
+      const uniqueInstitution = Array.from(new Set(this.requests.map(request => request.institution?.trim() || 'Non Renseigné')));
+      // Initialize requestByInstitutionData here
+      this.requestByInstitutionData = {
         labels: uniqueInstitution,
         datasets: [
           {
@@ -181,7 +190,7 @@ export class AdminRequestComponent implements OnInit {
             data: uniqueInstitution.map(institution =>
               this.requests.filter(request => (request.institution?.trim() || 'Non Renseigné') === institution).length
             ),
-            backgroundColor: ['#6A7CC1', '#861718' , '#245371', '#97a3d4' , '#db2c2e', '#3f8fc2' , '#3d4f94', '#5e1011' , '#193a4f'],
+            backgroundColor: ['#6A7CC1', '#861718', '#245371', '#97a3d4', '#db2c2e', '#3f8fc2', '#3d4f94', '#5e1011', '#193a4f'],
           },
         ],
       };
@@ -197,33 +206,39 @@ export class AdminRequestComponent implements OnInit {
             data: uniqueTypes.map(type =>
               this.requests.filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type).length
             ),
-            backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],
+            backgroundColor: ['#808080', '#245371', '#3f8fc2', '#4b7ca7', '#193a4f'],
           },
         ],
       };
-       // Initialize participantsByTypeData here
-        this.participantsByTypeData = {
-          labels: uniqueTypes,
-          datasets: [
-            {
-              label: 'Nombre de Participants',
-              data: uniqueTypes.map(type =>
-                this.requests
-                  .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
-                  .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0)
-              ),
-              backgroundColor: ['#808080','#245371', '#3f8fc2' ,'#4b7ca7', '#193a4f'],
-            },
-          ],
-        };
-        uniqueTypes.forEach(type => {
-          console.log(  this.requests
-            .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
-            .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0));
-     });
-           // ... existing logic ...
+      // Initialize participantsByTypeData here
+      this.participantsByTypeData = {
+        labels: uniqueTypes,
+        datasets: [
+          {
+            label: 'Nombre de Participants',
+            data: uniqueTypes.map(type =>
+              this.requests
+                .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
+                .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0)
+            ),
+            backgroundColor: ['#808080', '#245371', '#3f8fc2', '#4b7ca7', '#193a4f'],
+          },
+        ],
+      };
+      uniqueTypes.forEach(type => {
+        console.log(this.requests
+          .filter(request => (request.type?.label?.trim() || 'Non Renseigné') === type)
+          .reduce((totalParticipants, request) => totalParticipants + (request.participantsNb || 0), 0));
+      });
+      // ... existing logic ...
       this.applyPagination();
       this.cdr.detectChanges();
+
+      // Initialize the selectedStatusMap with the initial status of each request
+      this.filteredRequests.forEach(request => {
+        this.selectedStatusMap[request.id] = request.status;
+      });
+
     });
 
   }
@@ -246,16 +261,16 @@ export class AdminRequestComponent implements OnInit {
         const booleanValue = value.toLowerCase() === 'oui';
         return columnValue === booleanValue;
       }
-
-      // Default to no filtering for other types
-      return true;
-    });
-     // Update totalItems based on the filteredRequests
+      // Update totalItems based on the filteredRequests
       this.totalItems = this.filteredRequests.length;
 
       this.requestsCount = this.filteredRequests.length;
       // Apply pagination
       this.applyPagination();
+      // Default to no filtering for other types
+      return true;
+    });
+
   }
 
   sort(column: string) {
@@ -278,12 +293,13 @@ export class AdminRequestComponent implements OnInit {
       } else if (typeof valueA === 'number' && typeof valueB === 'number') {
         return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
       }
-
+      // Apply pagination
+      this.applyPagination();
       return 0; // Default to no sorting for other types
     });
-     // Apply pagination
-   this.applyPagination();
+
   }
+
 
   getSortIcon(column: string) {
     // Return appropriate FontAwesome class based on sort direction and column
@@ -354,12 +370,66 @@ export class AdminRequestComponent implements OnInit {
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     console.log('Total Pages: ', this.totalPages);
   }
-  
+
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
       this.applyPagination();
     }
+  }
+
+
+  // Function to update the status of a specific request
+  updateStatus(requestId: number): void {
+    // Find the request with the given ID
+    // const request = this.requests.find(req => req.id === requestId);
+    this.requestId = requestId;
+    this.allservice.getRequest(requestId).subscribe((data: any) => {
+      this.request = data;
+      this.request.status = this.selectedStatusMap[requestId];
+      this.allservice.updateRequest(this.request).subscribe(
+        data => {
+          console.log(data)
+        });
+    });
+    if (this.request) {
+      // Update the status of the found request
+      this.request.status = this.selectedStatusMap[requestId];
+    }
+  }
+
+  getStatusLabelColor(status: string): string {
+    switch (status) {
+      case 'Nouveau':
+        return '#FFF176';
+      case 'En cours':
+        return '#81C784';
+      case 'Traité':
+        return '#64B5F6';
+      case 'Annulé':
+        return '#B0BEC5';
+      // Add more cases for other statuses
+      default:
+        return 'convenient-default-color';
+    }
+  }
+
+
+  applyFilter(column: string) {
+    if (this.filterValue === '' || this.filterValue === 'Tous') {
+      // If filter value is empty, reset the filter
+      this.filteredRequests = this.requests.slice();
+    } else {
+      // Apply the filter based on the selected status
+      this.filteredRequests = this.requests.filter(request => request.status === this.filterValue);
+    }
+
+    // Update totalItems based on the filteredRequests
+    this.totalItems = this.filteredRequests.length;
+
+    this.requestsCount = this.filteredRequests.length;
+    // Apply pagination
+    // this.applyPagination();
   }
 
 }

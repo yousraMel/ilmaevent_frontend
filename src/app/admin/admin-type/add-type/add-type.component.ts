@@ -42,7 +42,7 @@ export class AddTypeComponent implements OnInit {
     const typeLabel = type?.label || '';
     const typeDescription = type?.description || '';
     const typeRank = type?.rank || '';
-    const typeActive = type?.active || false;
+    const typeActive = type?.active || true;
 
     this.typeForm = this.fb.group({
       'code': new FormControl(typeCode, [Validators.required]),

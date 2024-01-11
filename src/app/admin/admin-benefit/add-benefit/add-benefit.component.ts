@@ -44,7 +44,8 @@ export class AddBenefitComponent implements OnInit {
     const benefitLabel = benefit?.label || '';
     const benefitDescription = benefit?.description || '';
     const benefitRank = benefit?.rank || '';
-    const benefitActive = benefit?.active || false;
+    const benefitActive = benefit?.active || true;
+    const benefitIcone = benefit?.icone || '';
 
     this.benefitForm = this.fb.group({
       'code': new FormControl(benefitCode, [Validators.required]),
@@ -52,6 +53,7 @@ export class AddBenefitComponent implements OnInit {
       'description': new FormControl(benefitDescription),
       'rank': new FormControl(benefitRank, [Validators.required]),
       'active': new FormControl(benefitActive),
+      'icone': new FormControl(benefitIcone),
     });
   }
 

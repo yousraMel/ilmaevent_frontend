@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AllService } from '../../../services/all.service';
+import { AllService } from '../../services/all.service';
 import { SharedService } from '../../services/shared.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SharedService } from '../../services/shared.service';
 })
 export class AdminBenefitComponent implements OnInit {
   benefits: any[] = [];
-  benefitsCount : number = 0;
+  benefitsCount: number = 0;
   filteredBenefits: any[] = [];
   isAddBenefitPopupOpen: boolean = false;
   benefit: any;
@@ -21,9 +21,10 @@ export class AdminBenefitComponent implements OnInit {
   descriptionFilter: string = '';
   activeFilter: string = '';
   rankFilter = '';
-      // Sorting properties
-      sortColumn: string | null = null;
-      sortDirection: 'asc' | 'desc' = 'asc';
+  // Sorting properties
+  sortColumn: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
+  errorMessage: string = '';
 
   constructor(
     private allService: AllService,
@@ -41,9 +42,10 @@ export class AdminBenefitComponent implements OnInit {
 
   closeAddBenefitPopup() {
     setTimeout(() => {
+      this.sharedService.editMode = false
       this.reloadBenefits();
       this.isAddBenefitPopupOpen = false;
-    }, 1000);
+    }, 700);
   }
 
   reloadBenefits() {
@@ -78,14 +80,25 @@ export class AdminBenefitComponent implements OnInit {
   }
 
   onCloseAlert() {
-    this.isAlertCalled = false;
+    setTimeout(() => {
+      this.reloadBenefits();
+      this.isAlertCalled = false;
+    }, 700);
   }
 
   onDeleteBenefit() {
     this.allService.deleteBenefit(this.benefitId).subscribe(response => {
       this.benefits.splice(this.index, 1);
-    });
-    this.isAlertCalled = false;
+      setTimeout(() => {
+        this.reloadBenefits();
+        this.isAlertCalled = false;
+      }, 700);
+    },
+      (error) => {
+        console.error(error);
+        this.errorMessage = error;
+      });
+
   }
 
   onEditBenefit(benefitId: number) {

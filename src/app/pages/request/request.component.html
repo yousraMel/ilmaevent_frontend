@@ -21,45 +21,83 @@
                 </h2>
             </div>
             <div class="form__group">
-                <label for="type" class="form__label">Type d'événement</label>
-                <select class="form__input form__select" id="type" formControlName="type">
+                <label for="type" class="form__label required">Type d'événement</label>
+                <select class="form__input form__select" id="type" formControlName="type" required>
                     <option [ngValue]="null" disabled> -- Sélectionnez le type d'événement --
                     </option>
                     <option *ngFor="let type of types; let i = index" [ngValue]="type">
                         {{type.label}}</option>
                 </select>
+                <app-field-error-display [displayError]="isFieldValid('type')!" errorMsg="Veuillez choisir un type !">
+                </app-field-error-display>
             </div>
             <div class="form__group">
                 <label for="label" class="form__label">Intitulé de la manifestation</label>
                 <input type="text" class="form__input" placeholder="Intitulé de la manifestation" id="label"
-                    formControlName="label" required>
+                    formControlName="label">
             </div>
 
             <div class="form__group">
                 <label for="description" class="form__label">Description de l'événement</label>
                 <input type="area" class="form__input form__textarea" placeholder="Description de l'événement"
-                    id="description" formControlName="description" required />
+                    id="description" formControlName="description" />
             </div>
 
             <div class="form__group">
-                <label for="participantsNb" class="form__label">Nombre de participants</label>
+                <label for="participantsNb" class="form__label required">Nombre de participants</label>
                 <input type="number" class="form__input" placeholder="Nombre de participants" id="participantsNb"
                     formControlName="participantsNb" required>
+                <app-field-error-display [displayError]="isFieldValid('participantsNb')!"
+                    errorMsg="Veuillez saisir un nombre estimé de participants (au moins 1) !">
+                </app-field-error-display>
             </div>
-
             <div class="form__group">
-                <label for="isFree" class="form__label">Événement gratuit ?</label>
-                <div class="form__switch">
-                    <input type="checkbox" class="form__input form__switch-input" id="isFree"
-                        formControlName="isFree" />
-                    <label class="form__switch-label" for="isFree">
-                        <span class="form__switch-switch"></span>
-                    </label>
+                <label for="isFree" class="form__label ">Événement gratuit ?</label>
+                <div class="radio-wrapper mt-3">
+                    <p class="radio__p wrong"></p>
+                    <p class="radio__p neutral-icon">
+                    </p>
+                    <p class="radio__p correct">
+                    </p>
+                    <input type="radio" class="radio-switch no" id="radio-no" formControlName="isFree" value="no" />
+                    <label class="radio_label" for="radio-no">Non</label>
+                    <input type="radio" class="radio-switch neutral" checked id="radio-neutral" formControlName="isFree"
+                        value="neutral" />
+                    <label class="radio_label" for="radio-neutral">NA</label>
+                    <input type="radio" class="radio-switch yes" id="radio-yes" formControlName="isFree" value="yes" />
+                    <label class="radio_label" for="radio-yes">Oui</label>
                 </div>
             </div>
-
+            <div class="form__group" *ngIf="requestForm.get('isFree')?.value === 'no'">
+                <label for="fee" class="form__label">Tarif (DH)</label>
+                <input type="number" class="form__input" placeholder="Tarif" id="fee" formControlName="fee"
+                    pattern="^\d+(\.\d{1,2})?$">
+                <div *ngIf="requestForm.get('fee')?.hasError('pattern') && requestForm.get('fee')?.touched"
+                    class="error-message">
+                    Veuillez entrer un tarif valide (précision de 0.01).
+                </div>
+            </div>
             <div class="form__group">
-                <label class="form__label">Prestations</label>
+                <label for="mode" class="form__label required">Mode de Présentation</label>
+                <div class="radio-btn-group mt-3">
+
+                    <input type="radio" class="radio-btn" id="inPerson" formControlName="mode" value="Présentiel"
+                        checked>
+                    <label for="inPerson">En présentiel</label>
+
+                    <input type="radio" class="radio-btn" id="online" formControlName="mode" value="Enligne">
+                    <label for="online">En ligne</label>
+
+                    <input type="radio" class="radio-btn" id="hybrid" formControlName="mode" value="Hybride">
+                    <label for="hybrid">Hybride</label>
+
+                </div>
+                <app-field-error-display [displayError]="isFieldValid('mode')!"
+                    errorMsg="Veuillez choisir le mode de présentation !">
+                </app-field-error-display>
+            </div>
+            <div class="form__group">
+                <label class="form__label required">Préstations</label>
                 <div class="form__checkbox-group">
                     <div *ngFor="let benefit of benefits; let i = index" class="form__checkbox-subfroup">
                         <input [formControl]="controls[i]" type="checkbox" class="form__input form__checkbox" id="{{i}}"
@@ -67,40 +105,55 @@
                         <label class="form__checkbox-label" for="{{i}}">{{ benefit.label }}</label>
                     </div>
                 </div>
+                <app-field-error-display [displayError]="isFieldValid('benefits')!"
+                    errorMsg="Veuillez choisir au moins une préstation !">
+                </app-field-error-display>
             </div>
 
             <div class="form__group">
-                <label for="institution" class="form__label">Nom de l’institution ou Territoire(s) concerné(s) par le
+                <label for="institution" class="form__label required">Nom de l’institution ou Territoire(s) concerné(s)
+                    par le
                     projet</label>
                 <input type="text" class="form__input" placeholder="Institution" id="institution"
                     formControlName="institution" required>
+                <app-field-error-display [displayError]="isFieldValid('institution')!"
+                    errorMsg="Veuillez saisir le nom de l'institution !">
+                </app-field-error-display>
             </div>
 
             <div class="form__group">
 
-                <label for="committeeLeader" class="form__label">Responsable du comité d’organisation </label>
+                <label for="committeeLeader" class="form__label required">Responsable du comité d’organisation </label>
                 <input type="text" class="form__input" placeholder="Responsable du comité d’organisation"
                     id="committeeLeader" formControlName="committeeLeader" required>
+                <app-field-error-display [displayError]="isFieldValid('committeeLeader')!"
+                    errorMsg="Veuillez saisir le nom de responsable !">
+                </app-field-error-display>
             </div>
 
             <div class="form__group">
 
                 <label for="address" class="form__label">Adresse Complète </label>
                 <input type="text" class="form__input" placeholder="Adresse Complète" id="address"
-                    formControlName="address" required>
+                    formControlName="address">
             </div>
 
             <div class="form__group">
 
-                <label for="phone" class="form__label">Téléphone </label>
+                <label for="phone" class="form__label required">Téléphone </label>
                 <input type="text" class="form__input" placeholder="Téléphone" id="phone" formControlName="phone"
                     required>
+                <app-field-error-display [displayError]="isFieldValid('phone')!"
+                    errorMsg="Veuillez saisir un numéro de téléphone !">
+                </app-field-error-display>
             </div>
             <div class="form__group">
 
-                <label for="email" class="form__label">Adresse Mail </label>
+                <label for="email" class="form__label required">Adresse Mail </label>
                 <input type="text" class="form__input" placeholder="Adresse Mail" id="email" formControlName="email"
                     required>
+                <app-field-error-display [displayError]="isFieldValid('email')!" errorMsg="Veuillez saisir un email !">
+                </app-field-error-display>
             </div>
             <div class="form__group">
 
@@ -123,7 +176,13 @@
                     <span>&plus;</span>
                 </button>
             </div>
-
+            <div class="row form__group">
+                <re-captcha formControlName="recaptcha" siteKey="6Ldwj0spAAAAAGS7KnPp41VMPY9upGMLFSqGbcGi" required>
+                </re-captcha>
+                <app-field-error-display [displayError]="isFieldValid('recaptcha')!"
+                    errorMsg="Veuillez cocher la case pour confirmer que vous n'ête pas un robot !">
+                </app-field-error-display>
+            </div>
 
             <div class="row form__group">
                 <button type="submit" class="btn btn--primary btn-submit" (click)="onSubmitRequest()">Envoyer</button>
@@ -132,131 +191,4 @@
     </div>
 </section>
 <section class="section-separator"></section>
-<!-- <section class=" container section-info">
-    <div class="section-info__content">
-		<p class="paragraph">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ipsa? Alias quo totam quam
-			expedita dignissimos voluptatem necessitatibus, nesciunt blanditiis dolores deserunt porro
-			voluptatibus?
-		</p>
-    </div>
-</section>
-<section class="container section-form">
-	<div class="section-form__content">
-		<form [formGroup]="requestForm" class="form">
-			<div class="u-margin-bottom-medium">
-			<h2 class="heading-secondary">
-				Parlez-nous de votre événement !
-			</h2>
-			</div>
-
-			<div class="form__group">
-			<label for="type" class="form__label">Type d'événement</label>
-			<select class="form__input form__select" id="type" formControlName="type">
-				<option [ngValue]="null" disabled> -- Sélectionnez le type d'événement --
-				</option>
-				<option *ngFor="let type of types; let i = index" [ngValue]="type">
-				{{type.label}}</option>
-			</select>
-			</div>
-			<div class="form__group">
-			<label for="label" class="form__label">Intitulé de la manifestation</label>
-			<input type="text" class="form__input" placeholder="Intitulé de la manifestation" id="label"
-				formControlName="label" required>
-			</div>
-
-			<div class="form__group">
-			<label for="description" class="form__label">Description de l'événement</label>
-			<input type="area" class="form__input form__textarea" placeholder="Description de l'événement"
-				id="description" formControlName="description" required />
-			</div>
-
-			<div class="form__group">
-			<label for="participantsNb" class="form__label">Nombre de participants</label>
-			<input type="number" class="form__input" placeholder="Nombre de participants" id="participantsNb"
-				formControlName="participantsNb" required>
-			</div>
-
-			<div class="form__group">
-			<label for="isFree" class="form__label">Événement gratuit ?</label>
-			<div class="form__switch">
-				<input type="checkbox" class="form__input form__switch-input" id="isFree" formControlName="isFree" />
-				<label class="form__switch-label" for="isFree">
-				<span class="form__switch-switch"></span>
-				</label>
-			</div>
-			</div>
-
-			<div class="form__group">
-			<label class="form__label">Prestations</label>
-			<div class="form__checkbox-group">
-				<div *ngFor="let benefit of benefits; let i = index" class="form__checkbox-subfroup">
-				<input [formControl]="controls[i]" type="checkbox" class="form__input form__checkbox" id="{{i}}"
-					value="{{ benefit.label }}">
-				<label class="form__checkbox-label" for="{{i}}">{{ benefit.label }}</label>
-				</div>
-			</div>
-			</div>
-
-			<div class="form__group">
-			<label for="institution" class="form__label">Nom de l’institution ou Territoire(s) concerné(s) par le
-				projet</label>
-			<input type="text" class="form__input" placeholder="Institution" id="institution"
-				formControlName="institution" required>
-			</div>
-
-			<div class="form__group">
-
-			<label for="committeeLeader" class="form__label">Responsable du comité d’organisation </label>
-			<input type="text" class="form__input" placeholder="Responsable du comité d’organisation" id="committeeLeader"
-				formControlName="committeeLeader" required>
-			</div>
-
-			<div class="form__group">
-
-			<label for="address" class="form__label">Adresse Complète </label>
-			<input type="text" class="form__input" placeholder="Adresse Complète" id="address" formControlName="address"
-				required>
-			</div>
-
-			<div class="form__group">
-
-			<label for="phone" class="form__label">Téléphone </label>
-			<input type="text" class="form__input" placeholder="Téléphone" id="phone" formControlName="phone" required>
-			</div>
-			<div class="form__group">
-
-			<label for="email" class="form__label">Adresse Mail </label>
-			<input type="text" class="form__input" placeholder="Adresse Mail" id="email" formControlName="email" required>
-			</div>
-			<div class="form__group">
-
-			<label for="webSite" class="form__label">Site Web </label>
-			<input type="text" class="form__input" placeholder="Site Web" id="webSite" formControlName="webSite">
-			</div>
-
-			<div class="form__group">
-			<label for="socialNetworks" class="form__label">Liens Réseaux Sociaux</label>
-
-			<div *ngFor="let socialNetwork of socialNetworksFormArray.controls; let i = index" class="form__group">
-				<input type="text" [formControl]="getSocialNetworkControl(i)" class="form__input"
-				placeholder="Facebook, Instagram, Linkedin, ...">
-				<button type="button" class="btn btn--delete" (click)="removeSocialNetwork(i)">
-				<span><i class="fa fa-trash" aria-hidden="true"></i></span> 
-				</button>
-			</div>
-
-			<button type="button" class="btn btn--add" (click)="addSocialNetwork()">
-				<span>&plus;</span> 
-			</button>
-			</div>
-
-
-			<div class="row form__group">
-			<button type="submit" class="btn btn--primary btn-submit" (click)="onSubmitRequest()">Envoyer</button>
-			</div>
-		</form>
-
-	</div>
-</section> -->
 <app-footer></app-footer>

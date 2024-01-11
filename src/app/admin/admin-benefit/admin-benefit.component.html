@@ -86,6 +86,9 @@
     <div class="form_box__title">
         <h4>Voulez-vous vraiment supprimer cette préstation ?</h4>
     </div>
+    <div *ngIf="errorMessage" class="error-message padding-content">
+        {{ errorMessage }}
+    </div>
     <div class="form_box__btn">
         <button (click)="onDeleteBenefit()" class="btn btn-yes">Oui </button>
         <button (click)="onCloseAlert()" class="btn btn-cancel">Annuler </button>
