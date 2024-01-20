@@ -103,4 +103,28 @@ export class AllService {
     );
   }
 
+  /* -------------------------- apiMedia -------------------------- */
+
+  getAllMedia(): Observable<any> {
+    return this.http.get(hostMedia + '/getAll', httpOptions);
+  }
+
+  addMedia(item: any) {
+    console.log('item : ' + item)
+    return this.http.post(hostMedia + '/save', item);
+  }
+
+  getMedia(id: any) {
+    return this.http.get(hostMedia + '/get/' + id);
+  }
+
+  updateMedia(item: any) {
+    return this.http.put(hostMedia + '/update', item);
+  }
+
+  deleteMedia(id: any) {
+    return this.http.delete(hostMedia + '/delete/' + id);
+  }
+
+
 }

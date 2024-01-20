@@ -1,0 +1,97 @@
+<div class="data-table">
+    <div class="table-header">
+        <div class="table-title">
+            <h3 class="heading-tertiary">
+                Médiathèques
+                <span class="table_counter">({{mediaCount}})</span>
+            </h3>
+        </div>
+        <div class="table-actions">
+            <button class="btn btn-sm btn-export" (click)="openAddMediaPopup()"><i class="fa fa-add"></i>
+                Ajouter</button>
+        </div>
+    </div>
+    <div class="table-body ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="table_column table_column--small">Détails</th>
+                    <th class="table_column">
+                        <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
+                            class="form__input form__input--coltable" placeholder="Code"> <i class="fa"
+                            [ngClass]="getSortIcon('code')" (click)="sort('code')"></i>
+                    </th>
+                    <th class="table_column">
+                        <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
+                            class="form__input form__input--coltable" placeholder="Libellé"> <i class="fa"
+                            [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
+                    </th>
+                    <th class="table_column table_column--large">
+                        <input type="text" [(ngModel)]="descriptionFilter"
+                            (input)="filter('description', descriptionFilter)" class="form__input form__input--coltable"
+                            placeholder="Description"> <i class="fa" [ngClass]="getSortIcon('description')"
+                            (click)="sort('description')"></i>
+                    </th>
+                    <th class="table_column">
+                        <input type="text" [(ngModel)]="rankFilter" (input)="filter('rank', rankFilter)"
+                            class="form__input form__input--coltable" placeholder="Ordre"><i class="fa"
+                            [ngClass]="getSortIcon('rank')" (click)="sort('rank')"></i>
+                    </th>
+                    <th class="table_column">
+                        <input type="text" [(ngModel)]="activeFilter" (input)="filter('active', activeFilter)"
+                            class="form__input form__input--coltable" placeholder="Actif">
+                    </th>
+                    <th class="table_column table_column--small"></th>
+                    <th class="table_column table_column--small"></th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                <tr class="list--list-item" *ngFor="let media of filteredMedia; let i = index">
+                    <td class="customtooltip">
+                        <i class="far fa-clock"></i>
+                        <span class="customtooltiptext">
+                            Date Création : {{media.creationDate}} <br />
+                            Date Modification : {{media.lastModifDate}}
+                        </span>
+                    </td>
+                    <td class="">{{media.code}}</td>
+                    <td class="">{{media.label}}</td>
+                    <td class="">{{media.description}}</td>
+                    <td class="">{{media.rank}}</td>
+                    <td class="">{{media.active? 'Oui' : 'Non'}}</td>
+
+                    <td class="">
+                        <a type="button" (click)="onEditMedia(media.id)" class="mr-3"><i
+                                class="fa fa-pencil text-secondary" aria-hidden="true"></i></a>
+                    </td>
+                    <td class="">
+                        <a type="button" (click)="onCallDeleteMedia(media.id,i)"><i class="fa fa-trash text-danger"
+                                aria-hidden="true"></i></a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!------------------------------------------------ ADD NEW BENEFIT POPUP ------------------------------------------------------>
+    <app-add-media *ngIf="isAddMediaPopupOpen" (close)="closeAddMediaPopup()" (submit)="onMediaFormSubmit($event)"
+        [mediaId]="mediaId">
+    </app-add-media>
+    <!------------------------------------------------ END ADD NEW BENEFIT POPUP ------------------------------------------------------>
+    <!------------------------------------------------ ALERT CALL ------------------------------------------------------>
+    <div class="backdrop" *ngIf="isAlertCalled"></div>
+    <div class=" form-box " *ngIf="isAlertCalled">
+        <div class="form_box__title">
+            <h4>Voulez-vous vraiment supprimer ce media ?</h4>
+        </div>
+        <div *ngIf="errorMessage" class="error-message padding-content">
+            {{ errorMessage }}
+        </div>
+        <div class="form_box__btn">
+            <button (click)="onDeleteMedia()" class="btn btn-yes">Oui </button>
+            <button (click)="onCloseAlert()" class="btn btn-cancel">Annuler </button>
+        </div>
+    </div>
+    <!------------------------------------------------ END ALERT CALL ------------------------------------------------------>

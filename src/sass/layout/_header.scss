@@ -17,3 +17,23 @@
         color: $color-grey-dark-5;
     }
 }
+
+.registration {
+    height: 100vh;
+    // background: $color-primary-light-25;
+
+    &__content {
+        height: 100%;
+    }
+
+    &__image {
+        height: 100vh;
+        padding-top: 9.6rem;
+        float: right;
+    }
+
+    &__form {
+        padding: 15rem 15rem 10rem 5rem;
+        // color: $color-grey-dark-5;
+    }
+}

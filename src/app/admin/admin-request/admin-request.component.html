@@ -38,20 +38,25 @@
                         <span class="table_counter">({{requestsCount}})</span>
                     </h3>
                 </div>
+                <div class="filter-status radio-btn-group">
+                    <!-- <label>Status:</label> -->
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter('status')" id="all"
+                        class="radio-btn">
+                    <label for="all">Tous</label>
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Nouveau'" (change)="applyFilter('status')" id="new"
+                        class="radio-btn">
+                    <label for="new">Nouveau</label>
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'En cours'" (change)="applyFilter('status')" id="progress"
+                        class="radio-btn">
+                    <label for="progress">En cours</label> 
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Traité'" (change)="applyFilter('status')" id="done"
+                        class="radio-btn">
+                    <label for="done">Traité</label>
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Annulé'" (change)="applyFilter('status')" id="canceled"
+                        class="radio-btn">
+                    <label for="canceled">Annulé</label>
+                </div>
                 <div class="table-actions">
-                    <div class="filter-status">
-                        <label>Status:</label>
-                        <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter('status')">
-                        Tous
-                        <input type="radio" [(ngModel)]="filterValue" [value]="'Nouveau'"
-                            (change)="applyFilter('status')"> Nouveau
-                        <input type="radio" [(ngModel)]="filterValue" [value]="'En cours'"
-                            (change)="applyFilter('status')"> En cours
-                        <input type="radio" [(ngModel)]="filterValue" [value]="'Traité'"
-                            (change)="applyFilter('status')"> Traité
-                        <input type="radio" [(ngModel)]="filterValue" [value]="'Annulé'"
-                            (change)="applyFilter('status')"> Annulé
-                    </div>
                     <button class="btn btn-sm btn-export" (click)="exportToExcel()">
                         <i class="fa-solid fa-file-export"></i>
                         Exporter

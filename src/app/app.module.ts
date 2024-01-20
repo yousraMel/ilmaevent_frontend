@@ -7,10 +7,13 @@ import { NgChartsModule } from 'ng2-charts';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { DragScrollDirective } from '../directives/drag-scroll.directive';
 import { TruncatePipe } from '../pipes/truncate.pipe';
 import { AddBenefitComponent } from './admin/admin-benefit/add-benefit/add-benefit.component';
 import { AdminBenefitComponent } from './admin/admin-benefit/admin-benefit.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
+import { AddMediaComponent } from './admin/admin-media/add-media/add-media.component';
+import { AdminMediaComponent } from './admin/admin-media/admin-media.component';
 import { AdminRequestComponent } from './admin/admin-request/admin-request.component';
 import { AddTypeComponent } from './admin/admin-type/add-type/add-type.component';
 import { AdminTypeComponent } from './admin/admin-type/admin-type.component';
@@ -56,6 +59,9 @@ import { SharedService } from './services/shared.service';
     SubmitDialogComponent,
     ErrorDialogComponent,
     FieldErrorDisplayComponent,
+    DragScrollDirective,
+    AdminMediaComponent,
+    AddMediaComponent
   ],
   imports: [
     BrowserModule,

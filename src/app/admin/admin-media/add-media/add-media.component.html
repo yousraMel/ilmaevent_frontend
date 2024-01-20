@@ -1,0 +1,64 @@
+<div class="popup-container" *ngIf="true">
+    <div class="popup-content">
+        <button class="close-btn" (click)="closeAddMediaPopup()"> &times;</button>
+        <form [formGroup]="mediaForm" class="form">
+            <div class="u-margin-bottom-medium">
+                <h3 class="heading-tertiary" *ngIf="!editMode">
+                    Ajouter une Nouvelle Image ou Affiche.
+                </h3>
+                <h3 class="heading-tertiary" *ngIf="editMode">
+                    Modifier le Media ou l'Affiche.
+                </h3>
+            </div>
+            <div class="form__group">
+                <label for="type" class="form__label">Type de Médiathéque :</label>
+                <select class="form__input form__select" id="type" formControlName="type">
+                    <option>Image</option>
+                    <option>Affiche</option>
+                </select>
+            </div>
+            <div class="form__group">
+                <label for="label" class="form__label">Libellé :</label>
+                <input type="text" class="form__input" placeholder="Libellé" id="label" formControlName="label"
+                    required>
+            </div>
+            <div class="form__group">
+                <label for="participantsNb" class="form__label">Ordre :</label>
+                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank" required>
+            </div>
+
+            <div class="form__group">
+                <label for="active" class="form__label">Actif ?</label>
+                <div class="form__switch">
+                    <input type="checkbox" class="form__input form__switch-input" id="active"
+                        formControlName="active" />
+                    <label class="form__switch-label" for="active">
+                        <span class="form__switch-switch"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="form__group">
+                <div class="row form__file">
+                    <div class=" offset-md-2 col-md-2  offset-2 col-2  mt-5">
+                        <input ng-model="file_upload" name="file" type="file" (change)="fileChange($event)" #fileInput
+                            id="fileInput" />
+                        <label for="fileInput" id="fileLabel" class="file-label control-label ml-3 "><i
+                                class="fa fa-cloud-upload" aria-hidden="true"></i></label>
+                        <br />
+                        <button type="submit" class="btn-text btn-text--form-blue mt-1">Télécharger</button>
+                    </div>
+                    <div class="offset-md-1 col-md-6  offset-1 col-6 d-flex justify-content-center">
+                        <img [src]="imageSrc" alt="image loaded" class="form-box__img" *ngIf="fileLoaded">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row form__group">
+                <button type="submit" class="btn btn--primary btn-submit" (click)="onSubmit()">Sauvegarder</button>
+            </div>
+        </form>
+    </div>
+</div>

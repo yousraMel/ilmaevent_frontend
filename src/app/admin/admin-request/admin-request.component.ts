@@ -163,6 +163,19 @@ export class AdminRequestComponent implements OnInit {
       this.filteredRequests = this.requests.sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime()).slice();
 
       this.totalItems = this.filteredRequests.length;
+      // this.requestsCount = this.requests.length;
+      const statusOrder = ['Nouveau', 'En cours', 'Traité', 'Annulé'];
+
+      // Sort the data initially by 'status' and then by 'creationDate'
+      this.requests = this.requests.sort((a, b) => {
+        const statusComparison = statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
+        if (statusComparison !== 0) {
+          return statusComparison;
+        }
+        this.filteredRequests = this.requests.slice();
+        return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
+      });
+
       // Initialize filteredRequests
 
       // Calculate the number of requests for each category
@@ -235,9 +248,12 @@ export class AdminRequestComponent implements OnInit {
       this.cdr.detectChanges();
 
       // Initialize the selectedStatusMap with the initial status of each request
-      this.filteredRequests.forEach(request => {
-        this.selectedStatusMap[request.id] = request.status;
-      });
+      this.initSelectedStautsMap();
+    });
+  }
+  initSelectedStautsMap(): void {
+    this.filteredRequests.forEach(request => {
+      this.selectedStatusMap[request.id] = request.status;
 
     });
 
@@ -288,6 +304,13 @@ export class AdminRequestComponent implements OnInit {
       const valueA = a[column];
       const valueB = b[column];
 
+      // Custom sorting for the 'status' column
+      if (column === 'status') {
+        const statusOrder = [null, 'Nouveau', 'En cours', 'Traité', 'Annulé'];
+        return (
+          (statusOrder.indexOf(valueA) - statusOrder.indexOf(valueB)) * (this.sortDirection === 'asc' ? 1 : -1)
+        );
+      }
       if (typeof valueA === 'string' && typeof valueB === 'string') {
         return this.sortDirection === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
       } else if (typeof valueA === 'number' && typeof valueB === 'number') {
@@ -369,6 +392,7 @@ export class AdminRequestComponent implements OnInit {
     // Calculate total pages
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     console.log('Total Pages: ', this.totalPages);
+    this.initSelectedStautsMap();
   }
 
   goToPage(page: number) {
@@ -429,6 +453,7 @@ export class AdminRequestComponent implements OnInit {
 
     this.requestsCount = this.filteredRequests.length;
     // Apply pagination
+    this.initSelectedStautsMap();
     // this.applyPagination();
   }
 

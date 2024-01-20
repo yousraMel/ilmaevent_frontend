@@ -49,7 +49,7 @@
                          </a>
                      </li>
                      <li class="sidebar-item">
-                         <a class="sidebar-link" href="" aria-expanded="false">
+                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminMedia')">
                              <span>
                                  <i class="ti ti-cards"></i>
                              </span>
@@ -101,6 +101,9 @@
          </section>
          <section *ngIf="activeComponent === 'adminType'" class="admin__type">
              <app-admin-type></app-admin-type>
+         </section>
+         <section *ngIf="activeComponent === 'adminMedia'" class="admin__media">
+             <app-admin-media></app-admin-media>
          </section>
      </div>
  </div>

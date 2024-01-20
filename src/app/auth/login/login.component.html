@@ -1,60 +1,60 @@
-<header class="login_header">
-    <div class="login_header__logo-box">
-        <img src="../../assets/img/logo1.png" alt="Logo" class="login_header__logo">
-        <h5 class="sub-title sub-title--sm  mt-3">ILMA EVENT</h5>
-    </div>
-</header>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form *ngIf="!isLoggedIn" name="form" #f="ngForm" (ngSubmit)=" f.form.valid && onSubmit()">
-                <div class="card-login">
-                    <div class="row card-login__header  login_heading">
-                        <div class="col-md-12">
-                            <h4>Connexion </h4>
+<app-navigation></app-navigation>
+<section class="registration">
+    <div class="row registration__content">
+        <div class="col-6">
+            <div class="image_container">
+                <img class="registration__image" src="../../../assets/img/header_image.png" alt="Header Image">
+            </div>
+        </div>
+        <div class="col-6  vh-100">
+            <div class="registration__form">
+                <form *ngIf="!isLoggedIn" name="form" #f="ngForm" (ngSubmit)=" f.form.valid && onSubmit()">
+                    <div class="card card--registration ">
+                        <div class="card-header card--registration__header  text-center">
+                            <h3 class="heading-tertiary">
+                                Connexion</h3>
                         </div>
-                    </div>
-                    <div class="row card-login__body justify-content-center">
-                        <div class="form-group col-md-11 ">
-                            <label for="username">Nom d'utilisateur</label>
-                            <input type="username" class="form-control" [(ngModel)]="form.username" name="username"
-                                required #username="ngModel" />
+                        <div class="card-body justify-content-center">
+
+                            <div class="form__group">
+                                <label for="username" class="form__label">Nom d'utilisateur</label>
+                                <input type="username" class="form__input" [(ngModel)]="form.username" name="username"
+                                    required #username="ngModel" />
+                            </div>
                             <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
                                 Le nom d'utilisateur est obligatoire!
                             </div>
-                        </div>
-                        <div class="form-group col-md-11">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" [(ngModel)]="form.password" name="password"
-                                required minlength="6" #password="ngModel" />
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
-                            <div *ngIf="password?.errors?.['required']">Le mot de passe est obligatoire!</div>
-                            <div *ngIf="password?.errors?.['minlength']">
-                                Le mot de passe contient plus que 6 caractères!
+                            <div class="form__group">
+                                <label for="password" class="form__label">Mot de passe</label>
+                                <input type="password" class="form__input" [(ngModel)]="form.password" name="password"
+                                    required minlength="6" #password="ngModel" />
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                                <div *ngIf="password?.errors?.['required']">Le mot de passe est obligatoire!</div>
+                                <div *ngIf="password?.errors?.['minlength']">
+                                    Le mot de passe contient plus que 6 caractères!
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                                    Connexion echouée: {{ errorMessage }}
+                                </div>
+                            </div>
+
+                            <div class="alert alert-success" *ngIf="isLoggedIn">
+                                Se connecter autant que: {{ roles }}.
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-5 card-login__footer">
-                        <div class="offset-md-1 col-md-5 ">
-                            <a href="" class="login_help">Mot de passe oublié ?</a>
-                        </div>
-                        <div class="offset-md-2 col-md-4">
-                            <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+                        <div class="card-footer card--registration__footer bg-white mt-5 d-flex justify-content-center">
+                            <button class="btn btn--primary" type="submit" [disabled]="!f.valid">
                                 Se connecter
                             </button>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
-                        Connexion echouée: {{ errorMessage }}
-                    </div>
-                </div>
-            </form>
-            <div class="alert alert-success" *ngIf="isLoggedIn">
-                Se connecter autant que: {{ roles }}.
+                </form>
             </div>
         </div>
     </div>
-</div>
+</section>
+<app-footer></app-footer>

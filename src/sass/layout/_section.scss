@@ -18,3 +18,13 @@
     border: 3px solid $color-primary;
     box-shadow: 0 1.5rem 4rem rgba($color-primary, 0.1);
 }
+
+.section-partner-header {
+    height: 17rem;
+    background-color: #f1f9ff;
+    color: #acbdea;
+    text-transform: uppercase;
+    & h4 {
+        font-size: 2rem;
+    }
+}
