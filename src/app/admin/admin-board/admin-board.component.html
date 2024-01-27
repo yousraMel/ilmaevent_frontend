@@ -56,20 +56,20 @@
                              <span class="hide-menu">Médiathèques</span>
                          </a>
                      </li>
-                     <li class="sidebar-item">
+                     <!-- <li class="sidebar-item">
                          <a class="sidebar-link" href="" aria-expanded="false">
                              <span>
                                  <i class="ti ti-file-description"></i>
                              </span>
                              <span class="hide-menu">Données Générales</span>
                          </a>
-                     </li>
+                     </li> -->
                      <li class="nav-small-cap">
                          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                          <span class="hide-menu">Documentation</span>
                      </li>
                      <li class="sidebar-item">
-                         <a class="sidebar-link" href="" aria-expanded="false">
+                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminHelp')">
                              <span>
                                  <i class="ti ti-login"></i>
                              </span>
@@ -104,6 +104,9 @@
          </section>
          <section *ngIf="activeComponent === 'adminMedia'" class="admin__media">
              <app-admin-media></app-admin-media>
+         </section>
+         <section *ngIf="activeComponent === 'adminHelp'" class="admin__help">
+             <app-admin-help></app-admin-help>
          </section>
      </div>
  </div>

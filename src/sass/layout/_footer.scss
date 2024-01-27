@@ -1,25 +1,25 @@
 .footer {
-    height: 88vh;
+    height: 45vh;
     background-color: $color-grey-dark-3;
     font-size: 1.4rem;
     color: $color-grey-dark-5;
 
     &__logo-box {
-        text-align: center;
-        margin: 8rem;
+        text-align: left;
     }
 
-    &__logo {
-        width: 45rem;
+    &__logo img {
+        width: 15rem;
         height: auto;
     }
 
     &__content {
-        margin-top: 10%;
+        // margin-top: 6%;
     }
 
     &__navigation {
         border-top: 1px solid $color-grey-dark;
+        margin-top: 4rem;
         padding-top: 2rem;
         display: inline-block;
     }
@@ -57,8 +57,117 @@
 
     &__copyright {
         border-top: 1px solid $color-grey-dark;
+        margin-top: 4rem;
         padding-top: 2rem;
         width: 80%;
         float: right;
     }
+}
+
+.rounded-social-buttons {
+    & i {
+        line-height: 1.2;
+    }
+}
+
+.rounded-social-buttons .social-button {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 5rem;
+    height: 5rem;
+    border: 0.125rem solid transparent;
+    padding: 0;
+    text-decoration: none;
+    text-align: center;
+    color: #fefefe;
+    font-size: 1.5625rem;
+    font-weight: normal;
+    line-height: 2em;
+    border-radius: 1.6875rem;
+    transition: all 0.5s ease;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.rounded-social-buttons .social-button:hover,
+.rounded-social-buttons .social-button:focus {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+.rounded-social-buttons .fa-twitter,
+.fa-facebook-f,
+.fa-linkedin,
+.fa-tiktok,
+.fa-youtube,
+.fa-instagram {
+    font-size: 40px;
+}
+
+.rounded-social-buttons .social-button.facebook {
+    background: #3b5998;
+}
+
+.rounded-social-buttons .social-button.facebook:hover,
+.rounded-social-buttons .social-button.facebook:focus {
+    color: #3b5998;
+    background: #fefefe;
+    border-color: #3b5998;
+}
+
+.rounded-social-buttons .social-button.twitter {
+    background: #55acee;
+}
+
+.rounded-social-buttons .social-button.twitter:hover,
+.rounded-social-buttons .social-button.twitter:focus {
+    color: #55acee;
+    background: #fefefe;
+    border-color: #55acee;
+}
+
+.rounded-social-buttons .social-button.linkedin {
+    background: #007bb5;
+}
+
+.rounded-social-buttons .social-button.linkedin:hover,
+.rounded-social-buttons .social-button.linkedin:focus {
+    color: #007bb5;
+    background: #fefefe;
+    border-color: #007bb5;
+}
+
+.rounded-social-buttons .social-button.tiktok {
+    background: #000000;
+}
+
+.rounded-social-buttons .social-button.tiktok:hover,
+.rounded-social-buttons .social-button.tiktok:focus {
+    color: #000000;
+    background: #fefefe;
+    border-color: #000000;
+}
+
+.rounded-social-buttons .social-button.youtube {
+    background: #bb0000;
+}
+
+.rounded-social-buttons .social-button.youtube:hover,
+.rounded-social-buttons .social-button.youtube:focus {
+    color: #bb0000;
+    background: #fefefe;
+    border-color: #bb0000;
+}
+
+.rounded-social-buttons .social-button.instagram {
+    background: #d62976;
+}
+
+.rounded-social-buttons .social-button.instagram:hover,
+.rounded-social-buttons .social-button.instagram:focus {
+    color: #d62976;
+    background: #fefefe;
+    border-color: #d62976;
 }

@@ -1,8 +1,8 @@
 .section-gallery {
   // margin-top: -10rem;
   // background: $color-primary-light-25;
-  &__heading h2 {
-    margin: 0.5rem 0 8rem;
+  h2 {
+    margin: 0.5rem 0 5rem;
     font-weight: 400;
   }
 }
@@ -85,20 +85,21 @@
   align-items: center;
   background: $color-primary-light-50;
   display: flex;
-  height: 520px;
+  height: 550px;
   justify-content: center;
   width: 85%;
   flex-direction: column;
   & h2 {
-    color: $color-grey-dark-5;
-    margin: 1rem 0 5rem;
+    // color: $color-grey-dark-5;
+    color: snow;
+    margin: 1rem 0 3rem;
   }
 }
 
 .gallery-container {
   display: flex;
   flex-wrap: nowrap;
-  height: 280px;
+  height: 400px;
   justify-content: start;
   overflow-x: auto;
   cursor: grab;
@@ -134,38 +135,59 @@
   width: 600px;
 }
 
+/* SLIDES */
 
-// .gallery-container {
-//   display: flex;
-//   flex-wrap: nowrap;
-//   height: 280px;
-//   justify-content: start;
-//   overflow-x: auto;
-//   cursor: grab;
-// }
+/* -------- title style ------- */
+.line-title {
+  position: relative;
+  width: 800px;
+  padding-left : 30px;
+  padding-bottom : 10px;
+}
+.line-title::before,
+.line-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  border-radius: 2px;
+  padding-left : 30px;
+}
+.line-title::before {
+  width: 100%;
+  background: $color-grey-dark-5;
+}
+.line-title::after {
+  width: 200px;
+  background: $color-primary;
+}
 
-// .gallery-container:active {
-//   cursor: grabbing;
-// }
+/******* Middle section CSS Start ******/
+/* -------- Landing page ------- */
+.owl-stage-outer {
+ height : 410px;
+}
 
-// .gallery-card {
-//   align-items: flex-end;
-//   background-size: cover;
-//   // border-radius: 0.75rem;
-//   border-radius: 2rem;
-//   box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
-//   cursor: pointer;
-//   display: flex;
-//   margin: 0 10px;
-//   overflow: hidden;
-//   transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
-//   width: 80px;
-// }
+.owl-carousel .owl-item{
+  // min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px !important;
+  margin: 0px 15px;
+  padding: 5px 15px;
+  // Sky Blue to Rose:
+  background: linear-gradient(135deg, #87CEEB, #FFC0CB);
+  
 
-// .gallery-input {
-//   display: none;
-// }
+}
 
-// .gallery-input:checked + label {
-//   width: 600px;
-// }
+.owl-carousel .owl-item img{
+ max-height: 350px;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+  margin-top: 5px !important;
+  background-color: $color-primary !important;
+}

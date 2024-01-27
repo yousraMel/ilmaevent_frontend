@@ -41,19 +41,19 @@
                 <div class="filter-status radio-btn-group">
                     <!-- <label>Status:</label> -->
                     <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter('status')" id="all"
-                        class="radio-btn">
-                    <label for="all">Tous</label>
+                        class="radio-btn" >
+                    <label for="all" >Tous</label>
                     <input type="radio" [(ngModel)]="filterValue" [value]="'Nouveau'" (change)="applyFilter('status')" id="new"
-                        class="radio-btn">
+                        class="radio-btn radio-btn-new" >
                     <label for="new">Nouveau</label>
                     <input type="radio" [(ngModel)]="filterValue" [value]="'En cours'" (change)="applyFilter('status')" id="progress"
-                        class="radio-btn">
-                    <label for="progress">En cours</label> 
+                        class="radio-btn radio-btn-inpro">
+                    <label for="progress" >En cours</label> 
                     <input type="radio" [(ngModel)]="filterValue" [value]="'Traité'" (change)="applyFilter('status')" id="done"
-                        class="radio-btn">
-                    <label for="done">Traité</label>
+                        class="radio-btn radio-btn-done">
+                    <label for="done" >Traité</label>
                     <input type="radio" [(ngModel)]="filterValue" [value]="'Annulé'" (change)="applyFilter('status')" id="canceled"
-                        class="radio-btn">
+                        class="radio-btn radio-btn-cancel">
                     <label for="canceled">Annulé</label>
                 </div>
                 <div class="table-actions">

@@ -127,4 +127,9 @@ export class AllService {
   }
 
 
+  uploadimage(body: any) {
+    return this.http.post(hostMedia + '/upload', body, { responseType: 'text' });
+  }
+
+
 }

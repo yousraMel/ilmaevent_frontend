@@ -36,6 +36,8 @@ import { AuthService } from './services/auth.service';
 import { ConfirmationService } from './services/confirmation.service';
 import { ExcelExportService } from './services/excel-export.service';
 import { SharedService } from './services/shared.service';
+import { AdminHelpComponent } from './admin/admin-help/admin-help.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { SharedService } from './services/shared.service';
     FieldErrorDisplayComponent,
     DragScrollDirective,
     AdminMediaComponent,
-    AddMediaComponent
+    AddMediaComponent,
+    AdminHelpComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { SharedService } from './services/shared.service';
     MatDialogModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    CarouselModule,
   ],
   providers: [
     provideClientHydration(),

@@ -16,7 +16,7 @@ export class AdminMediaComponent {
   mediaId: any;
   index: any;
   isAlertCalled = false;
-  codeFilter: string = '';
+  typeFilter: string = '';
   labelFilter: string = '';
   descriptionFilter: string = '';
   activeFilter: string = '';
@@ -55,21 +55,6 @@ export class AdminMediaComponent {
     });
   }
 
-
-  onMediaFormSubmit(media: any) {
-    this.mediaEl = media;
-    this.allService.addType(this.mediaEl).subscribe(
-      data => {
-        console.log('Response:', data);
-        this.mediaEl = data;
-        this.mediaId = this.mediaEl.id;
-      },
-      error => {
-        console.error('Error:', error);
-      }
-    );
-    this.closeAddMediaPopup();
-  }
 
   // CALL POPUP TO DELETE AN ARTICLE 
   onCallDeleteMedia(mediaId: number, index: number) {
