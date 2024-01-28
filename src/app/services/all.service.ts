@@ -6,8 +6,8 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const API_URL = 'http://localhost:8082/api/';
-// const API_URL = 'http://ilma-event-api-env.eba-968cdqgy.eu-north-1.elasticbeanstalk.com/api/';
+// const API_URL = 'http://localhost:8082/api/';
+const API_URL = 'http://ilma-event-api-env.eba-968cdqgy.eu-north-1.elasticbeanstalk.com/api/';
 
 const hostBenefit = API_URL + 'benefit';
 const hostContent = API_URL + 'content';
