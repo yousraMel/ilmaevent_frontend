@@ -22,7 +22,6 @@ export class AdminRequestComponent implements OnInit {
   filterValue: string = '';
   labelFilter: string = '';
   descriptionFilter: string = '';
-  codeFilter: string = '';
   typeFilter: string = '';
   isFreeFilter: string = '';
   participantsNbFilter = '';
@@ -361,7 +360,6 @@ export class AdminRequestComponent implements OnInit {
         'Site Web': request.webSite,
         'Réseaux Sociaux': request.socialNetworks ? request.socialNetworks.join(', ') : '',
         // Include additional properties as needed
-        'Code': request.code,
         'Libellé': request.label,
         'Description': request.description,
         'Type Evénement': request.type?.label,

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable, of, tap } from 'rxjs';
 import { AllService } from '../../../services/all.service';
 import { SharedService } from '../../../services/shared.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-media',
@@ -16,7 +17,7 @@ export class AddMediaComponent {
   mediaEl: any;
   editMode: any;
   imageSrc: any;
-  fileLoaded: Boolean | undefined;
+  fileLoaded: boolean = false;
   isFileExist = false;
   file!: File;
   images: any[] = [];
@@ -26,6 +27,9 @@ export class AddMediaComponent {
   base64Image: any;
   submitValid = false;
   selectedFileName: string = 'Choisir une image...';
+  submitting = false;
+  creationDate: Date = new Date();
+  errorMessage: string = '';
 
 
   constructor(
@@ -38,6 +42,7 @@ export class AddMediaComponent {
     this.editMode = this.sharedService.editMode;
 
     if (this.mediaId && this.editMode) {
+      
       this.allService.getMedia(this.mediaId).subscribe((resp: any) => {
         this.mediaEl = resp;
         this.selectedFileName = this.mediaEl.label ? this.mediaEl.label : 'Choisir une image...';
@@ -45,6 +50,7 @@ export class AddMediaComponent {
         if (this.mediaEl.label) {
           this.selectedFileName = this.mediaEl.label;
           this.isFileExist = true;
+          this.fileLoaded = true
         }
       });
     } else {
@@ -53,7 +59,6 @@ export class AddMediaComponent {
   }
 
   initForm(mediaEl: any) {
-    const mediaCode = mediaEl?.code || '';
     const mediaDescription = mediaEl?.description || '';
     const mediaRank = mediaEl?.rank || '';
     const mediaActive = mediaEl?.active || true;
@@ -62,10 +67,9 @@ export class AddMediaComponent {
 
     this.mediaForm = this.fb.group({
       'type': new FormControl(mediaType, [Validators.required]),
-      'code': new FormControl(mediaCode, [Validators.required]),
-      'description': new FormControl(mediaDescription),
-      'rank': new FormControl(mediaRank, [Validators.required]),
-      'active': new FormControl(mediaActive),
+      'description': new FormControl(mediaDescription, [Validators.maxLength(64)]),
+      'rank': new FormControl(mediaRank),
+      'active': new FormControl(mediaActive)
     });
   }
 
@@ -74,29 +78,38 @@ export class AddMediaComponent {
   }
 
   onSubmit() {
-    this.mediaEl = this.mediaForm.value;
-    this.upload().subscribe(
-      () => {
-        this.mediaEl.label = this.fileName;
-        this.mediaEl.id = this.mediaId;
-        const mediaObservable = this.editMode
-          ? this.allService.updateMedia(this.mediaEl)
-          : this.allService.addMedia(this.mediaEl);
-        mediaObservable.subscribe(
-          (data: any) => {
-            console.log('Response:', data);
-            this.mediaEl = data;
-            this.mediaId = this.mediaEl.id;
-            this.closeAddMediaPopup();
-          },
-          (error: any) => {
-            console.error('Error:', error);
+    console.log('File Loaded:', this.fileLoaded);  // Add this line for debugging
+    if (this.fileLoaded) {
+      if (this.mediaForm.valid && !this.submitting) {
+        this.mediaEl = this.mediaForm.value;
+        this.upload().subscribe(
+          () => {
+            this.mediaEl.label = this.fileName;
+            this.mediaEl.id = this.mediaId;
+            const mediaObservable = this.editMode
+              ? this.allService.updateMedia(this.mediaEl)
+              : this.allService.addMedia(this.mediaEl);
+            mediaObservable.subscribe(
+              (data: any) => {
+                console.log('Response:', data);
+                this.mediaEl = data;
+                this.mediaId = this.mediaEl.id;
+                this.closeAddMediaPopup();
+              },
+              (error: any) => {
+                console.error('Error:', error);
+                this.errorMessage = error;
+
+              }
+            );
           }
         );
+        this.mediaId = null;
+        this.editMode = false;
+      } else {
+        this.sharedService.validateAllFormFields(this.mediaForm);
       }
-    );
-    this.mediaId = null;
-    this.editMode = false;
+    }
   }
 
   upload(): Observable<any> {
@@ -114,6 +127,11 @@ export class AddMediaComponent {
           this.fileName = data;
           this.isFileExist = this.fileName === 'fileExistsAlready';
           this.submitValid = !this.isFileExist;
+        }),
+        catchError((error:any) => {
+              console.error('Upload Error:', error);
+          this.errorMessage = error;
+          throw error; // Rethrow the error to propagate it
         })
       );
     }
@@ -139,6 +157,20 @@ export class AddMediaComponent {
       reader.onload = e => this.imageSrc = reader.result;
       reader.readAsDataURL(this.file);
     }
+  }
+
+  displayFieldCss(field: string): any {
+    return this.sharedService.displayFieldCss(field, this.mediaForm);
+  }
+
+  isFieldValid(field: string) {
+    return this.sharedService.isFieldValid(field, this.mediaForm);
+  }
+
+  // Add a method to get the character count of the description
+  get descriptionCharacterCount() {
+    const description = this.mediaForm.get('description');
+    return description ? description.value.length : 0;
   }
 
 }

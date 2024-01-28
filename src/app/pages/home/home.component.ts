@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AllService } from '../../services/all.service';
+import { SharedService } from '../../services/shared.service';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
 @Component({
@@ -13,12 +14,14 @@ export class HomeComponent implements OnInit {
   isHovered: boolean = false;
   hoveredCardIndex: number | null = null;
 
-  constructor(private allservice: AllService) { }
+  constructor(private allservice: AllService,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     this.allservice.getAllBenefits().subscribe((data: any[]) => {
-      this.benefits = data;
+      this.benefits = this.sharedService.activeFilterAndSortItems(data);
     });
+
   }
 
   setHoveredCard(index: number) {

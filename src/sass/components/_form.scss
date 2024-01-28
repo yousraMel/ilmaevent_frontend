@@ -7,6 +7,7 @@
         margin-bottom: 2rem;
     }
 
+
     &__input,
     &__select,
     &__textarea {
@@ -36,6 +37,13 @@
         &::-webkit-input-placeholder {
             color: $color-grey-dark-2;
         }
+        /* Apply styles to make the textarea resizable */
+        &__textarea {
+            resize: both; /* Enables vertical and horizontal resizing */
+            overflow: auto; /* Displays scrollbars if content overflows */
+            height: 100px; /* Set an initial height */
+        }
+
     }
 
     &__label {

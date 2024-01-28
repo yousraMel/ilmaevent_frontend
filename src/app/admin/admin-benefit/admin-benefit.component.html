@@ -17,30 +17,26 @@
                 <tr>
                     <th class="table_column table_column--small">Détails</th>
                     <th class="table_column">
-                        <input type="text" [(ngModel)]="codeFilter" (input)="filter('code', codeFilter)"
-                            class="form__input form__input--coltable" placeholder="Code"> <i class="fa"
-                            [ngClass]="getSortIcon('code')" (click)="sort('code')"></i>
-                    </th>
-                    <th class="table_column">
                         <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
                             class="form__input form__input--coltable" placeholder="Libellé"> <i class="fa"
                             [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
                     </th>
-                    <th class="table_column table_column--large">
+                    <th class="table_column table_column--xlarge">
                         <input type="text" [(ngModel)]="descriptionFilter"
                             (input)="filter('description', descriptionFilter)" class="form__input form__input--coltable"
                             placeholder="Description"> <i class="fa" [ngClass]="getSortIcon('description')"
                             (click)="sort('description')"></i>
                     </th>
-                    <th class="table_column">
+                    <th class="table_column table_column--small">
                         <input type="text" [(ngModel)]="rankFilter" (input)="filter('rank', rankFilter)"
                             class="form__input form__input--coltable" placeholder="Ordre"><i class="fa"
                             [ngClass]="getSortIcon('rank')" (click)="sort('rank')"></i>
                     </th>
-                    <th class="table_column">
+                    <th class="table_column table_column--small">
                         <input type="text" [(ngModel)]="activeFilter" (input)="filter('active', activeFilter)"
                             class="form__input form__input--coltable" placeholder="Actif">
                     </th>
+                    <th class="table_column table_column--small"> Icône </th>
                     <th class="table_column table_column--small"></th>
                     <th class="table_column table_column--small"></th>
                 </tr>
@@ -54,12 +50,11 @@
                             Date Modification : {{benefit.lastModifDate}}
                         </span>
                     </td>
-                    <td class="">{{benefit.code}}</td>
                     <td class="">{{benefit.label}}</td>
                     <td class="">{{benefit.description}}</td>
                     <td class="">{{benefit.rank}}</td>
                     <td class="">{{benefit.active? 'Oui' : 'Non'}}</td>
-
+                    <td class=""><i class="{{benefit.icone}}"></i></td>
                     <td class="">
                         <a type="button" (click)="onEditBenefit(benefit.id)" class="mr-3 text-secondary"><i
                                 class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -76,7 +71,7 @@
 
 
 <!------------------------------------------------ ADD NEW BENEFIT POPUP ------------------------------------------------------>
-<app-add-benefit *ngIf="isAddBenefitPopupOpen" (close)="closeAddBenefitPopup()" (submit)="onBenefitFormSubmit($event)"
+<app-add-benefit *ngIf="isAddBenefitPopupOpen" (close)="closeAddBenefitPopup()" 
     [benefitId]="benefitId">
 </app-add-benefit>
 <!------------------------------------------------ END ADD NEW BENEFIT POPUP ------------------------------------------------------>

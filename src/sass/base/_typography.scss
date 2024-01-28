@@ -31,6 +31,12 @@ p {
     font-size: $default-font-size;
 }
 
+.p-counter {
+    font-size: 10px; ;
+    float : right;
+    margin-right : 80px;
+}
+
 .list {
     font-size: $default-font-size;
     list-style: none;

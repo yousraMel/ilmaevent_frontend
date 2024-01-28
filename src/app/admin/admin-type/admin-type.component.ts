@@ -5,31 +5,32 @@ import { SharedService } from '../../services/shared.service';
 @Component({
   selector: 'app-admin-type',
   templateUrl: './admin-type.component.html',
-  styleUrl: '../../../sass/main.scss'
+  styleUrls: ['../../../sass/main.scss']
 })
 export class AdminTypeComponent implements OnInit {
   types: any[] = [];
   typesCount: number = 0;
   filteredTypes: any[] = [];
-  isAddTypePopupOpen: boolean = false;
+  isAddTypePopupOpen = false;
   type: any;
   typeId: any;
   index: any;
   isAlertCalled = false;
-  codeFilter: string = '';
-  labelFilter: string = '';
-  descriptionFilter: string = '';
-  activeFilter: string = '';
+  labelFilter = '';
+  descriptionFilter = '';
+  activeFilter = '';
   rankFilter = '';
-  // Sorting properties
   sortColumn: string | null = null;
   sortDirection: 'asc' | 'desc' = 'asc';
-  errorMessage: string = '';
+  errorMessage = '';
+
+  // Constants
+  WAIT_TIME_BEFORE_RELOAD = 700;
 
   constructor(
     private allService: AllService,
-    private sharedService: SharedService,
-  ) { }
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.reloadTypes();
@@ -41,37 +42,21 @@ export class AdminTypeComponent implements OnInit {
 
   closeAddTypePopup() {
     setTimeout(() => {
-      this.sharedService.editMode = false
+      this.sharedService.editMode = false;
       this.reloadTypes();
       this.isAddTypePopupOpen = false;
-    }, 700);
+    }, this.WAIT_TIME_BEFORE_RELOAD);
   }
 
   reloadTypes() {
     this.allService.getAllTypes().subscribe((data: any[]) => {
       this.types = data;
-      this.filteredTypes = this.types.slice();
+      this.filteredTypes = [...this.types];
+      this.filteredTypes.sort((a: any, b: any) => a.rank - b.rank);
       this.typesCount = this.filteredTypes.length;
     });
   }
 
-
-  onTypeFormSubmit(type: any) {
-    this.type = type;
-    this.allService.addType(this.type).subscribe(
-      data => {
-        console.log('Response:', data);
-        this.type = data;
-        this.typeId = this.type.id;
-      },
-      error => {
-        console.error('Error:', error);
-      }
-    );
-    this.closeAddTypePopup();
-  }
-
-  // CALL POPUP TO DELETE AN ARTICLE 
   onCallDeleteType(typeId: number, index: number) {
     this.isAlertCalled = true;
     this.typeId = typeId;
@@ -82,23 +67,20 @@ export class AdminTypeComponent implements OnInit {
     setTimeout(() => {
       this.reloadTypes();
       this.isAlertCalled = false;
-    }, 700);
-
+    }, this.WAIT_TIME_BEFORE_RELOAD);
   }
 
   onDeleteType() {
-    this.allService.deleteType(this.typeId).subscribe(response => {
-      this.types.splice(this.index, 1);
-      setTimeout(() => {
-        this.reloadTypes();
-        this.isAlertCalled = false;
-      }, 700);
-    },
+    this.allService.deleteType(this.typeId).subscribe(
+      () => {
+        this.types.splice(this.index, 1);
+        this.onCloseAlert();
+      },
       (error) => {
         console.error(error);
         this.errorMessage = error;
-      });
-
+      }
+    );
   }
 
   onEditType(typeId: number) {
@@ -111,22 +93,16 @@ export class AdminTypeComponent implements OnInit {
     this.filteredTypes = this.types.filter(type => {
       const columnValue = type[column];
       if (value === '') {
-        return true; // No filtering if the value is empty
+        return true;
       }
-      // Check the type of the column value
       if (typeof columnValue === 'string') {
-        // String comparison (case-insensitive)
         return columnValue.toLowerCase().includes(value.toLowerCase());
       } else if (typeof columnValue === 'number') {
-        // Numeric comparison
-        return columnValue === +value; // Convert value to number for strict equality
+        return columnValue === +value;
       } else if (typeof columnValue === 'boolean') {
-        // Boolean comparison
         const booleanValue = value.toLowerCase() === 'oui';
         return columnValue === booleanValue;
       }
-
-      // Default to no filtering for other types
       return true;
     });
     this.typesCount = this.filteredTypes.length;
@@ -134,15 +110,12 @@ export class AdminTypeComponent implements OnInit {
 
   sort(column: string) {
     if (this.sortColumn === column) {
-      // Toggle sort direction if it's the same column
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
-      // Set new sort column and default direction
       this.sortColumn = column;
       this.sortDirection = 'asc';
     }
 
-    // Perform the actual sorting
     this.filteredTypes.sort((a, b) => {
       const valueA = a[column];
       const valueB = b[column];
@@ -153,17 +126,15 @@ export class AdminTypeComponent implements OnInit {
         return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
       }
 
-      return 0; // Default to no sorting for other types
+      return 0;
     });
   }
 
   getSortIcon(column: string) {
-    // Return appropriate FontAwesome class based on sort direction and column
     return {
       'fa-sort': !this.sortColumn || this.sortColumn !== column,
       'fa-sort-asc': this.sortColumn === column && this.sortDirection === 'asc',
       'fa-sort-desc': this.sortColumn === column && this.sortDirection === 'desc',
     };
   }
-
 }

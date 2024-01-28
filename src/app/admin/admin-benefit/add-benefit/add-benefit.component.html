@@ -11,20 +11,28 @@
                 </h3>
             </div>
             <div class="form__group">
-                <label for="label" class="form__label">Libellé :</label>
+                <label for="label" class="form__label required">Libellé :</label>
                 <input type="text" class="form__input" placeholder="Libellé" id="label" formControlName="label"
                     required>
+                <app-field-error-display [displayError]="isFieldValid('label')!"
+                    errorMsg="Veuillez saisir un libellé !">
+                </app-field-error-display>
             </div>
 
             <div class="form__group">
                 <label for="description" class="form__label">Description :</label>
-                <input type="tetxtarea" class="form__input " placeholder="Description" id="description"
-                    formControlName="description" required />
+                <textarea  type="textarea" class="form__textarea" placeholder="Description" id="description"
+                    formControlName="description"  >
+                </textarea>
+                <p class="p-counter">{{ descriptionCharacterCount }}/250</p>
+                <app-field-error-display [displayError]="isFieldValid('description')!"
+                    errorMsg="La description ne peut pas dépasser 250 caractères.">
+                </app-field-error-display>
             </div>
 
             <div class="form__group">
                 <label for="participantsNb" class="form__label">Ordre :</label>
-                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank" required>
+                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank" >
             </div>
 
             <div class="form__group">
@@ -38,8 +46,11 @@
                 </div>
             </div>
             <div class="form__group">
-                <label for="icone" class="form__label">Icone :</label>
+                <label for="icone" class="form__label required">Icone :</label>
                 <input type="text" class="form__input" placeholder="Icone" id="icone" formControlName="icone" required>
+            <app-field-error-display [displayError]="isFieldValid('icone')!"
+                errorMsg="Veuillez choisir une icône !">
+            </app-field-error-display>
             </div>
 
             <div class="row form__group row d-flex justify-content-center">

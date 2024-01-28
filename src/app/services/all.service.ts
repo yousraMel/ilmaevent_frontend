@@ -30,6 +30,9 @@ export class AllService {
   }
 
   addBenefit(item: any) {
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
+    item.creationDate = formattedDate;
     return this.http.post(hostBenefit + '/save', item);
   }
 
@@ -38,6 +41,9 @@ export class AllService {
   }
 
   updateBenefit(item: any) {
+    // Add the current date to the item before updating
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
     return this.http.put(hostBenefit + '/update', item);
   }
 
@@ -59,6 +65,9 @@ export class AllService {
 
   addRequest(item: any) {
     console.log('item : ' + item)
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
+    item.creationDate = formattedDate;
     return this.http.post(hostRequest + '/save', item);
   }
 
@@ -67,6 +76,9 @@ export class AllService {
   }
 
   updateRequest(item: any) {
+    // Add the current date to the item before updating
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
     return this.http.put(hostRequest + '/update', item);
   }
 
@@ -82,6 +94,9 @@ export class AllService {
 
   addType(item: any) {
     console.log('item : ' + item)
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
+    item.creationDate = formattedDate;
     return this.http.post(hostEventType + '/save', item);
   }
 
@@ -90,6 +105,9 @@ export class AllService {
   }
 
   updateType(item: any) {
+    // Add the current date to the item before updating
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
     return this.http.put(hostEventType + '/update', item);
   }
 
@@ -111,7 +129,16 @@ export class AllService {
 
   addMedia(item: any) {
     console.log('item : ' + item)
-    return this.http.post(hostMedia + '/save', item);
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
+    item.creationDate = formattedDate;
+    // return this.http.post(hostMedia + '/save', item);
+    return this.http.post(hostMedia + '/save', item).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = "Attention ! Cette image existe déja.";
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 
   getMedia(id: any) {
@@ -119,6 +146,9 @@ export class AllService {
   }
 
   updateMedia(item: any) {
+    // Add the current date to the item before updating
+    const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    item.lastModifDate = formattedDate;
     return this.http.put(hostMedia + '/update', item);
   }
 
@@ -128,8 +158,12 @@ export class AllService {
 
 
   uploadimage(body: any) {
-    return this.http.post(hostMedia + '/upload', body, { responseType: 'text' });
+    // return this.http.post(hostMedia + '/upload', body, { responseType: 'text' });
+    return this.http.post(hostMedia + '/upload', body, { responseType: 'text' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = "Attention ! Cette image existe déja.";
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
-
-
 }

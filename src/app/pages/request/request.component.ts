@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AllService } from '../../services/all.service';
 import { ConfirmationService } from '../../services/confirmation.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-request',
@@ -20,6 +21,7 @@ export class RequestComponent implements OnInit {
 
   constructor(
     private allService: AllService,
+    private sharedService: SharedService,
     private fb: FormBuilder,
     private confirmationService: ConfirmationService
   ) { }
@@ -60,14 +62,14 @@ export class RequestComponent implements OnInit {
   fetchTypes(): void {
     // Fetch available types and update the component property
     this.allService.getAllTypes().subscribe((data: any[]) => {
-      this.types = data.filter(el => el.active === true);
+      this.types = this.sharedService.activeFilterAndSortItems(data);
     });
   }
 
   fetchBenefits(): void {
     // Fetch available benefits and update the component property
     this.allService.getAllBenefits().subscribe((data: any[]) => {
-      this.benefits = data.filter(el => el.active === true);
+      this.benefits = this.sharedService.activeFilterAndSortItems(data);
 
       // Add a form control for each benefit in the form array
       const benefitsFormArray = this.requestForm.get('benefits') as FormArray;

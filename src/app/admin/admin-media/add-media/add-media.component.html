@@ -11,20 +11,27 @@
                 </h3>
             </div>
             <div class="form__group">
-                <label for="type" class="form__label">Type de Médiathéque :</label>
-                <select class="form__input form__select" id="type" formControlName="type">
+                <label for="type" class="form__label required">Type de Médiathéque :</label>
+                <select class="form__input form__select" id="type" formControlName="type" required>
                     <option>Image</option>
                     <option>Affiche</option>
                 </select>
+                <app-field-error-display [displayError]="isFieldValid('type')!" errorMsg="Veuillez choisir un type !">
+                </app-field-error-display>
             </div>
             <div class="form__group">
                 <label for="description" class="form__label">Description :</label>
-                <input type="text" class="form__input" placeholder="Description" id="description"
-                    formControlName="description" required>
+                <textarea type="textarea" class="form__textarea" placeholder="Description" id="description"
+                    formControlName="description">
+            </textarea>
+                <p class="p-counter">{{ descriptionCharacterCount }}/64</p>
+                <app-field-error-display [displayError]="isFieldValid('description')!"
+                    errorMsg="La description ne peut pas dépasser 64 caractères.">
+                </app-field-error-display>
             </div>
             <div class="form__group">
                 <label for="participantsNb" class="form__label">Ordre :</label>
-                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank" required>
+                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank">
             </div>
 
             <div class="form__group">
@@ -40,15 +47,22 @@
             <div class="form__group">
                 <div class="row form__file">
                     <div class="form__file_box">
+                        <p *ngIf="!fileLoaded" class="text-danger" style="font-size: 1.2rem;">Veuillez choisir une image.<br/> Il est recommandé de choisir une image respectant le ratio <strong>"271:350"</strong> pour un affichage optimal.</p>
+                    
                         <input ng-model="file_upload" name="file" type="file" (change)="fileChange($event)" #fileInput
                             id="fileInput" class="form__file_box-input btn btn-export" />
-                            <label for="fileInput" class="btn btn-export"><i class="fa fa-upload"></i> {{ selectedFileName }}</label>
+                        <label for="fileInput" class="btn btn-export"><i class="fa fa-upload"></i>
+                            {{ selectedFileName }}</label>
+                    </div>
+                    <div *ngIf="errorMessage" class="error-message padding-content">
+                        {{ errorMessage }}
                     </div>
                     <div class="form__file_img-box">
                         <img *ngIf="fileLoaded" [src]="imageSrc" alt="image loaded" class="form__file_img">
                         <img *ngIf="editMode" src="{{mediaEl.url}}" alt="{{mediaEl.label}}" class="form__file_img">
                     </div>
                 </div>
+
             </div>
 
 

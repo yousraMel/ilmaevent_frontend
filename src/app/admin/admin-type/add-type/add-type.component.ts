@@ -2,19 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AllService } from '../../../services/all.service';
 import { SharedService } from '../../../services/shared.service';
+
 @Component({
   selector: 'app-add-type',
   templateUrl: './add-type.component.html',
-  styleUrl: '../../../../sass/main.scss'
+  styleUrls: ['../../../../sass/main.scss']
 })
 export class AddTypeComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
-  @Output() submit = new EventEmitter<void>();
   @Input() typeId: any;
   typeForm!: FormGroup;
   type: any;
   editMode: any;
-
+  submitting = false;
+  creationDate: Date = new Date();
 
   constructor(
     private allService: AllService,
@@ -23,33 +24,37 @@ export class AddTypeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("typeId" + this.type)
     this.editMode = this.sharedService.editMode;
+    this.initTypeForm();
+  }
+
+  private initTypeForm() {
+    this.typeForm = this.fb.group({
+      label: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.maxLength(250)]),
+      rank: new FormControl(''),
+      active: new FormControl(true)
+    });
 
     if (this.typeId && this.editMode) {
-      this.allService.getType(this.typeId).subscribe((resp: any) => {
-        this.type = resp;
-        console.log("THIS TYPE" + this.type)
-        this.initForm(this.type);
-      });
-    } else {
-      this.initForm(null); // Pass null to initialize an empty form
+      this.fetchTypeData();
     }
   }
 
-  initForm(type: any) {
-    const typeCode = type?.code || '';
-    const typeLabel = type?.label || '';
-    const typeDescription = type?.description || '';
-    const typeRank = type?.rank || '';
-    const typeActive = type?.active || true;
+  private fetchTypeData() {
+    this.allService.getType(this.typeId).subscribe((resp: any) => {
+      this.type = resp;
+      this.creationDate = this.type.creationDate;
+      this.populateFormWithTypeData();
+    });
+  }
 
-    this.typeForm = this.fb.group({
-      'code': new FormControl(typeCode, [Validators.required]),
-      'label': new FormControl(typeLabel, [Validators.required]),
-      'description': new FormControl(typeDescription),
-      'rank': new FormControl(typeRank, [Validators.required]),
-      'active': new FormControl(typeActive),
+  private populateFormWithTypeData() {
+    this.typeForm.patchValue({
+      label: this.type.label,
+      description: this.type.description,
+      rank: this.type.rank,
+      active: this.type.active
     });
   }
 
@@ -58,25 +63,59 @@ export class AddTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.editMode) {
-      console.log('Modifier')
-      this.type = this.typeForm.value
-      this.type.id = this.typeId;
-      this.allService.updateType(this.type).subscribe(
-        data => {
-          console.log('Response:', data);
-          this.type = data;
-          this.typeId = this.type.id;
-        },
-        error => {
-          console.error('Error:', error);
-        }
-      );
-      this.closeAddTypePopup();
-    } else {
-      console.log('Ajouter')
-      this.submit.emit(this.typeForm.value);
-    }
+    if (this.typeForm.valid && !this.submitting) {
+      this.submitting = true;
 
+      if (this.editMode) {
+        this.handleEditSubmission();
+      } else {
+        this.handleAddSubmission();
+      }
+    } else {
+      this.sharedService.validateAllFormFields(this.typeForm);
+    }
+  }
+
+  private handleEditSubmission() {
+    const updatedType = { ...this.typeForm.value, id: this.typeId, creationDate: this.creationDate };
+
+    this.allService.updateType(updatedType).subscribe(
+      data => this.handleSubmissionSuccess(data),
+      error => this.handleSubmissionError(error)
+    );
+  }
+
+  private handleAddSubmission() {
+    this.allService.addType(this.typeForm.value).subscribe(
+      data => this.handleSubmissionSuccess(data),
+      error => this.handleSubmissionError(error)
+    );
+  }
+
+  private handleSubmissionSuccess(data: any) {
+    console.log('Response:', data);
+    this.type = data;
+    this.typeId = this.type.id;
+    this.closeAddTypePopup();
+    this.submitting = false;
+  }
+
+  private handleSubmissionError(error: any) {
+    console.error('Error:', error);
+    this.submitting = false;
+  }
+
+  displayFieldCss(field: string): any {
+    return this.sharedService.displayFieldCss(field, this.typeForm);
+  }
+
+  isFieldValid(field: string) {
+    return this.sharedService.isFieldValid(field, this.typeForm);
+  }
+
+  // Add a method to get the character count of the description
+  get descriptionCharacterCount() {
+    const description = this.typeForm.get('description');
+    return description ? description.value.length : 0;
   }
 }

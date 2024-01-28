@@ -39,7 +39,6 @@
                     </h3>
                 </div>
                 <div class="filter-status radio-btn-group">
-                    <!-- <label>Status:</label> -->
                     <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter('status')" id="all"
                         class="radio-btn" >
                     <label for="all" >Tous</label>
@@ -124,8 +123,6 @@
                                     Date Modification : {{request.lastModifDate}}
                                 </span></td>
                             <td class="">
-                                <!-- <select class="form__input form__select form__input--coltable" id="status"
-                                    [(ngModel)]="{{request.status}}" (change)="updateStatus(request.id)">-->
                                 <select class="form__input form__select form__select--coltable form__input--coltable"
                                     id="status" [(ngModel)]="selectedStatusMap[request.id]"
                                     (change)="updateStatus(request.id)"
