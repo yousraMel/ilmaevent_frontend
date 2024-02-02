@@ -1,0 +1,7 @@
+
+  {
+    "/api": {
+      "target": "http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/",
+      "secure": false
+    }
+  }

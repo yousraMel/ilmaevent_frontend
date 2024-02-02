@@ -1,13 +1,20 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { SharedService } from './shared.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'http://localhost:4200', // Update with your frontend URL
+    // Add other headers as needed
+  })
 };
 
-// const API_URL = 'http://localhost:8082/api/';
-const API_URL = 'http://ilma-event-api-env.eba-968cdqgy.eu-north-1.elasticbeanstalk.com/api/';
+
+
+const API_URL = 'http://localhost:5000/api/';
+// const API_URL = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/api/';
 
 const hostBenefit = API_URL + 'benefit';
 const hostContent = API_URL + 'content';
@@ -21,12 +28,30 @@ const hostRequest = API_URL + 'request';
 })
 export class AllService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private sharedService: SharedService) { }
 
-  /* -------------------------- apiBenefit -------------------------- */
 
-  getAllBenefits(): Observable<any> {
-    return this.http.get(hostBenefit + '/getAll', httpOptions);
+
+  // getAllBenefits(): Observable<any> {
+  //   return this.http.get(hostBenefit + '/getAll', { ...httpOptions, observe: 'response' }).pipe(
+  //     catchError((error: HttpErrorResponse) => {
+  //       // Handle errors here
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+
+  getAllBenefits(): Observable<any[]> {
+    return this.http.get<any[]>(hostBenefit + '/getAll', httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Handle errors here
+        return throwError(error);
+      }),
+      map((data: any[]) => {
+        return this.sharedService.activeFilterAndSortItems(data);
+      })
+    );
   }
 
   addBenefit(item: any) {
@@ -123,8 +148,17 @@ export class AllService {
 
   /* -------------------------- apiMedia -------------------------- */
 
-  getAllMedia(): Observable<any> {
-    return this.http.get(hostMedia + '/getAll', httpOptions);
+  // getAllMedia(): Observable<any> {
+  //   return this.http.get(hostMedia + '/getAll', httpOptions);
+  // }
+
+  getAllMedia(): Observable<any[]> {
+    return this.http.get<any[]>(hostMedia + '/getAll', httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Handle errors here
+        return throwError(error);
+      })
+    );
   }
 
   addMedia(item: any) {
@@ -136,7 +170,7 @@ export class AllService {
     return this.http.post(hostMedia + '/save', item).pipe(
       catchError((error: HttpErrorResponse) => {
         const errorMessage = "Attention ! Cette image existe déja.";
-        return throwError(() => new Error(errorMessage));
+        return throwError(() => new Error(error.message));
       })
     );
   }
@@ -162,7 +196,7 @@ export class AllService {
     return this.http.post(hostMedia + '/upload', body, { responseType: 'text' }).pipe(
       catchError((error: HttpErrorResponse) => {
         const errorMessage = "Attention ! Cette image existe déja.";
-        return throwError(() => new Error(errorMessage));
+        return throwError(() => new Error(error.message));
       })
     );
   }

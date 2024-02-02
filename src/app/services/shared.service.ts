@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,18 @@ export class SharedService {
 
   constructor() { }
 
- activeFilterAndSortItems(resp: any[]): any[] {
+  // activeFilterAndSortItems(resp: any[]): any[] {
+  //   const filteredItems = resp.filter((item: any) => item.active === true);
+  //   return filteredItems.sort((a: any, b: any) => a.rank - b.rank);
+  // }
+
+  activeFilterAndSortItems(resp: any[]): any[] {
+    if (!Array.isArray(resp)) {
+      // Handle the case where resp is not an array
+      console.error('Expected an array, but got:', resp);
+      return [];
+    }
+
     const filteredItems = resp.filter((item: any) => item.active === true);
     return filteredItems.sort((a: any, b: any) => a.rank - b.rank);
   }
@@ -24,10 +35,10 @@ export class SharedService {
   }
 
   isFieldValid(field: string, formGroup: FormGroup) {
-      return !formGroup?.get(field)?.valid && formGroup?.get(field)?.touched;
+    return !formGroup?.get(field)?.valid && formGroup?.get(field)?.touched;
   }
 
-  displayFieldCss(field: string,formGroup: FormGroup): any {
+  displayFieldCss(field: string, formGroup: FormGroup): any {
     // Define CSS classes based on field validity
     return {
       'has-error': this.isFieldValid(field, formGroup),
