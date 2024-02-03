@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://localhost:5000/auth/';
-// const AUTH_API = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/auth/';
+// const AUTH_API = 'http://localhost:5000/auth/';
+const AUTH_API = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

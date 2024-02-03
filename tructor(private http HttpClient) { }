@@ -1,0 +1,126 @@
+[33mcommit 61dd2fd46ded36993ea11370009b2ad263c1660a[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Fri Feb 2 22:59:44 2024 +0100
+
+    deployment config
+
+[33mcommit e64564b583da57b74fe3770575af33a6f60bdc63[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sun Jan 28 16:07:55 2024 +0100
+
+    prod evironement
+
+[33mcommit 06e0c988baa9cf99896fe95d3e445b0c2e4e37e7[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sun Jan 28 02:14:28 2024 +0100
+
+    add form validatorx
+
+[33mcommit c23c6cdba1cbe3d9aa36424fd015aaa015c44e62[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sat Jan 27 09:47:07 2024 +0100
+
+    add media/portfolio logic,screen,admin
+
+[33mcommit 681cdb22748e4818ff1d8a9a1a48a61c8fd49058[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sat Jan 20 21:57:09 2024 +0100
+
+    design-request status-portfolio-media
+
+[33mcommit 1b36c23a1ab22904911f98333185666840253ef7[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Thu Jan 11 23:58:25 2024 +0100
+
+    changes recette
+
+[33mcommit 37017b97b5d2293beeed8072d3bc7aaf2716d1c8[m[33m ([m[1;31morigin/admin-progress[m[33m, [m[1;32madmin-progress[m[33m)[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Fri Jan 5 12:56:03 2024 +0100
+
+    styling admin
+
+[33mcommit b7f40b1abb9f6676c91c80decfae4922f817782a[m[33m ([m[1;31morigin/styling[m[33m, [m[1;32mstyling[m[33m)[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Thu Jan 4 02:56:47 2024 +0100
+
+    styling- part 1
+
+[33mcommit 8c7d803b3488b26e214e72de5a53fcfcc81fc69e[m
+Merge: e33946f 09fbba9
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Wed Jan 3 16:07:38 2024 +0100
+
+    Merge branch 'admin-progress' of https://github.com/yousraMel/ilmaevent_frontend
+
+[33mcommit 09fbba949ab09e4bd48c2f88ab8fb5db1bfc101c[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Wed Jan 3 16:06:41 2024 +0100
+
+    pagination - counter
+
+[33mcommit 59fe4612af67bf93fbfaf099d2a0cc42b35338dc[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Wed Jan 3 13:11:14 2024 +0100
+
+    Sort function - fix filter bugs (boolean and object)
+
+[33mcommit e33946f23fc6b680a08b7d3c4eaa70f416a1ee49[m[33m ([m[1;31morigin/user-progress[m[33m, [m[1;32muser-progress[m[33m)[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Wed Jan 3 12:19:45 2024 +0100
+
+    add contact and about pages
+
+[33mcommit 77e33d71f1232fe091aad7639e7a4550188cb837[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Wed Jan 3 11:34:15 2024 +0100
+
+    add filter to benefit and type
+
+[33mcommit 0e884cf6f93873efb879df9844c9d8f06773d44c[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Tue Jan 2 17:39:45 2024 +0100
+
+    build configuration - scss optimizing files
+
+[33mcommit 5238468f0ce390030f856beb9b167cf132845049[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Tue Jan 2 00:39:56 2024 +0100
+
+    setup authentication
+
+[33mcommit 50cf33ec17139fa0141d23a61785343e4b9675a1[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sun Dec 31 19:01:38 2023 +0100
+
+    add graphs
+
+[33mcommit 681f5e490c5e0f099d07f625896b3ace5ec974ae[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sun Dec 31 15:06:32 2023 +0100
+
+    Export Requests
+
+[33mcommit a221ba1cd89aa39df207c2f7e9dcc8a7c4ee1e2b[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sun Dec 31 12:11:10 2023 +0100
+
+    benifit/type crud + initialize reuqest filter/dort(ing)
+
+[33mcommit 681591dd82e87119c6045d6217718f832ac4515c[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Sun Dec 31 01:25:07 2023 +0100
+
+    add-benefit
+
+[33mcommit b7236fffe0de688f31f653cbc6ef6f7ac738ce6c[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Wed Dec 27 00:38:48 2023 +0100
+
+    First commit
+
+[33mcommit b10403c1749ed5f4ebc6b13b73f327e7c7fd3a43[m
+Author: ymdev <ymdevcompany@gmail.com>
+Date:   Fri Dec 22 21:34:48 2023 +0100
+
+    initial commit

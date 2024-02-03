@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, of, tap } from 'rxjs';
 import { AllService } from '../../../services/all.service';
 import { SharedService } from '../../../services/shared.service';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-media',
@@ -42,7 +40,7 @@ export class AddMediaComponent {
     this.editMode = this.sharedService.editMode;
 
     if (this.mediaId && this.editMode) {
-      
+
       this.allService.getMedia(this.mediaId).subscribe((resp: any) => {
         this.mediaEl = resp;
         this.selectedFileName = this.mediaEl.label ? this.mediaEl.label : 'Choisir une image...';
@@ -63,13 +61,23 @@ export class AddMediaComponent {
     const mediaRank = mediaEl?.rank || '';
     const mediaActive = mediaEl?.active || true;
     const mediaType = mediaEl?.type || '';
+    const mediaUrl = mediaEl?.url || '';
+    const mediaLabel = mediaEl?.label || '';
+    const mediaFormat = mediaEl?.format || '';
+    const mediaCode = mediaEl?.code || '';
+    const mediaCreationDate = mediaEl?.creationDate || '';
 
 
     this.mediaForm = this.fb.group({
       'type': new FormControl(mediaType, [Validators.required]),
       'description': new FormControl(mediaDescription, [Validators.maxLength(64)]),
       'rank': new FormControl(mediaRank),
-      'active': new FormControl(mediaActive)
+      'active': new FormControl(mediaActive),
+      'url': new FormControl(mediaUrl),
+      'label': new FormControl(mediaLabel),
+      'code': new FormControl(mediaCode),
+      'format': new FormControl(mediaFormat),
+      'creationDate': new FormControl(mediaCreationDate)
     });
   }
 
@@ -81,27 +89,27 @@ export class AddMediaComponent {
     console.log('File Loaded:', this.fileLoaded);  // Add this line for debugging
     if (this.fileLoaded) {
       if (this.mediaForm.valid && !this.submitting) {
-        this.mediaEl = this.mediaForm.value;
-        this.upload().subscribe(
-          () => {
-            this.mediaEl.label = this.fileName;
-            this.mediaEl.id = this.mediaId;
-            const mediaObservable = this.editMode
-              ? this.allService.updateMedia(this.mediaEl)
-              : this.allService.addMedia(this.mediaEl);
-            mediaObservable.subscribe(
-              (data: any) => {
-                console.log('Response:', data);
-                this.mediaEl = data;
-                this.mediaId = this.mediaEl.id;
-                this.closeAddMediaPopup();
-              },
-              (error: any) => {
-                console.error('Error:', error);
-                this.errorMessage = error;
+        // const formData = new FormData();
+        // formData.append('file', this.file);
 
-              }
-            );
+        this.mediaEl = this.mediaForm.value;
+        this.mediaEl.label = this.selectedFileName;
+        this.mediaEl.id = this.mediaId;
+
+        const mediaObservable = this.editMode
+          ? this.allService.updateMedia(this.mediaEl)
+          : this.allService.addMedia(this.file, this.mediaEl);
+
+        mediaObservable.subscribe(
+          (data: any) => {
+            console.log('Response:', data);
+            this.mediaEl = data;
+            // this.mediaId = this.mediaEl.id;
+            this.closeAddMediaPopup();
+          },
+          (error: any) => {
+            console.error('Error:', error);
+            this.errorMessage = error;
           }
         );
         this.mediaId = null;
@@ -112,30 +120,65 @@ export class AddMediaComponent {
     }
   }
 
-  upload(): Observable<any> {
-    console.log("isFileExist " + this.isFileExist);
-    if (this.isFileExist) {
-      // File already exists, no need to upload
-      this.fileName = this.selectedFileName;
-      this.submitValid = true;
-      return of(null);  // Return an observable with null value
-    } else {
-      let body = new FormData();
-      body.append("file", this.file);
-      return this.allService.uploadimage(body).pipe(
-        tap(data => {
-          this.fileName = data;
-          this.isFileExist = this.fileName === 'fileExistsAlready';
-          this.submitValid = !this.isFileExist;
-        }),
-        catchError((error:any) => {
-              console.error('Upload Error:', error);
-          this.errorMessage = error;
-          throw error; // Rethrow the error to propagate it
-        })
-      );
-    }
-  }
+  // onSubmit() {
+  //   console.log('File Loaded:', this.fileLoaded);  // Add this line for debugging
+  //   if (this.fileLoaded) {
+  //     if (this.mediaForm.valid && !this.submitting) {
+  //       this.mediaEl = this.mediaForm.value;
+  //       this.upload().subscribe(
+  //         () => {
+  //           this.mediaEl.label = this.fileName;
+  //           this.mediaEl.id = this.mediaId;
+  //           const mediaObservable = this.editMode
+  //             ? this.allService.updateMedia(this.mediaEl)
+  //             : this.allService.addMedia(this.mediaEl);
+  //           mediaObservable.subscribe(
+  //             (data: any) => {
+  //               console.log('Response:', data);
+  //               this.mediaEl = data;
+  //               this.mediaId = this.mediaEl.id;
+  //               this.closeAddMediaPopup();
+  //             },
+  //             (error: any) => {
+  //               console.error('Error:', error);
+  //               this.errorMessage = error;
+
+  //             }
+  //           );
+  //         }
+  //       );
+  //       this.mediaId = null;
+  //       this.editMode = false;
+  //     } else {
+  //       this.sharedService.validateAllFormFields(this.mediaForm);
+  //     }
+  //   }
+  // }
+
+  // upload(): Observable<any> {
+  //   console.log("isFileExist " + this.isFileExist);
+  //   if (this.isFileExist) {
+  //     // File already exists, no need to upload
+  //     this.fileName = this.selectedFileName;
+  //     this.submitValid = true;
+  //     return of(null);  // Return an observable with null value
+  //   } else {
+  //     let body = new FormData();
+  //     body.append("file", this.file);
+  //     return this.allService.uploadimage(body).pipe(
+  //       tap(data => {
+  //         this.fileName = data;
+  //         this.isFileExist = this.fileName === 'fileExistsAlready';
+  //         this.submitValid = !this.isFileExist;
+  //       }),
+  //       catchError((error:any) => {
+  //             console.error('Upload Error:', error);
+  //         this.errorMessage = error;
+  //         throw error; // Rethrow the error to propagate it
+  //       })
+  //     );
+  //   }
+  // }
 
   // Check for changes in files inputs via a DOMString reprsenting the name of an event
   fileChange(event: any) {

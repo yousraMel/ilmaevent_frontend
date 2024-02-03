@@ -13,8 +13,8 @@ const httpOptions = {
 
 
 
-const API_URL = 'http://localhost:5000/api/';
-// const API_URL = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/api/';
+// const API_URL = 'http://localhost:5000/api/';
+const API_URL = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/api/';
 
 const hostBenefit = API_URL + 'benefit';
 const hostContent = API_URL + 'content';
@@ -148,35 +148,28 @@ export class AllService {
 
   /* -------------------------- apiMedia -------------------------- */
 
-  // getAllMedia(): Observable<any> {
-  //   return this.http.get(hostMedia + '/getAll', httpOptions);
-  // }
-
-  getAllMedia(): Observable<any[]> {
-    return this.http.get<any[]>(hostMedia + '/getAll', httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        // Handle errors here
-        return throwError(error);
-      })
-    );
+  getAllMedia(): Observable<any> {
+    return this.http.get(hostMedia + '/getAll', httpOptions);
   }
 
-  addMedia(item: any) {
-    console.log('item : ' + item)
+  addMedia(file: any, media: any) {
     const formattedDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
-    item.lastModifDate = formattedDate;
-    item.creationDate = formattedDate;
-    // return this.http.post(hostMedia + '/save', item);
-    return this.http.post(hostMedia + '/save', item).pipe(
+    media.lastModifDate = formattedDate;
+    media.creationDate = formattedDate;
+    // console.log("MEDIA in service: " + JSON.stringify(media));
+    // console.log("FILE in service: " + JSON.stringify(file));
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Convert media object to JSON string and append it to FormData
+    formData.append('media', JSON.stringify(media));
+
+    return this.http.post(hostMedia + '/save', formData).pipe(
       catchError((error: HttpErrorResponse) => {
-        const errorMessage = "Attention ! Cette image existe déja.";
-        return throwError(() => new Error(error.message));
+        const errorMessage = "Attention ! Cette image existe déjà.";
+        return throwError(() => new Error(errorMessage));
       })
     );
-  }
-
-  getMedia(id: any) {
-    return this.http.get(hostMedia + '/get/' + id);
   }
 
   updateMedia(item: any) {
@@ -186,18 +179,13 @@ export class AllService {
     return this.http.put(hostMedia + '/update', item);
   }
 
+
+  getMedia(id: any) {
+    return this.http.get(hostMedia + '/get/' + id);
+  }
+
   deleteMedia(id: any) {
     return this.http.delete(hostMedia + '/delete/' + id);
   }
 
-
-  uploadimage(body: any) {
-    // return this.http.post(hostMedia + '/upload', body, { responseType: 'text' });
-    return this.http.post(hostMedia + '/upload', body, { responseType: 'text' }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        const errorMessage = "Attention ! Cette image existe déja.";
-        return throwError(() => new Error(error.message));
-      })
-    );
-  }
 }

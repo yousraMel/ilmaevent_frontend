@@ -141,8 +141,8 @@
 .line-title {
   position: relative;
   width: 800px;
-  padding-left : 30px;
-  padding-bottom : 10px;
+  padding-left: 30px;
+  padding-bottom: 10px;
 }
 .line-title::before,
 .line-title::after {
@@ -152,7 +152,7 @@
   left: 0;
   height: 4px;
   border-radius: 2px;
-  padding-left : 30px;
+  padding-left: 30px;
 }
 .line-title::before {
   width: 100%;
@@ -166,10 +166,10 @@
 /******* Middle section CSS Start ******/
 /* -------- Landing page ------- */
 .owl-stage-outer {
- height : 410px;
+  height: 410px;
 }
 
-.owl-carousel .owl-item{
+.owl-carousel .owl-item {
   // min-height: 380px;
   display: flex;
   align-items: center;
@@ -178,16 +178,14 @@
   margin: 0px 15px;
   padding: 5px 15px;
   // Sky Blue to Rose:
-  background: linear-gradient(135deg, #87CEEB, #FFC0CB);
-  
-
+  background: linear-gradient(135deg, #87ceeb, #ffc0cb);
 }
 
-.owl-carousel .owl-item img{
- max-height: 350px;
+.owl-carousel .owl-item img {
+  max-height: 350px;
 }
 
-.owl-theme .owl-nav [class*=owl-] {
-  margin-top: 5px !important;
+.owl-theme .owl-nav [class*="owl-"] {
+  margin-top: 10px !important;
   background-color: $color-primary !important;
 }
