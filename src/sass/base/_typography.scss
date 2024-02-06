@@ -29,12 +29,16 @@ body {
 
 p {
     font-size: $default-font-size;
+
+    @media (max-width: 991.98px) and (min-width: 768px) {
+        font-size: $font-size-small;
+    }
 }
 
 .p-counter {
-    font-size: 10px; ;
-    float : right;
-    margin-right : 80px;
+    font-size: 10px;
+    float: right;
+    margin-right: 80px;
 }
 
 .list {

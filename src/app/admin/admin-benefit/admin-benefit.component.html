@@ -7,7 +7,7 @@
             </h3>
         </div>
         <div class="table-actions">
-            <button class="btn btn-sm btn-export" (click)="openAddBenefitPopup()"><i class="fa fa-add"></i>
+            <button class="btn btn--primary" (click)="openAddBenefitPopup()"><i class="fa fa-add"></i>
                 Ajouter</button>
         </div>
     </div>
@@ -71,8 +71,7 @@
 
 
 <!------------------------------------------------ ADD NEW BENEFIT POPUP ------------------------------------------------------>
-<app-add-benefit *ngIf="isAddBenefitPopupOpen" (close)="closeAddBenefitPopup()" 
-    [benefitId]="benefitId">
+<app-add-benefit *ngIf="isAddBenefitPopupOpen" (close)="closeAddBenefitPopup()" [benefitId]="benefitId">
 </app-add-benefit>
 <!------------------------------------------------ END ADD NEW BENEFIT POPUP ------------------------------------------------------>
 <!------------------------------------------------ ALERT CALL ------------------------------------------------------>
@@ -85,8 +84,8 @@
         {{ errorMessage }}
     </div>
     <div class="form_box__btn">
-        <button (click)="onDeleteBenefit()" class="btn btn-yes">Oui </button>
-        <button (click)="onCloseAlert()" class="btn btn-cancel">Annuler </button>
+        <button (click)="onDeleteBenefit()" class="btn btn--danger">Oui </button>
+        <button (click)="onCloseAlert()" class="btn btn--grey">Annuler </button>
     </div>
 </div>
 <!------------------------------------------------ END ALERT CALL ------------------------------------------------------>

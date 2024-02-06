@@ -7,7 +7,7 @@
             </h3>
         </div>
         <div class="table-actions">
-            <button class="btn btn-sm btn-export" (click)="openAddMediaPopup()"><i class="fa fa-add"></i>
+            <button class="btn btn--primary" (click)="openAddMediaPopup()"><i class="fa fa-add"></i>
                 Ajouter</button>
         </div>
     </div>
@@ -91,8 +91,8 @@
             {{ errorMessage }}
         </div>
         <div class="form_box__btn">
-            <button (click)="onDeleteMedia()" class="btn btn-yes">Oui </button>
-            <button (click)="onCloseAlert()" class="btn btn-cancel">Annuler </button>
+            <button (click)="onDeleteMedia()" class="btn btn--danger">Oui </button>
+            <button (click)="onCloseAlert()" class="btn btn--grey">Annuler </button>
         </div>
     </div>
     <!------------------------------------------------ END ALERT CALL ------------------------------------------------------>

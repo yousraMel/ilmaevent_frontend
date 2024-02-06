@@ -1,7 +1,15 @@
 .card {
     padding: 2rem 3rem 2.5rem;
-    height: 28rem;
+    height: 30rem;
     margin-bottom: 3rem;
+
+    @media (max-width: 1199.98px) and (min-width: 992px) {
+        height: 35rem;
+    }
+
+    // @media (max-width: 768.98px) and (min-width: 576px) {
+    //     height: 45rem;
+    // }
 
     &--transparent {
         background-color: transparent;
@@ -46,4 +54,3 @@
         }
     }
 }
-

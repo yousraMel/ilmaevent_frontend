@@ -6,7 +6,11 @@ import { Observable } from 'rxjs';
 const AUTH_API = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/auth/';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'https://localhost:4200, https://ilmaevent.s3-website.eu-north-1.amazonaws.com, https://ilmaevent.com',
+    // Add other headers as needed
+  })
 };
 
 @Injectable({

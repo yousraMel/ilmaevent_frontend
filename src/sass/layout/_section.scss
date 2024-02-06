@@ -27,4 +27,8 @@
     & h4 {
         font-size: 2rem;
     }
+
+    @media (max-width: 767.98px) {
+        height: 28rem;
+    }
 }

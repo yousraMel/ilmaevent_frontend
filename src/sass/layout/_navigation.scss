@@ -7,7 +7,8 @@
     padding: 10px;
     // background: $color-primary-light-90;
     background: $color-grey-dark-5;
-    height: 9.4rem;
+    // height: 9.4rem;
+    height: 13%;
     // border-bottom: 1px solid $color-grey-dark;
     z-index: 1;
 
@@ -18,6 +19,10 @@
 
     &__logo {
         width: 75px;
+
+        @media (max-width: 1399.98px) {
+            width: 55px;
+        }
     }
 
     &__menu {

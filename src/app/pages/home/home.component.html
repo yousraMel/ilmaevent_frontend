@@ -1,12 +1,12 @@
 <app-navigation></app-navigation>
 <header class="header">
     <div class="row header__content">
-        <div class="col-6">
-            <div class="image_container">
+        <div class="col-md-6 col-12">
+            <div class="header__image_container">
                 <img class="header__image" src="../../../assets/img/header_image.png" alt="Header Image">
             </div>
         </div>
-        <div class="col-6 d-flex align-items-center justify-content-center vh-100">
+        <div class="col-md-6 col-12 d-flex align-items-center justify-content-center vh-100">
             <div class="header__description">
                 <h1 class="heading-primary">ILMA EVENT</h1>
                 <h2 class="heading-tertiary">Organiser votre événement avec ILMA SUCCESS</h2>
@@ -16,7 +16,7 @@
                     complète de vos événements sur une seule plateforme. Facile à utiliser, ILMA EVENT vous accompagne à
                     chaque étape de la réalisation de votre événement, simplifiant ainsi l'ensemble du processus.
                 </p>
-                <a href="/form" class="btn btn--important mt-5">Organiser</a>
+                <a href="/form" class="btn btn--important btn--sm mt-3">Organiser</a>
             </div>
         </div>
     </div>
@@ -24,38 +24,38 @@
 <section class="section-partner-header">
 
     <div class="row">
-        <div class="col-md-12 d-flex justify-content-center">
+        <div class="col-12 d-flex justify-content-center">
             <h4 class="mt-5">Nos Partenaires</h4>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-4">
             <div class="card card--transparent card--transparent__header">
                 <img src="../../assets/img/casa-env-noBG.png" alt="Casa Env">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-4">
             <div class="card card--transparent card--transparent__header">
                 <img src="../../assets/img/moroccan-center-noBG.png" alt=" Centre Marocain">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-4">
             <div class="card card--transparent card--transparent__header">
                 <img src="../../assets/img/ju2com-noBG.png" alt="Ju2Com">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-4">
             <div class="card card--transparent card--transparent__header">
                 <img src="../../assets/img/vizigan-noBG.png" alt="Vizigan">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-4">
             <div class="card card--transparent card--transparent__header">
                 <img src="../../assets/img/amriDigital-noBG.png" alt="Amri Digital">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-4">
             <div class="card card--transparent card--transparent__header">
                 <img src="../../assets/img/venessa-noBG.png" alt="Venessa">
             </div>
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6 col-12">
             <div class="padding-content">
                 <p>
                     Organiser des événements constitue la principale mission de notre centre ILMA SUCCESS, affilié à la
@@ -88,7 +88,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-md-6 col-12">
             <div class="padding-content">
                 <p>
                     Les tâches de ILMA EVENT sont très diversifiées. Mais voici son mode de fonctionnement :
@@ -126,7 +126,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4" *ngFor="let benefit of benefits; let i=index;">
+            <div class="col-lg-4 col-md-6 col-12" *ngFor="let benefit of benefits; let i=index;">
                 <div class="card">
                     <div class="card-body text-center">
                         <i class="{{ benefit.icone}} card__icon pb-4"></i>
