@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:ilmaevent": "node dist/ilmaevent/server/server.mjs",
-    "compile:sass": "sass src/sass/main.scss src/styles/style.css --style compressed",
+    "compile:sass": "sass src/sass/bootstrap.scss src/assets/css/bootstrap.css --style compressed",
     "lint": "ng lint"
   },
   "private": true,

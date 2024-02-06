@@ -1,5 +1,349 @@
 <app-navigation></app-navigation>
-<section class="section-separator"></section>
+<!-- Header Start -->
+<div class="container-fluid header bg-white p-0">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+        <div class="col-md-6 p-5 mt-lg-5">
+            <h1 class="display-5 animated fadeIn mb-4">Organiser Votre Evénement !</h1>
+            <nav aria-label="breadcrumb animated fadeIn">
+                <ol class="breadcrumb text-uppercase">
+                    <li class="breadcrumb-item"><a href="/home">Accueil</a></li>
+                    <li class="breadcrumb-item text-body active" aria-current="page">Formulaire</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-6 animated fadeIn">
+            <div class="header-img position-relative overflow-hidden p-5 pe-0">
+                <img class="img-fluid w-150" src="../../../assets/img/features/header_image.png">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- Search Start -->
+<div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-11 text-white text-center">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search End -->
+
+
+<!-- Contact Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Parlez-nous de votre événement !</h1>
+            <p>Merci de prendre un moment pour partager les détails de votre événement avec nous. Remplissez le
+                formulaire ci-dessous :</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="row gy-4">
+                    <div class="col-md-11 col-lg-11 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center justify-content-center rounded p-3"
+                                style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <form [formGroup]="requestForm" class="form" style="padding: 35px; width:75%">
+                                    <div class="form__group mb-5">
+                                        <label for="type" class="form-label required">Type d'événement</label>
+                                        <select class="form-select border-0 py-3" id="type" formControlName="type"
+                                            required>
+                                            <option [ngValue]="null" disabled> -- Sélectionnez le type d'événement --
+                                            </option>
+                                            <option *ngFor="let type of types; let i = index" [ngValue]="type">
+                                                {{type.label}}</option>
+                                        </select>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('type')!"
+                                            errorMsg="Veuillez choisir un type !">
+                                        </app-field-error-display>
+                                    </div>
+                                    <div class="form__group mb-5">
+                                        <label for="label" class="form-label">Intitulé de la manifestation</label>
+                                        <input type="text" class="form-control border-0 py-3 "
+                                            placeholder="Intitulé de la manifestation" id="label"
+                                            formControlName="label">
+                                    </div>
+
+                                    <div class="form__group mb-5">
+                                        <label for="description" class="form-label">Description de l'événement</label>
+                                        <input type="area" class="form-control border-0 py-3 "
+                                            placeholder="Description de l'événement" id="description"
+                                            formControlName="description" />
+                                    </div>
+
+                                    <div class="form__group mb-5">
+                                        <label for="participantsNb" class="form-label required">Nombre de
+                                            participants</label>
+                                        <input type="number" class="form-control border-0 py-3"
+                                            placeholder="Nombre de participants" id="participantsNb"
+                                            formControlName="participantsNb" required>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('participantsNb')!"
+                                            errorMsg="Veuillez saisir un nombre estimé de participants (au moins 1) !">
+                                        </app-field-error-display>
+                                    </div>
+                                    <div class="form__group mb-5">
+                                        <label for="isFree" class="form-label">Événement gratuit ?</label>
+                                        <div class="radio-wrapper mt-3">
+                                            <p class="radio__p wrong me-1"></p>
+                                            <p class="radio__p neutral-icon me-1">
+                                            </p>
+                                            <p class="radio__p correct me-1">
+                                            </p>
+                                            <input type="radio" class="radio-switch no me-1" id="radio-no"
+                                                formControlName="isFree" value="no" />
+                                            <label class="radio_label me-1" for="radio-no">Non</label>
+                                            <input type="radio" class="radio-switch neutral me-1" checked
+                                                id="radio-neutral" formControlName="isFree" value="neutral" />
+                                            <label class="radio_label me-1" for="radio-neutral">NA</label>
+                                            <input type="radio" class="radio-switch yes me-1" id="radio-yes"
+                                                formControlName="isFree" value="yes" />
+                                            <label class="radio_label me-1" for="radio-yes">Oui</label>
+                                        </div>
+                                    </div>
+                                    <div class="form__group mb-5" *ngIf="requestForm.get('isFree')?.value === 'no'">
+                                        <label for="fee" class="form-label">Tarif (DH)</label>
+                                        <input type="number" class="form-control border-0 py-3" placeholder="Tarif"
+                                            id="fee" formControlName="fee" pattern="^\d+(\.\d{1,2})?$">
+                                        <div *ngIf="requestForm.get('fee')?.hasError('pattern') && requestForm.get('fee')?.touched"
+                                            class="error-message">
+                                            Veuillez entrer un tarif valide (précision de 0.01).
+                                        </div>
+                                    </div>
+                                    <div class="form__group mb-5">
+                                        <label for="mode" class="form-label required">Mode de Présentation</label>
+                                        <div class="radio-btn-group mt-3">
+
+                                            <input type="radio" class="radio-btn me-1" id="inPerson"
+                                                formControlName="mode" value="Présentiel" checked>
+                                            <label for="inPerson">En présentiel</label>
+
+                                            <input type="radio" class="radio-btn me-1 ms-1" id="online"
+                                                formControlName="mode" value="Enligne">
+                                            <label for="online">En ligne</label>
+
+                                            <input type="radio" class="radio-btn me-1 ms-1" id="hybrid"
+                                                formControlName="mode" value="Hybride">
+                                            <label for="hybrid">Hybride</label>
+
+                                        </div>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('mode')!"
+                                            errorMsg="Veuillez choisir le mode de présentation !">
+                                        </app-field-error-display>
+                                    </div>
+                                    <div class="form__group mb-5">
+                                        <label class="form-label required">Préstations</label>
+                                        <div class="form__checkbox-group">
+                                            <div *ngFor="let benefit of benefits; let i = index"
+                                                class="form__checkbox-subfroup">
+                                                <input [formControl]="controls[i]" type="checkbox"
+                                                    class="form__input form__checkbox me-1" id="{{i}}"
+                                                    value="{{ benefit.label }}">
+                                                <label class="form__checkbox-label me-1"
+                                                    for="{{i}}">{{ benefit.label }}</label>
+                                            </div>
+                                        </div>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('benefits')!"
+                                            errorMsg="Veuillez choisir au moins une préstation !">
+                                        </app-field-error-display>
+                                    </div>
+
+                                    <div class="form__group mb-5">
+                                        <label for="institution" class="form-label required">Nom de l’institution ou
+                                            Territoire(s) concerné(s)
+                                            par le
+                                            projet</label>
+                                        <input type="text" class="form-control border-0 py-3" placeholder="Institution"
+                                            id="institution" formControlName="institution" required>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('institution')!"
+                                            errorMsg="Veuillez saisir le nom de l'institution !">
+                                        </app-field-error-display>
+                                    </div>
+
+                                    <div class="form__group mb-5">
+
+                                        <label for="committeeLeader" class="form-label required">Responsable du comité
+                                            d’organisation </label>
+                                        <input type="text" class="form-control border-0 py-3"
+                                            placeholder="Responsable du comité d’organisation" id="committeeLeader"
+                                            formControlName="committeeLeader" required>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('committeeLeader')!"
+                                            errorMsg="Veuillez saisir le nom de responsable !">
+                                        </app-field-error-display>
+                                    </div>
+
+                                    <div class="form__group mb-5">
+
+                                        <label for="address" class="form-label">Adresse Complète </label>
+                                        <input type="text" class="form-control border-0 py-3"
+                                            placeholder="Adresse Complète" id="address" formControlName="address">
+                                    </div>
+
+                                    <div class="form__group mb-5">
+
+                                        <label for="phone" class="form-label required">Téléphone </label>
+                                        <input type="text" class="form-control border-0 py-3" placeholder="Téléphone"
+                                            id="phone" formControlName="phone" required>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('phone')!"
+                                            errorMsg="Veuillez saisir un numéro de téléphone !">
+                                        </app-field-error-display>
+                                    </div>
+                                    <div class="form__group mb-5">
+
+                                        <label for="email" class="form-label required">Adresse Mail </label>
+                                        <input type="text" class="form-control border-0 py-3" placeholder="Adresse Mail"
+                                            id="email" formControlName="email" required>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('email')!"
+                                            errorMsg="Veuillez saisir un email !">
+                                        </app-field-error-display>
+                                    </div>
+                                    <div class="form__group mb-5">
+
+                                        <label for="webSite" class="form-label">Site Web </label>
+                                        <input type="text" class="form-control border-0 py-3" placeholder="Site Web"
+                                            id="webSite" formControlName="webSite">
+                                    </div>
+
+                                    <div class="form__group mb-5">
+                                        <label for="socialNetworks" class="form-label">Liens Réseaux Sociaux</label>
+
+                                        <div *ngFor="let socialNetwork of socialNetworksFormArray.controls; let i = index"
+                                            class="form__group">
+                                            <input type="text" [formControl]="getSocialNetworkControl(i)"
+                                                class="form-control border-0 py-3"
+                                                placeholder="Facebook, Instagram, Linkedin, ...">
+                                            <button type="button" class="btn btn--delete"
+                                                (click)="removeSocialNetwork(i)">
+                                                <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                            </button>
+                                        </div>
+
+                                        <button type="button" class="btn btn--add" (click)="addSocialNetwork()">
+                                            <span>&plus;</span>
+                                        </button>
+                                    </div>
+                                    <div class="row form__group mb-5">
+                                        <re-captcha formControlName="recaptcha"
+                                            siteKey="6LcPMl4pAAAAAPZPcD3iifMBE4b2eBtlhfA0khlz" required>
+                                        </re-captcha>
+                                        <app-field-error-display class="text-secondary line-height-sm"
+                                            [displayError]="isFieldValid('recaptcha')!"
+                                            errorMsg="Veuillez cocher la case pour confirmer que vous n'ête pas un robot !">
+                                        </app-field-error-display>
+                                    </div>
+
+                                    <div class="row form__group justify-content-center">
+                                        <button type="submit" class="btn btn-primary" style="width: 50%"
+                                            (click)="onSubmitRequest()">Envoyer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3"
+                                style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-envelope-open text-primary"></i>
+                                </div>
+                                <span>info@example.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="bg-light rounded p-3">
+                            <div class="d-flex align-items-center bg-white rounded p-3"
+                                style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-phone-alt text-primary"></i>
+                                </div>
+                                <span>+012 345 6789</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <iframe class="position-relative rounded w-100 h-100"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                    frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
+                    tabindex="0"></iframe>
+            </div>
+            <div class="col-md-6">
+                <div class="wow fadeInUp" data-wow-delay="0.5s">
+                    <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form
+                        with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're
+                        done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message"
+                                        style="height: 150px"></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section class="section-separator"></section>
 <section class="section-separator"></section>
 <section class="section-one">
     <div class="section__content container">
@@ -20,7 +364,7 @@
                 </h2>
             </div>
             <div class="form__group">
-                <label for="type" class="form__label required">Type d'événement</label>
+                <label for="type" class="form-label required">Type d'événement</label>
                 <select class="form__input form__select" id="type" formControlName="type" required>
                     <option [ngValue]="null" disabled> -- Sélectionnez le type d'événement --
                     </option>
@@ -190,4 +534,4 @@
     </div>
 </section>
 <section class="section-separator"></section>
-<app-footer></app-footer>
+-->
