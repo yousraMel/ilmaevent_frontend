@@ -8,15 +8,24 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['../../../sass/main.scss']
 })
 export class PortfolioComponent implements OnInit {
-  images: any[] = [];
+  // images: any[] = [];
   // posters: any[] = [];
 
   posters = [
     { url: '../../../assets/img/portfolio/Image1.jpg', label: 'Image 1', title: 'Title 1' },
     { url: '../../../assets/img/portfolio/Image2.jpg', label: 'Image 2', title: 'Title 2' },
     { url: '../../../assets/img/portfolio/Image3.jpg', label: 'Image 3', title: 'Title 3' },
-    { url: '../../../assets/img/portfolio/Image4.jpg', label: 'Image 3', title: 'Title 4' },
-    { url: '../../../assets/img/portfolio/Image1.jpg', label: 'Image 3', title: 'Title 1' }
+    { url: '../../../assets/img/portfolio/Image4.jpg', label: 'Image 4', title: 'Title 4' },
+    { url: '../../../assets/img/portfolio/Image5.jpg', label: 'Image 5', title: 'Title 5' }
+    // Add more images as needed
+  ];
+
+  images = [
+    { url: '../../../assets/img/portfolio/Image11.jpg', label: 'Image 6', description: '' },
+    { url: '../../../assets/img/portfolio/Image12.jpg', label: 'Image 7', description: '' },
+    { url: '../../../assets/img/portfolio/Image8.jpg', label: 'Image 8', description: '' },
+    { url: '../../../assets/img/portfolio/Image9.jpg', label: 'Image 9', description: '' },
+    { url: '../../../assets/img/portfolio/Image10.jpg', label: 'Image 10', description: '' }
     // Add more images as needed
   ];
 
@@ -48,7 +57,7 @@ export class PortfolioComponent implements OnInit {
   }
   ngOnInit() {
     this.allService.getAllMedia().subscribe((resp: any) => {
-      this.images = this.filterAndSortMedia(resp, 'Image');
+      // this.images = this.filterAndSortMedia(resp, 'Image');
       // this.posters = this.filterAndSortMedia(resp, 'Affiche');
     });
   }

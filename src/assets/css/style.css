@@ -169,6 +169,14 @@
     .header {
         margin-top: -120px;
     }
+
+    .header-feature {
+        margin-top: -200px;
+    }
+}
+
+.header-feature-heading {
+    margin-top: 200px;
 }
 
 .header-carousel .owl-nav {
@@ -226,7 +234,8 @@
 .header-img img {
     position: relative;
     z-index: 2;
-    height: 480px;
+    height: 300px;
+    top: 120px;
 }
 
 .header-img::before {
@@ -238,9 +247,38 @@
     height: 100%;
     background: var(--primary);
     transform: skew(-15deg);
-    z-index: 1;
+    z-index: 0;
 }
 
+.header-img::after {
+    content: "\f129";
+    font-family: "Font Awesome 5 Free";
+    color: white;
+    font-size: 56px;
+    font-weight: bold;
+    position: relative;
+    /* z-index: 10; */
+    display: flex;
+    justify-content: center;
+    top: -50px;
+    left: 25%;
+}
+
+.header-img-about::after {
+    content: "\f129";
+}
+
+.header-img-portfolio::after {
+    content: "\f07c";
+}
+
+.header-img-request::after {
+    content: "\f1d8";
+}
+
+.header-img-contact::after {
+    content: "\f095";
+}
 
 /*** About ***/
 .about-img img {
@@ -473,7 +511,7 @@
     min-height: 400px !important;
     margin: 0px 15px;
     padding: 5px 15px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--light), var(--primary), var(--light));
 }
 
 .owl-carousel .owl-item img {
