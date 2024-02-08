@@ -1113,8 +1113,10 @@ th {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: var(--primary) color: white;
-    border: 2px solid var(--primary) -moz-animation-duration: 0.4s;
+    background: var(--primary);
+    color: white;
+    border: 2px solid var(--primary);
+    -moz-animation-duration: 0.4s;
     -moz-animation-name: slideno;
     -webkit-animation-duration: 0.4s;
     -webkit-animation-name: slideno;
