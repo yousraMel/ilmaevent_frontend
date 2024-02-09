@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RequestComponent } from './pages/request/request.component';
 import { PoliticComponent } from './pages/politic/politic.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'politics', component: PoliticComponent },
+  { path: 'politic', component: PoliticComponent },
+  { path: 'terms', component: TermsComponent },
   {
     path: 'admin',
     component: AdminBoardComponent,

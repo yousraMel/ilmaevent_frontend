@@ -39,6 +39,7 @@ import { SharedService } from './services/shared.service';
 import { AdminHelpComponent } from './admin/admin-help/admin-help.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PoliticComponent } from './pages/politic/politic.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { PoliticComponent } from './pages/politic/politic.component';
     AdminMediaComponent,
     AddMediaComponent,
     AdminHelpComponent,
-    PoliticComponent
+    PoliticComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
