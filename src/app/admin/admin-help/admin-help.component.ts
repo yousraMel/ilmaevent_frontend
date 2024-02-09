@@ -6,12 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: '../../../sass/main.scss'
 })
 export class AdminHelpComponent {
-  isArticle = false;
-  isSection = false;
-  isMedia = false;
-  isEdit = false;
-  isPassword = false;
-  isLanguage = false;
+  isNew = false;
+  isUpdate = false;
+  isDelete = false;
   constructor() { }
 
   ngOnInit() {
@@ -20,25 +17,15 @@ export class AdminHelpComponent {
   // EXPAND SECTION AREA BY CLICK ON TOOGLE 
   onSection(section: any) {
     switch (section) {
-      case "article":
-        this.isArticle = !this.isArticle;
+      case "new":
+        this.isNew = !this.isNew;
         break;
-      case "section":
-        this.isSection = !this.isSection;
+      case "update":
+        this.isUpdate = !this.isUpdate;
         break;
-      case "media":
-        this.isMedia = !this.isMedia;
+      case "delete":
+        this.isDelete = !this.isDelete;
         break;
-      case "edit":
-        this.isEdit = !this.isEdit;
-        break;
-      case "password":
-        this.isPassword = !this.isPassword;
-        break;
-      case "language":
-        this.isLanguage = !this.isLanguage;
-        break;
-
       default:
         break;
     }

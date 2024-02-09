@@ -1,84 +1,113 @@
-<div class="container main-container mt-5">
+<div class="container mt-3">
     <div class="row mb-5">
-        <div class="col-md-12 heading">
-            <h3 class="heading-tertiary">Comment utiliser l'administration ILMA EVENT</h3>
+        <div class="col-md-12">
+            <h2 class="">Documentation de l'administration - Ilma Event</h2>
         </div>
     </div>
     <section>
-        <p class="paragraph paragraph--md-bold mt-5 ">
-            L’application contient deux volés, un espace pour le public contient une présentation de Ilma Event et un
-            formulaire de prise de contact. Plus, une gallerie des événements organisé par Ilma Event.
-            Le deuxième espace concerne l’administration du site. Il contient une liste des demandes à exporter, des
-            formulaires pour créer ou éditer des listes fermées et aussi télécharger des images qui seront être publiés
-            dans l'espace portfolio. Ce qui va être expliqué de la façon suivante :
-        </p>
-    </section>
-    <section id="media">
-        <a (click)="onSection('media')">
-            <h3> <span class="icon">&rsaquo;</span> Télécharger des images de votre Pc vers l’application.</h3>
-        </a>
-        <p *ngIf="isMedia" class="paragraph paragraph--md-bold mt-5">
-            La médiathèque de l’admin contient les images associées aux articles et les images publiées dans la
-            médiathèque du site.
-            <br />
-            <br />
-            Pour ajouter une nouvelle image à la médiathèque de l’admin, aller à la <a routerLink="/admin/media"
-                class="style style--link">médiathèque</a>, appuyer sur <span class="style style--italic">ajouter une
-                image</span>.
-            Un
-            formulaire apparaitra, appuyer sur l’icone <span class="style style--italic"><i
-                    class="fa fa-cloud-upload"></i></span>
-            pour télécharger une image du Pc personnel vers l’application puis appuyer sur <span
-                class="style style--italic">télécharger</span> pour confirmer. Facultativement, donner un <span
-                class="style style--italic">titre</span> à l’image et une <span
-                class="style style--italic">description</span>. Pour la publier à la médiathèque du site, il faut cocher
-            <span class="style style--italic">à la Une</span>. Appuyer sur <span
-                class="style style--italic">Publier</span>
-            pour valider le formulaire.
-        </p>
+        <p>Cette section vous permet de gérer les différents éléments utilisés dans les formulaires et les listes
+            déroulantes sur le site web public. Vous pourrez ajouter de nouvelles prestations, types d'événements et
+            bien
+            plus encore pour personnaliser l'expérience des utilisateurs.</p>
     </section>
     <hr />
-    <section id="article">
-        <a (click)="onSection('article')">
-            <h3> <span class="icon">&rsaquo;</span> Créer un nouvel élément.</h3>
+    <section id="new">
+        <a (click)="onSection('new')">
+            <h4> <span class="icon">&rsaquo;</span> Ajouter un nouvel élément.</h4>
         </a>
-        <p *ngIf="isArticle" class="paragraph paragraph--md-bold mt-5">Pour créer une page que ça soit pour une action,
-            un
-            blog ou une story. Aller à <a routerLink="/admin/article" class="style style--link">Nouveau</a>, un
-            formulaire apparaitra, Choisir une
-            image représentant le sujet de l’article et qui va être affichée au début de ce dernier, la liste des images
-            contient celles qui ne sont pas encore affectées à un article. Choisir le type de l’article entre ACTION,
-            BLOG ou STORY. Remplir les champs de <span class="style style--italic">titre</span> et <span
-                class="style style--italic">introduction</span>. Puis appuyer sur <span class="style style--italic">
-                Enregistrer</span> l’article. Ce bouton redirige vers un nouveau formulaire pour compléter les
-            paragraphes de l’article. Remplir le <span class="style style--italic">titre</span> et le <span
-                class="style style--italic">contenu</span> du premier paragraphe. Puis appuyer sur Enregistrer
-            la section. Pour ajouter un nouveau paragraphe appuyer sur <span class="style style--italic">Ajouter</span>
-            une section. Tous les champs sont obligatoires. </p>
+        <div *ngIf="isNew" class="">
+            <ol>
+                <li class="mb-2">Cliquez sur le bouton <button class="btn btn-primary me-1 ms-1" style="padding: 0.2rem 0.5rem;
+                    font-size: 11px; cursor:none"> <i class="fa fa-plus"></i>Ajouter</button>.
+                    Un popup s'ouvrira, vous permettant de saisir les
+                    détails de
+                    l'élément.</li>
+                <li class="mb-2">Remplissez le champ "Libellé" qui est obligatoire. Vous pouvez également fournir une
+                    description,
+                    bien
+                    que celle-ci ne soit pas obligatoire et ne doit pas dépasser 250 caractères. Un compteur de
+                    caractères
+                    est disponible pour vous aider à respecter cette limite.</li>
+                <li class="mb-2">Cochez la case "Actif" si vous souhaitez que l'élément soit visible dans les listes
+                    déroulantes ou
+                    les
+                    emplacements spécifiés sur le site. Par défaut, cette case est cochée.</li>
+                <li class="mb-2">Saisissez un ordre si vous souhaitez spécifier la position de l'élément dans la liste.
+                    Ce champ
+                    n'est
+                    pas obligatoire.</li>
+                <li class="mb-2">Pour les prestations, vous avez la possibilité d'ajouter une icône qui sera affichée
+                    avec la
+                    prestation
+                    sur la page d'accueil. Il est recommandé de choisir une icône représentative. Ce champ est
+                    obligatoire.
+                </li>
+                <li class="mb-2">Une fois que vous avez rempli les champs nécessaires, cliquez sur <button
+                        class="btn btn-primary me-1 ms-1" style="padding: 0.2rem 0.5rem;
+                    font-size: 11px; cursor:none">Sauvegarder</button> pour
+                    enregistrer
+                    l'élément. Il devrait maintenant apparaître dans la liste.</li>
+            </ol>
+            <p>Pour trouver une icône appropriée, vous pouvez utiliser la bibliothèque d'icônes Font Awesome disponible
+                sur <a href="https://fontawesome.com">fontawesome.com</a>. Recherchez un mot-clé qui correspond à votre
+                prestation, puis copiez la classe de l'icône au format HTML et collez-la dans le champ dédié.</p>
+            <p>Exemple HTML : <code>&lt;i class="fa-solid fa-user"&gt;&lt;/i&gt;</code><br>
+                Classe à copier : <code>fa-solid fa-user</code></p>
+        </div>
     </section>
     <hr />
-    <section id="edit">
-        <a (click)="onSection('edit')">
-            <h3> <span class="icon">&rsaquo;</span> Modifier un élément. </h3>
+    <section id="update">
+        <a (click)="onSection('update')">
+            <h4> <span class="icon">&rsaquo;</span> Modifier un élément existant.</h4>
         </a>
-        <p *ngIf="isEdit" class="paragraph paragraph--md-bold mt-5">
-            Aller au <a routerLink="/admin/article" class="style style--link"> Paramètres</a>. Appuyer sur l’icone
-            <span class="style style--italic"><i class="fa fa-pencil"></i></span>. Un formulaire apparaitra pour éditer
-            les informations telles que, la représentation de l’association, son histoire, les coordonnées et liens de
-            réseaux sociaux. Les liens de réseaux sociaux sont affichés dans la barre de navigation du site. </p>
+        <div *ngIf="isUpdate" class="">
+            <ol>
+                <li class="mb-2">Accédez à la liste contenant l'élément que vous souhaitez modifier.</li>
+                <li class="mb-2">Pointez sur l'élément spécifique que vous souhaitez modifier, puis cliquez sur l'icône
+                    du stylet <i class="fa fa-pencil text-secondary"></i>
+                    dans la colonne avant-dernière.</li>
+                <li class="mb-2">Une fois cliqué, la même fenêtre contextuelle d'ajout s'ouvrira, mais cette fois elle
+                    sera
+                    pré-remplie
+                    avec les détails de l'élément sélectionné.</li>
+                <li class="mb-2">Apportez les modifications nécessaires aux détails de l'élément.</li>
+                <li class="mb-2">Enregistrez vos modifications en cliquant sur le bouton <button
+                        class="btn btn-primary  me-1 ms-1" style="padding: 0.2rem 0.5rem;
+                font-size: 11px; cursor:none">Sauvegarder</button>.</li>
+            </ol>
+        </div>
     </section>
     <hr />
-    <section id="password">
-        <a (click)="onSection('password')">
-            <h3> <span class="icon">&rsaquo;</span> Options de gestion des données. </h3>
+    <section id="delete">
+        <a (click)="onSection('delete')">
+            <h4> <span class="icon">&rsaquo;</span> Supprimer un élément existant.</h4>
         </a>
-        <p *ngIf="isPassword" class="paragraph paragraph--md-bold mt-5">Lorem ipsum dolor sit amet consectetur
-            adipisicing
-            elit. Nisi cum suscipit, fuga mollitia eveniet sunt est perferendis, iste consequatur id delectus omnis nam
-            hic iure exercitationem et sit praesentium pariatur!</p>
+        <div *ngIf="isDelete" class="">
+            <ol>
+                <li class="mb-2">Accédez à la liste contenant l'élément que vous souhaitez supprimer.</li>
+                <li class="mb-2">Cliquez sur l'icône de la corbeille <i class="fa fa-trash text-danger"></i> dans la
+                    dernière colonne, en regard de
+                    l'élément que vous
+                    souhaitez supprimer.</li>
+                <li class="mb-2">Une alerte s'ouvrira pour confirmer votre décision de suppression.</li>
+                <li class="mb-2">Si vous êtes sûr de vouloir supprimer l'élément, cliquez sur <button
+                        class="btn btn-secondary me-1 ms-1" style="padding: 0.2rem 0.5rem;
+                    font-size: 11px; cursor:none">Oui </button>. L'élément sera
+                    alors supprimé
+                    définitivement.</li>
+                <li class="mb-2">Si vous changez d'avis, cliquez sur <button class="btn btn-light me-1 ms-1" style="padding: 0.2rem 0.5rem;
+                    font-size: 11px; cursor:none">Annuler </button> pour annuler la suppression.</li>
+            </ol>
+        </div>
     </section>
     <hr />
-    <p class="paragraph paragraph--md-bold mt-5">Pour toute autre information ou aide, contacter <a
-            routerLink="/admin/article" class="style style--link">yousra.melhaoui.1&#64;gmail.com</a>.
+    <p>
+        En suivant ces instructions, vous pourrez facilement ajouter, modifier ou supprimer des éléments de votre site
+        web, vous donnant ainsi un contrôle total sur son contenu et son fonctionnement et une expérience utilisateur
+        plus riche et personnalisée.
     </p>
+    <p>Pour toute autre information ou aide, contacter <span
+            style=" color:blue; font-style: italic;">yousra.melhaoui.1&#64;gmail.com</span>.
+    </p>
+    <p>&copy; 2024 Ilma Event. Tous droits réservés.</p>
 </div>

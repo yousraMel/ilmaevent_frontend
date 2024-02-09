@@ -6,8 +6,8 @@
          <!-- Sidebar scroll-->
          <div>
              <div class="brand-logo d-flex align-items-center justify-content-between mt-5">
-                 <a href="./index.html" class="text-nowrap logo-img">
-                     <img src="../../assets/img/logo_192x192.png" width="120" alt="" />
+                 <a href="/home" class="text-nowrap logo-img">
+                     <img src="../../assets/img/features/logo_192x192.png" width="120" alt="" />
                  </a>
                  <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                      <i class="ti ti-x fs-8"></i>
@@ -48,14 +48,14 @@
                              <span class="hide-menu">Types Evénement</span>
                          </a>
                      </li>
-                     <li class="sidebar-item">
+                     <!-- <li class="sidebar-item">
                          <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminMedia')">
                              <span>
                                  <i class="ti ti-cards"></i>
                              </span>
                              <span class="hide-menu">Médiathèques</span>
                          </a>
-                     </li>
+                     </li> -->
                      <!-- <li class="sidebar-item">
                          <a class="sidebar-link" href="" aria-expanded="false">
                              <span>
@@ -90,7 +90,7 @@
      </aside>
      <!--  Sidebar End -->
      <!--  Navbar Start -->
-     <div class="navbar navbar--admin "></div>
+     <!-- <div class="navbar navbar--admin "></div> -->
      <div class="admin-container">
          <!-- Conditionally render components based on the activeComponent value -->
          <section *ngIf="activeComponent === 'adminRequest'" class="admin__request">

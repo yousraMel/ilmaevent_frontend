@@ -3,7 +3,7 @@
     <div class="row registration__content">
         <div class="col-6">
             <div class="image_container">
-                <img class="registration__image" src="../../../assets/img/header_image.png" alt="Header Image">
+                <img class="registration__image" src="../../../assets/img/features/header_image.png" alt="Header Image">
             </div>
         </div>
         <div class="col-6  vh-100">
@@ -11,22 +11,22 @@
                 <form *ngIf="!isLoggedIn" name="form" #f="ngForm" (ngSubmit)=" f.form.valid && onSubmit()">
                     <div class="card card--registration ">
                         <div class="card-header card--registration__header  text-center">
-                            <h3 class="heading-tertiary">
+                            <h3 class="">
                                 Connexion</h3>
                         </div>
                         <div class="card-body justify-content-center">
 
                             <div class="form__group">
-                                <label for="username" class="form__label">Nom d'utilisateur</label>
-                                <input type="username" class="form__input" [(ngModel)]="form.username" name="username"
+                                <label for="username" class="form-label">Nom d'utilisateur</label>
+                                <input type="username" class="form-input" [(ngModel)]="form.username" name="username"
                                     required #username="ngModel" />
                             </div>
                             <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
                                 Le nom d'utilisateur est obligatoire!
                             </div>
                             <div class="form__group">
-                                <label for="password" class="form__label">Mot de passe</label>
-                                <input type="password" class="form__input" [(ngModel)]="form.password" name="password"
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-input" [(ngModel)]="form.password" name="password"
                                     required minlength="6" #password="ngModel" />
                             </div>
                             <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="card-footer card--registration__footer bg-white mt-5 d-flex justify-content-center">
-                            <button class="btn btn--primary" type="submit" [disabled]="!f.valid">
+                            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
                                 Se connecter
                             </button>
                         </div>

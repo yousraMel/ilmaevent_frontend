@@ -38,6 +38,7 @@ import { ExcelExportService } from './services/excel-export.service';
 import { SharedService } from './services/shared.service';
 import { AdminHelpComponent } from './admin/admin-help/admin-help.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { PoliticComponent } from './pages/politic/politic.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     DragScrollDirective,
     AdminMediaComponent,
     AddMediaComponent,
-    AdminHelpComponent
+    AdminHelpComponent,
+    PoliticComponent
   ],
   imports: [
     BrowserModule,
