@@ -16,13 +16,13 @@ export class AddBenefitComponent implements OnInit {
   benefit: any;
   editMode: any;
   submitting = false;
-  creationDate : Date = new Date();
+  creationDate: Date = new Date();
 
   constructor(
     private allService: AllService,
     private sharedService: SharedService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.editMode = this.sharedService.editMode;
@@ -32,7 +32,7 @@ export class AddBenefitComponent implements OnInit {
   private initBenefitForm() {
     this.benefitForm = this.fb.group({
       label: new FormControl('', [Validators.required]),
-      description: new FormControl('',[Validators.maxLength(250)]),
+      description: new FormControl('', [Validators.maxLength(400)]),
       rank: new FormControl(''),
       active: new FormControl(true),
       icone: new FormControl('', [Validators.required]),
@@ -68,7 +68,7 @@ export class AddBenefitComponent implements OnInit {
   onSubmit() {
     if (this.benefitForm.valid && !this.submitting) {
       this.submitting = true;
-  
+
       if (this.editMode) {
         this.handleEditSubmission();
       } else {
@@ -78,23 +78,23 @@ export class AddBenefitComponent implements OnInit {
       this.sharedService.validateAllFormFields(this.benefitForm);
     }
   }
-  
+
   private handleEditSubmission() {
-  const updatedBenefit = { ...this.benefitForm.value, id: this.benefitId , creationDate : this.creationDate};
-  
+    const updatedBenefit = { ...this.benefitForm.value, id: this.benefitId, creationDate: this.creationDate };
+
     this.allService.updateBenefit(updatedBenefit).subscribe(
       data => this.handleSubmissionSuccess(data),
       error => this.handleSubmissionError(error)
     );
   }
-  
+
   private handleAddSubmission() {
     this.allService.addBenefit(this.benefitForm.value).subscribe(
       data => this.handleSubmissionSuccess(data),
       error => this.handleSubmissionError(error)
     );
   }
-  
+
   private handleSubmissionSuccess(data: any) {
     console.log('Response:', data);
     this.benefit = data;
@@ -102,7 +102,7 @@ export class AddBenefitComponent implements OnInit {
     this.closeAddBenefitPopup();
     this.submitting = false;
   }
-  
+
   private handleSubmissionError(error: any) {
     console.error('Error:', error);
     this.submitting = false;

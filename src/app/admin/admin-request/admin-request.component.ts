@@ -36,11 +36,17 @@ export class AdminRequestComponent implements OnInit {
   itemsPerPage: number = 10; // Adjust this value based on your preference
   totalItems: number = 0;
   totalPages: number = 0; // Add this line
+  errorMessage = '';
   // selectedStatus: string = 'Nouveau';
-
+  isAlertCalled = false;
+  selectedIds: any[] = [];
   // Map to store the selected status for each request
   selectedStatusMap: { [key: number]: string } = {};
 
+  selectedItems: { [key: number]: boolean } = {};
+
+  // Constants
+  WAIT_TIME_BEFORE_RELOAD = 700;
   constructor(
     private allservice: AllService,
     private excelExportService: ExcelExportService,
@@ -382,14 +388,14 @@ export class AdminRequestComponent implements OnInit {
   applyPagination() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    console.log('startIndex: ' + startIndex);
-    console.log('endIndex: ' + endIndex);
-    console.log('this.filteredRequests before slicing: ', this.filteredRequests);
+    // console.log('startIndex: ' + startIndex);
+    // console.log('endIndex: ' + endIndex);
+    // console.log('this.filteredRequests before slicing: ', this.filteredRequests);
     this.filteredRequests = this.requests.slice(startIndex, endIndex);
-    console.log('this.filteredRequests after slicing: ', this.filteredRequests);
+    // console.log('this.filteredRequests after slicing: ', this.filteredRequests);
     // Calculate total pages
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-    console.log('Total Pages: ', this.totalPages);
+    // console.log('Total Pages: ', this.totalPages);
     this.initSelectedStautsMap();
   }
 
@@ -403,21 +409,26 @@ export class AdminRequestComponent implements OnInit {
 
   // Function to update the status of a specific request
   updateStatus(requestId: number): void {
-    // Find the request with the given ID
-    // const request = this.requests.find(req => req.id === requestId);
     this.requestId = requestId;
-    this.allservice.getRequest(requestId).subscribe((data: any) => {
-      this.request = data;
-      this.request.status = this.selectedStatusMap[requestId];
-      this.allservice.updateRequest(this.request).subscribe(
-        data => {
-          console.log(data)
-        });
-    });
-    if (this.request) {
-      // Update the status of the found request
-      this.request.status = this.selectedStatusMap[requestId];
-    }
+    this.allservice.getRequest(requestId).subscribe(
+      (data: any) => {
+        this.request = data;
+        this.request.status = this.selectedStatusMap[requestId];
+        this.allservice.updateRequest(this.request).subscribe(
+          () => {
+            // Refresh the list of filteredRequests after updating the status
+            // this.applyFilter();
+            this.refresh();
+          },
+          (error: any) => {
+            console.error('Error updating request status:', error);
+          }
+        );
+      },
+      (error: any) => {
+        console.error('Error fetching request data:', error);
+      }
+    );
   }
 
   getStatusLabelColor(status: string): string {
@@ -437,7 +448,7 @@ export class AdminRequestComponent implements OnInit {
   }
 
 
-  applyFilter(column: string) {
+  applyFilter() {
     if (this.filterValue === '' || this.filterValue === 'Tous') {
       // If filter value is empty, reset the filter
       this.filteredRequests = this.requests.slice();
@@ -453,6 +464,45 @@ export class AdminRequestComponent implements OnInit {
     // Apply pagination
     this.initSelectedStautsMap();
     // this.applyPagination();
+  }
+
+  refresh() {
+    window.location.reload();
+  }
+
+  deleteSelected(): void {
+    // Filter out selected items
+    this.selectedIds = Object.keys(this.selectedItems)
+      .filter(key => this.selectedItems[key as unknown as keyof typeof this.selectedItems]);
+    console.log('Selected IDs:', this.selectedIds);
+    this.isAlertCalled = true;
+  }
+
+  onCloseAlert() {
+    setTimeout(() => {
+      this.selectedIds = [];
+      this.isAlertCalled = false;
+    }, this.WAIT_TIME_BEFORE_RELOAD);
+  }
+
+  async onDeleteRequests() {
+    try {
+      for (const id of this.selectedIds) {
+        console.log('ID to delete: ', id);
+        await this.allservice.deleteRequest(id).toPromise();
+      }
+      console.log('All requests deleted successfully');
+      this.onCloseAlert();
+      this.refresh();
+      this.selectedIds = [];
+    } catch (error) {
+      console.error('Error deleting requests:', error);
+      // Handle error, e.g., show error message to the user
+    }
+  }
+
+  anyItemSelected(): boolean {
+    return Object.values(this.selectedItems).some(value => value);
   }
 
 }

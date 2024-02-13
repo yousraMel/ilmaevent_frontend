@@ -746,18 +746,18 @@
 .table_column {
     width: 100px;
     border: 1px solid var(--dark);
+}
 
-    :is(--small) {
-        width: 50px;
-    }
+.table_column.--small {
+    width: 50px;
+}
 
-    :is(--large) {
-        width: 150px;
-    }
+.table_column.--large {
+    width: 150px;
+}
 
-    :is(--xlarge) {
-        width: 250px;
-    }
+.table_column.--xlarge {
+    width: 250px;
 }
 
 thead,
@@ -849,7 +849,7 @@ th {
 
 
 .radio-btn-group {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .radio-btn:checked,
@@ -861,8 +861,8 @@ th {
 .radio-btn:checked+label,
 .radio-btn:not(:checked)+label {
     position: relative;
-    padding-left: 28px;
-    margin-right: 15px;
+    padding-left: 20px;
+    margin-right: 12px;
     cursor: pointer;
     line-height: 20px;
     display: inline-block;
@@ -875,8 +875,8 @@ th {
     position: absolute;
     left: 0;
     top: 0;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border: 1px solid var(--primary);
     border-radius: 30%;
     background: #fff;
@@ -889,8 +889,8 @@ th {
     height: 8px;
     background: var(--primary);
     position: absolute;
-    top: 4.8px;
-    left: 4.8px;
+    top: 3px;
+    left: 3px;
     border-radius: 30%;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;

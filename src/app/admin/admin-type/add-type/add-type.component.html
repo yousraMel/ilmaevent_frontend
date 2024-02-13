@@ -10,45 +10,42 @@
                     Modifier le Type d'Evénement.
                 </h3>
             </div>
-            <div class="form__group">
-                <label for="label" class="form__label required">Libellé :</label>
-                <input type="text" class="form__input" placeholder="Libellé" id="label" formControlName="label"
+            <div class="form__group mb-3">
+                <label for="label" class="form-label required">Libellé :</label>
+                <input type="text" class="form-control" placeholder="Libellé" id="label" formControlName="label"
                     required>
                 <app-field-error-display [displayError]="isFieldValid('label')!"
                     errorMsg="Veuillez saisir un libellé !">
                 </app-field-error-display>
             </div>
 
-            <div class="form__group">
-                <label for="description" class="form__label">Description :</label>
-                <textarea type="textarea" class="form__textarea" placeholder="Description" id="description"
+            <div class="form__group mb-3">
+                <label for="description" class="form-label">Description :</label>
+                <textarea type="textarea" class="form-control form__textarea" placeholder="Description" id="description"
                     formControlName="description">
                 </textarea>
-                <p class="p-counter">{{ descriptionCharacterCount }}/250</p>
+                <p class="p-counter">{{ descriptionCharacterCount }}/400</p>
                 <app-field-error-display [displayError]="isFieldValid('description')!"
-                    errorMsg="La description ne peut pas dépasser 250 caractères.">
+                    errorMsg="La description ne peut pas dépasser 400 caractères." class="fs-5 text-secondary">
                 </app-field-error-display>
             </div>
 
-            <div class="form__group">
-                <label for="participantsNb" class="form__label">Ordre :</label>
-                <input type="number" class="form__input" placeholder="Ordre" id="rank" formControlName="rank">
+            <div class="form__group mb-3">
+                <label for="participantsNb" class="form-label">Ordre :</label>
+                <input type="number" class="form-control" placeholder="Ordre" id="rank" formControlName="rank">
             </div>
 
-            <div class="form__group">
-                <label for="active" class="form__label">Actif ?</label>
-                <div class="form__switch">
-                    <input type="checkbox" class="form__input form__switch-input" id="active"
-                        formControlName="active" />
-                    <label class="form__switch-label" for="active">
-                        <span class="form__switch-switch"></span>
-                    </label>
+            <div class="form__group mb-3">
+                <label for="active" class="form-label">Actif ?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="active" formControlName="active">
                 </div>
             </div>
 
             <div class="row form__group row d-flex justify-content-center">
-                <button type="submit" class="btn btn--primary btn--sm" (click)="onSubmit()">Sauvegarder</button>
+                <button type="submit" class="btn btn-primary " (click)="onSubmit()">Sauvegarder</button>
             </div>
+
         </form>
     </div>
 </div>

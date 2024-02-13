@@ -31,7 +31,7 @@ export class AddTypeComponent implements OnInit {
   private initTypeForm() {
     this.typeForm = this.fb.group({
       label: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.maxLength(250)]),
+      description: new FormControl('', [Validators.maxLength(400)]),
       rank: new FormControl(''),
       active: new FormControl(true)
     });

@@ -50,23 +50,30 @@
                     </h3>
                 </div>
                 <div class="filter-status radio-btn-group">
-                    <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter('status')"
-                        id="all" class="radio-btn">
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Tous'" (change)="applyFilter()" id="all"
+                        class="radio-btn">
                     <label for="all">Tous</label>
-                    <input type="radio" [(ngModel)]="filterValue" [value]="'Nouveau'" (change)="applyFilter('status')"
-                        id="new" class="radio-btn radio-btn-new">
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Nouveau'" (change)="applyFilter()" id="new"
+                        class="radio-btn radio-btn-new">
                     <label for="new">Nouveau</label>
-                    <input type="radio" [(ngModel)]="filterValue" [value]="'En cours'" (change)="applyFilter('status')"
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'En cours'" (change)="applyFilter()"
                         id="progress" class="radio-btn radio-btn-inpro">
                     <label for="progress">En cours</label>
-                    <input type="radio" [(ngModel)]="filterValue" [value]="'Traité'" (change)="applyFilter('status')"
-                        id="done" class="radio-btn radio-btn-done">
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Traité'" (change)="applyFilter()" id="done"
+                        class="radio-btn radio-btn-done">
                     <label for="done">Traité</label>
-                    <input type="radio" [(ngModel)]="filterValue" [value]="'Annulé'" (change)="applyFilter('status')"
+                    <input type="radio" [(ngModel)]="filterValue" [value]="'Annulé'" (change)="applyFilter()"
                         id="canceled" class="radio-btn radio-btn-cancel">
                     <label for="canceled">Annulé</label>
                 </div>
                 <div class="table-actions">
+                    <button class="btn btn-outline-secondary me-1" (click)="deleteSelected()"
+                        [disabled]="!anyItemSelected()">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-primary me-1" (click)="refresh()">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </button>
                     <button class="btn btn-primary" (click)="exportToExcel()">
                         <i class="fa-solid fa-file-export"></i>
                         Exporter
@@ -77,19 +84,20 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="table_column table_column--small">Détails</th>
+                            <th class="table_column --small"></th>
+                            <th class="table_column --small">Détails</th>
                             <th class="table_column" (click)="sort('status')">
                                 Statut
                                 <i class="fa" [ngClass]="getSortIcon('status')"></i>
                             </th>
-                            <th class="table_column table_column--small">Contact</th>
-                            <th class="table_column table_column--small">Préstations</th>
+                            <th class="table_column --small">Contact</th>
+                            <th class="table_column --small">Préstations</th>
                             <th class="table_column">
                                 <input type="text" [(ngModel)]="labelFilter" (input)="filter('label', labelFilter)"
                                     class="form__input form__input--coltable" placeholder="Libellé"> <i class="fa"
                                     [ngClass]="getSortIcon('label')" (click)="sort('label')"></i>
                             </th>
-                            <th class="table_column">
+                            <th class="table_column --xlarge">
                                 <input type="text" [(ngModel)]="descriptionFilter"
                                     (input)="filter('description', descriptionFilter)"
                                     class="form__input form__input--coltable" placeholder="Description"> <i class="fa"
@@ -127,6 +135,7 @@
                     </thead>
                     <tbody class="list">
                         <tr class="list--list-item" *ngFor="let request of filteredRequests; let i = index">
+                            <td class=""><input type="checkbox" [(ngModel)]="selectedItems[request.id]" /></td>
                             <td class="customtooltip">
                                 <i class="far fa-clock"></i>
                                 <span class="customtooltiptext">
@@ -202,3 +211,18 @@
         </div>
     </div>
 </div>
+<!------------------------------------------------ ALERT CALL ------------------------------------------------------>
+<div class="backdrop" *ngIf="isAlertCalled"></div>
+<div class=" form-box " *ngIf="isAlertCalled">
+    <div class="form_box__title">
+        <h4>Voulez-vous vraiment supprimer définitevement ces demandes ?</h4>
+    </div>
+    <div *ngIf="errorMessage" class="error-message padding-content">
+        {{ errorMessage }}
+    </div>
+    <div class="form_box__btn">
+        <button (click)="onDeleteRequests()" class="btn btn-secondary">Oui </button>
+        <button (click)="onCloseAlert()" class="btn btn-light">Annuler </button>
+    </div>
+</div>
+<!------------------------------------------------ END ALERT CALL ------------------------------------------------------>

@@ -108,6 +108,7 @@ export class AllService {
   }
 
   deleteRequest(id: any) {
+    // console.log('DELETE');
     return this.http.delete(hostRequest + '/delete/' + id);
   }
 
