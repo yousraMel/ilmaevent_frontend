@@ -1,112 +1,112 @@
- <!--  Body Wrapper -->
- <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-     data-sidebar-position="fixed" data-header-position="fixed">
-     <!-- Sidebar Start -->
-     <aside class="left-sidebar">
-         <!-- Sidebar scroll-->
-         <div>
-             <div class="brand-logo d-flex align-items-center justify-content-between mt-5">
-                 <a href="/home" class="text-nowrap logo-img">
-                     <img src="../../assets/img/features/logo_192x192.png" width="120" alt="" />
-                 </a>
-                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-                     <i class="ti ti-x fs-8"></i>
-                 </div>
-             </div>
-             <!-- Sidebar navigation-->
-             <nav class="sidebar-nav " data-simplebar="">
-                 <ul id="sidebarnav">
-                     <li class="nav-small-cap">
-                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                         <span class="hide-menu">Accueil</span>
-                     </li>
-                     <li class="sidebar-item">
-                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminRequest')">
-                             <span>
-                                 <i class="ti ti-layout-dashboard"></i>
-                             </span>
-                             <span class="hide-menu">Tableau de Board</span>
-                         </a>
-                     </li>
-                     <li class="nav-small-cap">
-                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                         <span class="hide-menu">Administration</span>
-                     </li>
-                     <li class="sidebar-item">
-                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminBenefit')">
-                             <span>
-                                 <i class="ti ti-article"></i>
-                             </span>
-                             <span class="hide-menu">Préstations</span>
-                         </a>
-                     </li>
-                     <li class="sidebar-item">
-                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminType')">
-                             <span>
-                                 <i class="ti ti-alert-circle"></i>
-                             </span>
-                             <span class="hide-menu">Types Evénement</span>
-                         </a>
-                     </li>
-                     <!-- <li class="sidebar-item">
-                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminMedia')">
-                             <span>
-                                 <i class="ti ti-cards"></i>
-                             </span>
-                             <span class="hide-menu">Médiathèques</span>
-                         </a>
-                     </li> -->
-                     <!-- <li class="sidebar-item">
-                         <a class="sidebar-link" href="" aria-expanded="false">
-                             <span>
-                                 <i class="ti ti-file-description"></i>
-                             </span>
-                             <span class="hide-menu">Données Générales</span>
-                         </a>
-                     </li> -->
-                     <li class="nav-small-cap">
-                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                         <span class="hide-menu">Documentation</span>
-                     </li>
-                     <li class="sidebar-item">
-                         <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminHelp')">
-                             <span>
-                                 <i class="ti ti-login"></i>
-                             </span>
-                             <span class="hide-menu">Documentation</span>
-                         </a>
-                     </li>
-                     <li routerLinkActive="active" class="sidebar-item">
-                         <a class="sidebar-link" (click)="logout()" *ngIf="isLoggedIn === true">
-                             <i class="fa fa-sign-out"></i>
-                             <em>Déconnexion</em>
-                         </a>
-                     </li>
-                 </ul>
-             </nav>
-             <!-- End Sidebar navigation -->
-         </div>
-         <!-- End Sidebar scroll-->
-     </aside>
-     <!--  Sidebar End -->
-     <!--  Navbar Start -->
-     <!-- <div class="navbar navbar--admin "></div> -->
-     <div class="admin-container">
-         <!-- Conditionally render components based on the activeComponent value -->
-         <section *ngIf="activeComponent === 'adminRequest'" class="admin__request">
-             <app-admin-request></app-admin-request>
-         </section>
-         <section *ngIf="activeComponent === 'adminBenefit'" class="admin__benefit">
-             <app-admin-benefit></app-admin-benefit>
-         </section>
-         <section *ngIf="activeComponent === 'adminType'" class="admin__type">
-             <app-admin-type></app-admin-type>
-         </section>
-         <section *ngIf="activeComponent === 'adminMedia'" class="admin__media">
-             <app-admin-media></app-admin-media>
-         </section>
-         <section *ngIf="activeComponent === 'adminHelp'" class="admin__help">
-             <app-admin-help></app-admin-help>
-         </section>
-     </div>
- </div>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between mt-5">
+                <a href="/home" class="text-nowrap logo-img">
+                    <img src="../../assets/img/features/logo_192x192.png" width="120" alt="" />
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav " data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Accueil</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminRequest')">
+                            <span>
+                                <i class="ti ti-layout-dashboard"></i>
+                            </span>
+                            <span class="hide-menu">Tableau de Board</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Administration</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminBenefit')">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu">Préstations</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminType')">
+                            <span>
+                                <i class="ti ti-alert-circle"></i>
+                            </span>
+                            <span class="hide-menu">Types Evénement</span>
+                        </a>
+                    </li>
+                    <!-- <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminMedia')">
+                            <span>
+                                <i class="ti ti-cards"></i>
+                            </span>
+                            <span class="hide-menu">Médiathèques</span>
+                        </a>
+                    </li> -->
+                    <!-- <li class="sidebar-item">
+                        <a class="sidebar-link" href="" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-file-description"></i>
+                            </span>
+                            <span class="hide-menu">Données Générales</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Documentation</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false" (click)="toggleComponent('adminHelp')">
+                            <span>
+                                <i class="ti ti-login"></i>
+                            </span>
+                            <span class="hide-menu">Documentation</span>
+                        </a>
+                    </li>
+                    <li routerLinkActive="active" class="sidebar-item">
+                        <a class="sidebar-link" (click)="logout()" *ngIf="isLoggedIn === true">
+                            <i class="fa fa-sign-out"></i>
+                            <em>Déconnexion</em>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Navbar Start -->
+    <!-- <div class="navbar navbar--admin "></div> -->
+    <div class="admin-container">
+        <!-- Conditionally render components based on the activeComponent value -->
+        <section *ngIf="activeComponent === 'adminRequest'" class="admin__request">
+            <app-admin-request></app-admin-request>
+        </section>
+        <section *ngIf="activeComponent === 'adminBenefit'" class="admin__benefit">
+            <app-admin-benefit></app-admin-benefit>
+        </section>
+        <section *ngIf="activeComponent === 'adminType'" class="admin__type">
+            <app-admin-type></app-admin-type>
+        </section>
+        <section *ngIf="activeComponent === 'adminMedia'" class="admin__media">
+            <app-admin-media></app-admin-media>
+        </section>
+        <section *ngIf="activeComponent === 'adminHelp'" class="admin__help">
+            <app-admin-help></app-admin-help>
+        </section>
+    </div>
+</div>
