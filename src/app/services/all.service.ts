@@ -6,15 +6,14 @@ import { SharedService } from './shared.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'https://localhost:4200, https://www.ilmaevent.com',
+    'Access-Control-Allow-Origin': 'http://localhost:4200, https://www.ilmaevent.com',
     // Add other headers as needed
   })
 };
 
-
-
 // const API_URL = 'http://localhost:5000/api/';
-const API_URL = 'http://ilmaeventapi.eu-north-1.elasticbeanstalk.com/api/';
+// const API_URL = 'http://127.0.0.1:3000/api/';
+const API_URL = 'https://13gd0rt6ra.execute-api.eu-north-1.amazonaws.com/Prod/api/';
 
 const hostBenefit = API_URL + 'benefit';
 const hostContent = API_URL + 'content';
