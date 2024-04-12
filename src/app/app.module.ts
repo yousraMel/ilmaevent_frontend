@@ -40,6 +40,7 @@ import { AdminHelpComponent } from './admin/admin-help/admin-help.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PoliticComponent } from './pages/politic/politic.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { SpinnerComponent } from './helpers/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TermsComponent } from './pages/terms/terms.component';
     AddMediaComponent,
     AdminHelpComponent,
     PoliticComponent,
-    TermsComponent
+    TermsComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

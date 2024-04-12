@@ -10,6 +10,7 @@ import { SharedService } from '../../services/shared.service';
   styleUrl: '../../../sass/main.scss'
 })
 export class RequestComponent implements OnInit {
+  isLoading: boolean = false;
   editMode = false;
   requestForm!: FormGroup;
   types: any[] = [];
@@ -116,6 +117,7 @@ export class RequestComponent implements OnInit {
   }
 
   onSubmitRequest(): void {
+    this.isLoading = true;
     // Handle form submission
     if (this.requestForm.valid) {
       // Prepare request payload and submit to the backend
@@ -135,10 +137,12 @@ export class RequestComponent implements OnInit {
           this.request = data;
           this.requestId = this.request.id;
           this.initForm();
+          this.isLoading = false;
           this.confirmationService.openSubmitDialog('Votre demande est soumise avec succès. Veuillez vérifier votre e-mail pour confirmer vos informations.');
         },
         error => {
           console.error('Error:', error);
+          this.isLoading = false;
           this.confirmationService.openErrorDialog('Une erreur est survenue. Veuillez réessayer ultérieurement.');
         }
       );
